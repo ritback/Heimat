@@ -1,0 +1,12 @@
+
+VC++ Directories
+
+Include directories:
+$(KINECTSDK10_DIR)\inc;
+
+Library directories:
+$(KINECTSDK10_DIR)\lib\amd64;
+
+Linker
+Additional Dependencies:
+kinect10.lib;

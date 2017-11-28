@@ -1,0 +1,10 @@
+From a project in project folder:
+..\..\libraries\libHeimat
+..\..\libraries\libHeimat\GUIWithListener
+..\..\libraries\libHeimat\Helpers
+..\..\libraries\libHeimat\Kinect
+..\..\libraries\libHeimat\MassParticle
+..\..\libraries\libHeimat\Osc
+..\..\libraries\libHeimat\Flock
+..\..\libraries\libHeimat\FlowField
+
