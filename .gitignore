@@ -1,6 +1,12 @@
 
 # Created by https://www.gitignore.io/api/osx,xcode,windows,archive,archives,visualstudio,compressedarchive
 
+### Custom ###
+*.make
+Makefile
+
+
+
 ### Archive ###
 
 ### Mostly from https://en.wikipedia.org/wiki/List_of_archive_formats
