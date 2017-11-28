@@ -3,6 +3,10 @@
 
 ### Custom ###
 *.make
+*.pbxproj
+*.xc*
+*.plist
+
 Makefile
 
 
