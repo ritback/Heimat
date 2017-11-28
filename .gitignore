@@ -305,7 +305,8 @@ xcuserdata/
 x64/
 x86/
 bld/
-[Bb]in/
+#[Bb]in/ #ignore the .app instead => data from openframework
+*.app
 [Oo]bj/
 [Ll]og/
 
