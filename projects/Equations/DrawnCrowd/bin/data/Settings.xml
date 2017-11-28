@@ -1,0 +1,17 @@
+<group>
+	<Render_World_Limits>0</Render_World_Limits>
+	<World_Limit_Min_X>-750</World_Limit_Min_X>
+	<World_Limit_Min_Y>-430</World_Limit_Min_Y>
+	<World_Limit_Max_X>750</World_Limit_Max_X>
+	<World_Limit_Max_Y>396</World_Limit_Max_Y>
+	<Render_Users>0</Render_Users>
+	<Render_Room_Limits>0</Render_Room_Limits>
+	<Room_Limit_Min_X>-702</Room_Limit_Min_X>
+	<Room_Limit_Min_Y>-408</Room_Limit_Min_Y>
+	<Room_Limit_Max_X>720</Room_Limit_Max_X>
+	<Room_Limit_Max_Y>360</Room_Limit_Max_Y>
+	<Cohesion>1.81085</Cohesion>
+	<Alignement>1.4174</Alignement>
+	<Separation>0.359238</Separation>
+<group/>
+</group>
