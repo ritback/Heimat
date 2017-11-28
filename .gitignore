@@ -12,7 +12,8 @@ Makefile
 *.vc*
 *.sln
 *.rc
-
+## open framework
+libraries/of
 
 ### Archive ###
 
