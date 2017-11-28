@@ -3,12 +3,15 @@
 
 ### Custom ###
 *.make
+Makefile
+## OSX
 *.pbxproj
 *.xc*
 *.plist
-
-Makefile
-
+## Win
+*.vc*
+*.sln
+*.rc
 
 
 ### Archive ###
