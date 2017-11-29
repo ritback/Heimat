@@ -1,0 +1,23 @@
+<group>
+	<NumBoids>50</NumBoids>
+	<Masses>2</Masses>
+	<Flock_Rules>
+		<Cohesion>0.5</Cohesion>
+		<Separation>0.6</Separation>
+		<Alignement>0.5</Alignement>
+	</Flock_Rules>
+	<Render_World_Limits>0</Render_World_Limits>
+	<World_Limit>
+		<Min_X>-405</Min_X>
+		<Min_Y>-265</Min_Y>
+		<Max_X>405</Max_X>
+		<Max_Y>265</Max_Y>
+	</World_Limit>
+	<World_Limit_Distance>
+		<Min_X>-305</Min_X>
+		<Min_Y>-165</Min_Y>
+		<Max_X>305</Max_X>
+		<Max_Y>165</Max_Y>
+	</World_Limit_Distance>
+<group/>
+</group>

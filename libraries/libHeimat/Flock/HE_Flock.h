@@ -40,13 +40,17 @@ public:
                                          const int& inNumExternalBoid,
                                          const HEFlockRules& inRulesWeight,
                                          const float& inRange);
-    
-public:
-    void setFlockRules(const HEFlockRules& inValue);
-    void setFlockMass(const float& inValue);
-    
+
 public:
     void setNumActiveBoids(const int& inNumBoid); // max is the number of boids created first
+    int getNumActiveBoids(); 
+
+public:
+    void setFlockRules(const HEFlockRules& inValue);
+    HEFlockRules getFlockRules();
+    void setFlockMasses(const float& inValue);
+    float getFlockMasses();
+    
     
 public:
     WorldType* getWorld();

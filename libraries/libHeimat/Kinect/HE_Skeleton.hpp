@@ -118,3 +118,154 @@ void HESkeleton<SkeletonJointType>::updateJoint(HESkeletonJoint* inJoint)
     HESkeletonJoint* joint = &(mJoints[inJoint->mPositionIndex]);
     joint->update(*inJoint);
 }
+
+// -----------------------------------------------------------------------------
+template<class SkeletonJointType>
+bool HESkeleton<SkeletonJointType>::isJointOnRightSide(const NUI_SKELETON_POSITION_INDEX& index)
+{
+    bool ret = false;
+    switch (index)
+    {
+    case NUI_SKELETON_POSITION_SHOULDER_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_ELBOW_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_WRIST_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_HAND_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_HIP_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_KNEE_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_ANKLE_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_FOOT_RIGHT: ret = true; break;
+    default:
+        break;
+    }
+    return ret;
+}
+
+template<class SkeletonJointType>
+bool HESkeleton<SkeletonJointType>::isJointOnLeftSide(const NUI_SKELETON_POSITION_INDEX& index)
+{
+    bool ret = false;
+    switch (index)
+    {
+    case NUI_SKELETON_POSITION_SHOULDER_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_ELBOW_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_WRIST_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_HAND_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_HIP_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_KNEE_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_ANKLE_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_FOOT_LEFT: ret = true; break;
+    default:
+        break;
+    }
+    return ret;
+}
+
+template<class SkeletonJointType>
+bool HESkeleton<SkeletonJointType>::isJointOnRightHandComponent(const NUI_SKELETON_POSITION_INDEX& index)
+{
+    bool ret = false;
+    switch (index)
+    {
+    case NUI_SKELETON_POSITION_WRIST_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_HAND_RIGHT: ret = true; break;
+    default:
+        break;
+    }
+    return ret;
+}
+
+template<class SkeletonJointType>
+bool HESkeleton<SkeletonJointType>::isJointOnLeftHandComponent(const NUI_SKELETON_POSITION_INDEX& index)
+{
+    bool ret = false;
+    switch (index)
+    {
+    case NUI_SKELETON_POSITION_WRIST_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_HAND_LEFT: ret = true; break;
+    default:
+        break;
+    }
+    return ret;
+}
+
+
+
+
+template<class SkeletonJointType>
+bool HESkeleton<SkeletonJointType>::isJointOnRightArm(const NUI_SKELETON_POSITION_INDEX& index)
+{
+    bool ret = false;
+    switch (index)
+    {
+    case NUI_SKELETON_POSITION_SHOULDER_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_ELBOW_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_WRIST_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_HAND_RIGHT: ret = true; break;
+    default:
+        break;
+    }
+    return ret;
+}
+
+template<class SkeletonJointType>
+bool HESkeleton<SkeletonJointType>::isJointOnRightLeg(const NUI_SKELETON_POSITION_INDEX& index)
+{
+    bool ret = false;
+    switch (index)
+    {
+    case NUI_SKELETON_POSITION_HIP_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_KNEE_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_ANKLE_RIGHT: ret = true; break;
+    case NUI_SKELETON_POSITION_FOOT_RIGHT: ret = true; break;
+    default:
+        break;
+    }
+    return ret;
+}
+
+template<class SkeletonJointType>
+bool HESkeleton<SkeletonJointType>::isJointOnLeftArm(const NUI_SKELETON_POSITION_INDEX& index)
+{
+    bool ret = false;
+    switch (index)
+    {
+    case NUI_SKELETON_POSITION_SHOULDER_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_ELBOW_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_WRIST_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_HAND_LEFT: ret = true; break;
+    default:
+        break;
+    }
+    return ret;
+}
+
+template<class SkeletonJointType>
+bool HESkeleton<SkeletonJointType>::isJointOnLeftLeg(const NUI_SKELETON_POSITION_INDEX& index)
+{
+    bool ret = false;
+    switch (index)
+    {
+    case NUI_SKELETON_POSITION_HIP_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_KNEE_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_ANKLE_LEFT: ret = true; break;
+    case NUI_SKELETON_POSITION_FOOT_LEFT: ret = true; break;
+    default:
+        break;
+    }
+    return ret;
+}
+
+template<class SkeletonJointType>
+bool HESkeleton<SkeletonJointType>::isJointOnTrunk(const NUI_SKELETON_POSITION_INDEX& index)
+{
+    bool ret = false;
+    switch (index)
+    {
+    case NUI_SKELETON_POSITION_HIP_CENTER: ret = true; break;
+    case NUI_SKELETON_POSITION_SPINE: ret = true; break;
+    case NUI_SKELETON_POSITION_SHOULDER_CENTER: ret = true; break;
+    default:
+        break;
+    }
+    return ret;
+}

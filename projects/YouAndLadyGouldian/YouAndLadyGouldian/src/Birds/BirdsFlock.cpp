@@ -1,9 +1,11 @@
 #include "BirdsFlock.h"
 
 BirdsFlock::BirdsFlock()
-: HEFlock<Bird, HEBoxWorld>(50)
+: HEFlock<Bird, HEBoxWorld>(200)
 {
-    setFlockMass(2);
+    setFlockMasses(2);
+
+    mNumActiveBoids = 50;
 }
 
 BirdsFlock::~BirdsFlock()

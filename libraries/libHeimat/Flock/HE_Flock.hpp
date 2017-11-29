@@ -182,6 +182,18 @@ void HEFlock<BoidType, WorldType>::applyExternalFlockForcesToBoids(ofPoint* inFr
     }
 }
 
+// -----------------------------------------------------------------------------
+template<class BoidType, class WorldType>
+void HEFlock<BoidType, WorldType>::setNumActiveBoids(const int& inNumBoid)
+{
+    mNumActiveBoids = inNumBoid;
+}
+
+template<class BoidType, class WorldType>
+int HEFlock<BoidType, WorldType>::getNumActiveBoids()
+{
+    return mNumActiveBoids;
+}
 
 // -----------------------------------------------------------------------------
 template<class BoidType, class WorldType>
@@ -196,7 +208,13 @@ void HEFlock<BoidType, WorldType>::setFlockRules(const HEFlockRules& inValue)
 }
 
 template<class BoidType, class WorldType>
-void HEFlock<BoidType, WorldType>::setFlockMass(const float& inValue)
+HEFlockRules HEFlock<BoidType, WorldType>::getFlockRules()
+{
+    return mBoids[0]->getRulesWeight();
+}
+
+template<class BoidType, class WorldType>
+void HEFlock<BoidType, WorldType>::setFlockMasses(const float& inValue)
 {
     for (BoidsIt it = mBoids.begin();
          it != mBoids.end();
@@ -206,11 +224,10 @@ void HEFlock<BoidType, WorldType>::setFlockMass(const float& inValue)
     }
 }
 
-// -----------------------------------------------------------------------------
 template<class BoidType, class WorldType>
-void HEFlock<BoidType, WorldType>::setNumActiveBoids(const int& inNumBoid)
+float HEFlock<BoidType, WorldType>::getFlockMasses()
 {
-    mNumActiveBoids = inNumBoid;
+    return mBoids[0]->getMass();
 }
 
 // -----------------------------------------------------------------------------

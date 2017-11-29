@@ -22,10 +22,21 @@ public:
     void loadParameters();
 
 public:
+    void setJointsHasMoveDistance(float& inValue);
+    void setJointsAttractionInc(float& inValue);
+    void setJointsAttractionMin(float& inValue);
+    void setJointsAttractionMax(float& inValue);
+
+public:
     ofxPanel mPanel;
 
     ofParameter<bool> mSilhouetteRenderNormal;
     ofParameter<bool> mSilhouetteRenderBackground;
+
+    ofParameter<float> mSkeletonsJointsHasMoveDistance;
+    ofParameter<float> mSkeletonsJointsAttractionInc;
+    ofParameter<float> mSkeletonsJointsAttractionMin;
+    ofParameter<float> mSkeletonsJointsAttractionMax;
 
 
 private:

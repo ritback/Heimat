@@ -21,6 +21,17 @@ public:
 public:
     void updateJoint(HESkeletonJoint* inJoint);
 
+protected:
+    bool isJointOnRightSide(const NUI_SKELETON_POSITION_INDEX& index);
+    bool isJointOnLeftSide(const NUI_SKELETON_POSITION_INDEX& index);
+    bool isJointOnRightHandComponent(const NUI_SKELETON_POSITION_INDEX& index);
+    bool isJointOnLeftHandComponent(const NUI_SKELETON_POSITION_INDEX& index);
+    bool isJointOnRightArm(const NUI_SKELETON_POSITION_INDEX& index);
+    bool isJointOnRightLeg(const NUI_SKELETON_POSITION_INDEX& index);
+    bool isJointOnLeftArm(const NUI_SKELETON_POSITION_INDEX& index);
+    bool isJointOnLeftLeg(const NUI_SKELETON_POSITION_INDEX& index);
+    bool isJointOnTrunk(const NUI_SKELETON_POSITION_INDEX& index);
+
 public:
     NUI_SKELETON_TRACKING_STATE mTrackingState;
 

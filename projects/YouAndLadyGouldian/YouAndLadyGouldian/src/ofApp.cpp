@@ -57,7 +57,7 @@ void ofApp::drawFlock()
 
     mFlock.render();
 
-    if(mGui.mFlockParametersGui.mFlockRenderWorld)
+    if(mGui.mFlockParametersGui.mRenderWorld)
         mFlock.renderWorld();
 
     ofPopMatrix();

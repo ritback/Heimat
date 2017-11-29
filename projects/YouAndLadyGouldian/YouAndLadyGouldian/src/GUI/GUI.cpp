@@ -8,6 +8,7 @@
 AppGui::AppGui(ofApp* inApp)
 : mApp(inApp)
 , mFlockParametersGui(inApp)
+, mKinectParametersGui(inApp)
 {
 
 }
@@ -26,18 +27,27 @@ void AppGui::initGui()
     mGeneralPanel.add(mRenderSkeletons.set("Render Flock or Kinect", true));
 
     mFlockParametersGui.initGui();
+    mKinectParametersGui.initGui();
 }
 
 void AppGui::launchGui()
 {
     mDisplayGui = true;
     mFlockParametersGui.launchGui();
+    mKinectParametersGui.launchGui();
+
+    mGeneralPanel.setPosition(5, 5);
+    mFlockParametersGui.mPanel.setPosition(220, 5);
+    mKinectParametersGui.mPanel.setPosition(435, 5);
+
+
 }
 
 void AppGui::removeGui()
 {
     mDisplayGui = false;
     mFlockParametersGui.removeGui();
+    mKinectParametersGui.removeGui();
 }
 
 //------------------------------------------------------------------------------
@@ -47,14 +57,12 @@ void AppGui::renderGui()
     if (!mDisplayGui) return;
 
 
-    mGeneralPanel.setPosition(5, 5);
-    mFlockParametersGui.mPanel.setPosition(220, 5);
-
 
     
     mGeneralPanel.draw();
 
     mFlockParametersGui.renderGui();
+    mKinectParametersGui.renderGui();
 
 
 
