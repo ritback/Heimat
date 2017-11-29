@@ -8,7 +8,9 @@
 AppGui::AppGui(ofApp* inApp)
 : mApp(inApp)
 , mFlockParametersGui(inApp)
+#if USE_KINECT
 , mKinectParametersGui(inApp)
+#endif
 {
 
 }
@@ -27,19 +29,21 @@ void AppGui::initGui()
     mGeneralPanel.add(mRenderSkeletons.set("Render Flock or Kinect", true));
 
     mFlockParametersGui.initGui();
+#if USE_KINECT
     mKinectParametersGui.initGui();
+#endif
 }
 
 void AppGui::launchGui()
 {
     mDisplayGui = true;
-    mFlockParametersGui.launchGui();
-    mKinectParametersGui.launchGui();
-
     mGeneralPanel.setPosition(5, 5);
+    mFlockParametersGui.launchGui();
     mFlockParametersGui.mPanel.setPosition(220, 5);
+#if USE_KINECT
+    mKinectParametersGui.launchGui();
     mKinectParametersGui.mPanel.setPosition(435, 5);
-
+#endif
 
 }
 
@@ -47,7 +51,9 @@ void AppGui::removeGui()
 {
     mDisplayGui = false;
     mFlockParametersGui.removeGui();
+#if USE_KINECT
     mKinectParametersGui.removeGui();
+#endif
 }
 
 //------------------------------------------------------------------------------
@@ -62,8 +68,9 @@ void AppGui::renderGui()
     mGeneralPanel.draw();
 
     mFlockParametersGui.renderGui();
+#if USE_KINECT
     mKinectParametersGui.renderGui();
-
+#endif
 
 
     std::stringstream frameRate;
@@ -81,12 +88,19 @@ void AppGui::saveParameters()
 {
     mGeneralPanel.saveToFile("GeneralSettings.xml");
     mFlockParametersGui.saveParameters();
+#if USE_KINECT
+    mKinectParametersGui.saveParameters();
+#endif
 }
 
 void AppGui::loadParameters()
 {
     mGeneralPanel.loadFromFile("GeneralSettings.xml");
     mFlockParametersGui.loadParameters();
+
+#if USE_KINECT
+    mKinectParametersGui.loadParameters();
+#endif
 
 }
 

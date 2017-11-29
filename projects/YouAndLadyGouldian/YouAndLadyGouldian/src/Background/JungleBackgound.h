@@ -1,22 +1,24 @@
 #pragma once
 
 #include "ofMain.h"
+
 #include "HEHelpers_Shader.h"
 
 class HEKinect;
 
-class Trees
+class JungleBackgound
 {
 public:
-    Trees();
-    ~Trees();
+    JungleBackgound();
+    ~JungleBackgound();
 
 public:
     void update();
     void render();
 
 private:
-    HEShaderHelper mTreesShader;
+    ofImage mJungleImage;
+    HEShaderHelper mHeatShader;
     ofImage mPixelCanvas;
 };
  

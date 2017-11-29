@@ -1,8 +1,3 @@
-
-
-
-
-
 #version 150
 
 uniform vec3            uResolution;           // viewport resolution (in pixels)

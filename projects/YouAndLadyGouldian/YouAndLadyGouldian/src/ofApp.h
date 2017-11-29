@@ -1,9 +1,15 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Kinect.h"
 #include "BirdsFlock.h"
+#include "JungleBackgound.h"
 #include "GUI.h"
+
+#define USE_KINECT 0
+
+#if USE_KINECT
+#include "Kinect.h"
+#endif
 
 class ofApp : public ofBaseApp
 {
@@ -40,11 +46,17 @@ public:
 public:
     BirdsFlock* getFlock();
 
-private:
+public:
     BirdsFlock mFlock;
 
+#if USE_KINECT
 public:
     Kinect mKinect;
+#endif
+
+public:
+    JungleBackgound mJungleBackgound;
+
 
 private:
     AppGui mGui;

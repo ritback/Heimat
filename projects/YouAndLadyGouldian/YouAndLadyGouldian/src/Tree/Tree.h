@@ -1,33 +1,24 @@
 #pragma once
 
 #include "ofMain.h"
-#include "HE_DepthLessBkgndImage.h"
 
 #include "HEHelpers_Shader.h"
 
 class HEKinect;
 
-class Silhouette
+class Tree
 {
 public:
-    Silhouette(HEKinect* inKinect);
-    ~Silhouette();
+    Tree();
+    ~Tree();
 
 public:
     void update();
     void render();
-    void renderStreamImage();
-    void renderBkgnd();
 
-public:
-    void refreshBackground();
 
 private:
-    HEKinectDepthImage mStreamImage;
-    HEDepthLessBkgndImage mDepthLessBkgndImage;
-
-private:
-    HEShaderHelper mSilhouetteShader;
+    HEShaderHelper mTreeShader;
     ofImage mPixelCanvas;
 };
  

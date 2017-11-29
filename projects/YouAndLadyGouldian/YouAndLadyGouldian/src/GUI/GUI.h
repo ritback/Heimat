@@ -3,7 +3,10 @@
 #include "ofMain.h"
 
 #include "FlockParametersGui.h"
+
+#if USE_KINECT
 #include "KinectParametersGui.h"
+#endif
 
 class ofApp;
 
@@ -28,7 +31,9 @@ public:
     
 public:
     FlockParametersGui mFlockParametersGui;
+#if USE_KINECT
     KinectParametersGui mKinectParametersGui;
+#endif
 
 public:
     ofxPanel mGeneralPanel;

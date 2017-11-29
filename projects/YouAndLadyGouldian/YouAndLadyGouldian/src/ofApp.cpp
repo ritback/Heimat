@@ -3,7 +3,10 @@
 ofApp::ofApp()
     : ofBaseApp()
     , mFlock()
+#if USE_KINECT
     , mKinect(&mFlock)
+#endif
+    , mJungleBackgound()
     , mGui(this)
 {
     
@@ -30,20 +33,29 @@ void ofApp::exit()
 //------------------------------------------------------------------------------
 void ofApp::update()
 {
-    mKinect.updateSilhoutte();
+    mJungleBackgound.update();
+
+#if USE_KINECT
+    //mKinect.updateSilhoutte();
     //mKinect.updateScarecrows();
+#endif
+
     mFlock.update();
 }
 
 void ofApp::draw()
 {   
     ofBackground(0);
+    mJungleBackgound.render();
 
-    mKinect.renderSilhouette();
+
+#if USE_KINECT
+    //mKinect.renderSilhouette();
 
     //if(mGui.mRenderSkeletons)
     //    mKinect.renderScarecrows();
-    
+#endif
+
     drawFlock();
 
     mGui.renderGui();
@@ -130,7 +142,20 @@ void ofApp::mouseExited(int x, int y)
 //------------------------------------------------------------------------------
 void ofApp::windowResized(int w, int h)
 {
+    ofPoint worldLimitMin(-ofGetWindowWidth() / 2, -ofGetWindowHeight() / 2);
+    ofPoint worldLimitMax(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2);
 
+    HEBoxWorld* boxWorld = mFlock.getWorld();
+
+    boxWorld->setWorldLimitMin(worldLimitMin);
+    boxWorld->setWorldLimitMax(worldLimitMax);
+
+    float margin = 100;
+    ofPoint worldLimitDistanceMin(worldLimitMin.x + margin, worldLimitMin.y + margin);
+    ofPoint worldLimitDistanceMax(worldLimitMax.x - margin, worldLimitMax.y - margin);
+
+    boxWorld->setWorldLimitDistanceMin(worldLimitDistanceMin);
+    boxWorld->setWorldLimitDistanceMax(worldLimitDistanceMax);
 }
 
 void ofApp::gotMessage(ofMessage msg)
