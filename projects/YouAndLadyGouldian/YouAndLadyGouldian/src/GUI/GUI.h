@@ -4,6 +4,7 @@
 
 #include "FlockParametersGui.h"
 
+#include "UseKinect.h"
 #if USE_KINECT
 #include "KinectParametersGui.h"
 #endif

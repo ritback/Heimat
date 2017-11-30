@@ -36,8 +36,8 @@ void ofApp::update()
     mJungleBackgound.update();
 
 #if USE_KINECT
-    //mKinect.updateSilhoutte();
-    //mKinect.updateScarecrows();
+    mKinect.updateSilhoutte();
+    mKinect.updateScarecrows();
 #endif
 
     mFlock.update();
@@ -50,10 +50,10 @@ void ofApp::draw()
 
 
 #if USE_KINECT
-    //mKinect.renderSilhouette();
+    mKinect.renderSilhouette();
 
-    //if(mGui.mRenderSkeletons)
-    //    mKinect.renderScarecrows();
+    if(mGui.mRenderSkeletons)
+        mKinect.renderScarecrows();
 #endif
 
     drawFlock();

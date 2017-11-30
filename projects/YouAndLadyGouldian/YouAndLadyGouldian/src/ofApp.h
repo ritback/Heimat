@@ -5,8 +5,7 @@
 #include "JungleBackgound.h"
 #include "GUI.h"
 
-#define USE_KINECT 0
-
+#include "UseKinect.h"
 #if USE_KINECT
 #include "Kinect.h"
 #endif
