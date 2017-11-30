@@ -3,7 +3,7 @@
 #include "HE_KinectDef.h"
 #include "HE_Kinect.h"
 
-struct HESkeletonJoint;
+class HESkeletonJoint;
 
 template<class SkeletonType>
 class HESkeletonsTracker: public HESkeletonsStreamHandlerInterface

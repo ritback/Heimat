@@ -1,7 +1,6 @@
 #include "Trees.h"
 
 Trees::Trees()
-    : mTreesShader("Trees")
 {
 
 }

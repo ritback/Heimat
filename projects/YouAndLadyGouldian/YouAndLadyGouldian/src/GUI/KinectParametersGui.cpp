@@ -21,9 +21,9 @@ void KinectParametersGui::initGui()
 {
     Kinect* kinect = mApp->getKinect();
     float hasMoove = (kinect->mScarecrowsTracker).getJointsHasMoveDistance();
-    float attractionInc = (kinect->mScarecrowsTracker).getJointsHasMoveDistance();
-    float attractionMin = (kinect->mScarecrowsTracker).getJointsHasMoveDistance();
-    float attractionMax = (kinect->mScarecrowsTracker).getJointsHasMoveDistance();
+    float attractionInc = (kinect->mScarecrowsTracker).getJointsAttractionInc();
+    float attractionMin = (kinect->mScarecrowsTracker).getJointsAttractionMin();
+    float attractionMax = (kinect->mScarecrowsTracker).getJointsAttractionMax();
 
     mPanel.setup("Kinect Panel");
     
@@ -56,9 +56,9 @@ void KinectParametersGui::launchGui()
     mSilhouetteRenderDepthLessBackground.addListener(this, &KinectParametersGui::setSilhouetteRenderDepthLessBackground);
 
     mSkeletonsJointsHasMoveDistance.addListener(this, &KinectParametersGui::setJointsHasMoveDistance);
-    mSkeletonsJointsAttractionInc.addListener(this, &KinectParametersGui::setJointsHasMoveDistance);
-    mSkeletonsJointsAttractionMin.addListener(this, &KinectParametersGui::setJointsHasMoveDistance);
-    mSkeletonsJointsAttractionMax.addListener(this, &KinectParametersGui::setJointsHasMoveDistance);
+    mSkeletonsJointsAttractionInc.addListener(this, &KinectParametersGui::setJointsAttractionInc);
+    mSkeletonsJointsAttractionMin.addListener(this, &KinectParametersGui::setJointsAttractionMin);
+    mSkeletonsJointsAttractionMax.addListener(this, &KinectParametersGui::setJointsAttractionMax);
 }
 
 void KinectParametersGui::removeGui()
@@ -69,9 +69,9 @@ void KinectParametersGui::removeGui()
     mSilhouetteRenderDepthLessBackground.removeListener(this, &KinectParametersGui::setSilhouetteRenderDepthLessBackground);
 
     mSkeletonsJointsHasMoveDistance.removeListener(this, &KinectParametersGui::setJointsHasMoveDistance);
-    mSkeletonsJointsAttractionInc.removeListener(this, &KinectParametersGui::setJointsHasMoveDistance);
-    mSkeletonsJointsAttractionMin.removeListener(this, &KinectParametersGui::setJointsHasMoveDistance);
-    mSkeletonsJointsAttractionMax.removeListener(this, &KinectParametersGui::setJointsHasMoveDistance);
+    mSkeletonsJointsAttractionInc.removeListener(this, &KinectParametersGui::setJointsAttractionInc);
+    mSkeletonsJointsAttractionMin.removeListener(this, &KinectParametersGui::setJointsAttractionMin);
+    mSkeletonsJointsAttractionMax.removeListener(this, &KinectParametersGui::setJointsAttractionMax);
 }
 
 //------------------------------------------------------------------------------
