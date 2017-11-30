@@ -1,0 +1,13 @@
+<group>
+	<Silhouette>
+		<Min_X>0</Min_X>
+		<Min_Y>0</Min_Y>
+	</Silhouette>
+	<Skeletons>
+		<Has_Move_Distance>75</Has_Move_Distance>
+		<Attraction_Inc>0.25</Attraction_Inc>
+		<Attraction_Min>-20</Attraction_Min>
+		<Attraction_Max>20</Attraction_Max>
+	</Skeletons>
+<group/>
+</group>

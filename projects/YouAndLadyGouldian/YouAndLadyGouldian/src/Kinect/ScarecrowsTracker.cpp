@@ -33,3 +33,59 @@ void ScarecrowsTracker::update()
 }
 
 
+//------------------------------------------------------------------------------
+void ScarecrowsTracker::setJointsHasMoveDistance(float inValue)
+{
+    for(int i = 0; i < NUI_SKELETON_COUNT; ++i)
+    {
+        mTrackedSkeletons[i].setJointsHasMoveDistance(inValue);
+    }
+}
+
+float ScarecrowsTracker::getJointsHasMoveDistance()
+{
+    return mTrackedSkeletons[0].getJointsHasMoveDistance();
+}
+
+void ScarecrowsTracker::setJointsAttractionInc(float inValue)
+{
+    for(int i = 0; i < NUI_SKELETON_COUNT; ++i)
+    {
+        mTrackedSkeletons[i].setJointsAttractionInc(inValue);
+    }
+}
+
+float ScarecrowsTracker::getJointsAttractionInc()
+{
+    return mTrackedSkeletons[0].getJointsAttractionInc();
+}
+
+void ScarecrowsTracker::setJointsAttractionMin(float inValue)
+{
+    for(int i = 0; i < NUI_SKELETON_COUNT; ++i)
+    {
+        mTrackedSkeletons[i].setJointsAttractionMin(inValue);
+    }
+}
+
+float ScarecrowsTracker::getJointsAttractionMin()
+{
+    return mTrackedSkeletons[0].getJointsAttractionMin();
+}
+
+void ScarecrowsTracker::setJointsAttractionMax(float inValue)
+{
+    for(int i = 0; i < NUI_SKELETON_COUNT; ++i)
+    {
+        mTrackedSkeletons[i].setJointsAttractionMax(inValue);
+    }
+}
+
+float ScarecrowsTracker::getJointsAttractionMax()
+{
+    return mTrackedSkeletons[0].getJointsAttractionMax();
+}
+
+
+
+

@@ -81,18 +81,11 @@ void HEKinectStreamHandler::streamDepthTo(HEDepthStreamHandlerInterface* inToStr
                                   ofPixels* inDepthChannel,
                                   float inWaitingTime)
 {
-    /*DWORD err = WaitForSingleObject(mNextDepthFrameEvent, inWaitingTime);
-    if (err != WAIT_OBJECT_0)
-    {
-        return;
-    }
-    */
-
+   
     HRESULT hr = S_OK;
     NUI_IMAGE_FRAME imageFrame;
 
-    hr = mKinect->NuiImageStreamGetNextFrame(mDepthStreamHandle, 100, &imageFrame);
-    
+    hr = mKinect->NuiImageStreamGetNextFrame(mDepthStreamHandle, 0, &imageFrame);
     if (hr != S_OK)
     {
         return;
@@ -149,15 +142,9 @@ void HEKinectStreamHandler::streamSkeletonsTo(HESkeletonsStreamHandlerInterface*
                                       float inWaitingTime)
 {
 
-    DWORD err = WaitForSingleObject(mNextSkeletonEvent, inWaitingTime);
-    if (err != WAIT_OBJECT_0)
-    {
-        return;
-    }
-
     NUI_SKELETON_FRAME skeletonFrame = { 0 };
 
-    HRESULT hr = mKinect->NuiSkeletonGetNextFrame(0, &skeletonFrame);
+    HRESULT hr = mKinect->NuiSkeletonGetNextFrame(10, &skeletonFrame);
     if (FAILED(hr))
     {
         return;

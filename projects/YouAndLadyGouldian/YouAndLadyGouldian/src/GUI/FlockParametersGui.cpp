@@ -30,6 +30,10 @@ void FlockParametersGui::initGui()
     ofPoint worldLimitMax = boxWorld->getWorldLimitMax();
     ofPoint worldLimitDistanceMin = boxWorld->getWorldLimitDistanceMin();
     ofPoint worldLimitDistanceMax = boxWorld->getWorldLimitDistanceMax();
+
+    float repulsion = boxWorld->getWorldRepulsionMag();
+
+
     
     mPanel.setup("Flock Panel");
     
@@ -38,14 +42,16 @@ void FlockParametersGui::initGui()
 
     ofParameterGroup flockRulesParam;
     flockRulesParam.setName("Flock Rules");
-    flockRulesParam.add(mFlockRulesCohesion.set("Cohesion", flockRules.mCohesion, 0, 2));
-    flockRulesParam.add(mFlockRulesSeparation.set("Separation", flockRules.mSeparation, 0, 2));
-    flockRulesParam.add(mFlockRulesAlignement.set("Alignement", flockRules.mAlignement, 0, 2));
+    flockRulesParam.add(mFlockRulesCohesion.set("Cohesion", flockRules.mCohesion, 0, 10));
+    flockRulesParam.add(mFlockRulesSeparation.set("Separation", flockRules.mSeparation, 0, 10));
+    flockRulesParam.add(mFlockRulesAlignement.set("Alignement", flockRules.mAlignement, 0, 10));
     mPanel.add(flockRulesParam);
 
 
     mPanel.add(mRenderWorld.set("Render World Limits", false));
-    
+
+    mPanel.add(mWorldLimitMinX.set("Repulsion", repulsion, 0, 20));
+
     ofParameterGroup worldLimit;
     worldLimit.setName("World Limit");
     worldLimit.add(mWorldLimitMinX.set("Min X", worldLimitMin.x, -1200, 0));
@@ -66,23 +72,31 @@ void FlockParametersGui::initGui()
 
 void FlockParametersGui::launchGui()
 {
-    mNumBoids.addListener(this, &FlockParametersGui::setFlockNumBoids);
-    mBoidsMasses.addListener(this, &FlockParametersGui::setFlockMasses);
 
-    mFlockRulesCohesion.addListener(this, &FlockParametersGui::setFlockRules);
-    mFlockRulesSeparation.addListener(this, &FlockParametersGui::setFlockRules);
-    mFlockRulesAlignement.addListener(this, &FlockParametersGui::setFlockRules);
+    BirdsFlock* flock = mApp->getFlock();
+    HEBoxWorld* boxWorld = flock->getWorld();
 
-    mWorldLimitMinX.addListener(this, &FlockParametersGui::resizeFlockWorld);
-    mWorldLimitMinY.addListener(this, &FlockParametersGui::resizeFlockWorld);
-    mWorldLimitMaxX.addListener(this, &FlockParametersGui::resizeFlockWorld);
-    mWorldLimitMaxY.addListener(this, &FlockParametersGui::resizeFlockWorld);
-    
-    mWorldLimitDistanceMinX.addListener(this, &FlockParametersGui::resizeFlockWorldDistance);
-    mWorldLimitDistanceMinY.addListener(this, &FlockParametersGui::resizeFlockWorldDistance);
-    mWorldLimitDistanceMaxX.addListener(this, &FlockParametersGui::resizeFlockWorldDistance);
-    mWorldLimitDistanceMaxY.addListener(this, &FlockParametersGui::resizeFlockWorldDistance);
-    
+    mNumBoids = flock->getNumActiveBoids();
+    mBoidsMasses = flock->getFlockMasses();
+
+    mWorldLimitRepuslion = boxWorld->getWorldRepulsionMag();
+
+    ofPoint worldLimitMin = boxWorld->getWorldLimitMin();
+    ofPoint worldLimitMax = boxWorld->getWorldLimitMax();
+    ofPoint worldLimitDistanceMin = boxWorld->getWorldLimitDistanceMin();
+    ofPoint worldLimitDistanceMax = boxWorld->getWorldLimitDistanceMax();
+
+    mWorldLimitMinX = worldLimitMin.x;
+    mWorldLimitMinY = worldLimitMin.y;
+    mWorldLimitMaxX = worldLimitMax.x;
+    mWorldLimitMaxY = worldLimitMax.y;
+
+    mWorldLimitDistanceMinX = worldLimitDistanceMin.x;
+    mWorldLimitDistanceMinY = worldLimitDistanceMin.y;
+    mWorldLimitDistanceMaxX = worldLimitDistanceMax.x;
+    mWorldLimitDistanceMaxY = worldLimitDistanceMax.y;
+
+
 }
 
 void FlockParametersGui::removeGui()
@@ -93,6 +107,8 @@ void FlockParametersGui::removeGui()
     mFlockRulesCohesion.removeListener(this, &FlockParametersGui::setFlockRules);
     mFlockRulesSeparation.removeListener(this, &FlockParametersGui::setFlockRules);
     mFlockRulesAlignement.removeListener(this, &FlockParametersGui::setFlockRules);
+
+    mWorldLimitRepuslion.removeListener(this, &FlockParametersGui::setWorldLimitRepulsion);
 
     mWorldLimitMinX.removeListener(this, &FlockParametersGui::resizeFlockWorld);
     mWorldLimitMinY.removeListener(this, &FlockParametersGui::resizeFlockWorld);
@@ -154,6 +170,14 @@ void FlockParametersGui::setFlockRules(float & inValue)
 }
 
 //------------------------------------------------------------------------------
+void FlockParametersGui::setWorldLimitRepulsion(float & inLimit)
+{
+    BirdsFlock* flock = mApp->getFlock();
+    HEBoxWorld* boxWorld = flock->getWorld();
+
+    boxWorld->setWorldRepulsionMag(inLimit);
+}
+
 void FlockParametersGui::resizeFlockWorld(float & inLimit)
 {
     ofPoint worldLimitMin(mWorldLimitMinX, mWorldLimitMinY);
@@ -166,7 +190,6 @@ void FlockParametersGui::resizeFlockWorld(float & inLimit)
     boxWorld->setWorldLimitMax(worldLimitMax);
 }
 
-//------------------------------------------------------------------------------
 void FlockParametersGui::resizeFlockWorldDistance(float & inLimit)
 {
     ofPoint worldLimitMin(mWorldLimitDistanceMinX, mWorldLimitDistanceMinY);

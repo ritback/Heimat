@@ -1,10 +1,10 @@
 <group>
-	<NumBoids>200</NumBoids>
-	<Masses>2</Masses>
+	<NumBoids>150</NumBoids>
+	<Masses>2.2</Masses>
 	<Flock_Rules>
-		<Cohesion>0.5</Cohesion>
-		<Separation>0.6</Separation>
-		<Alignement>0.5</Alignement>
+		<Cohesion>0.7</Cohesion>
+		<Separation>3.14</Separation>
+		<Alignement>7.3</Alignement>
 	</Flock_Rules>
 	<Render_World_Limits>0</Render_World_Limits>
 	<World_Limit>

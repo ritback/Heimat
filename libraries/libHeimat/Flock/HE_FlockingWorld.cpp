@@ -12,7 +12,7 @@ HEFlockingWorldInterface::HEFlockingWorldInterface()
                       -ofGetWindowHeight()/2 + INITIAL_MARGIN,
                       ofGetWindowWidth() - 2 * INITIAL_MARGIN,
                       ofGetWindowHeight() - 2 * INITIAL_MARGIN)
-, mWorldRepulsionMag(1)
+, mWorldRepulsionMag(15)
 , mWorldViscosity(0.0)
 {
     

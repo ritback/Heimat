@@ -16,6 +16,16 @@ public:
 public:
     virtual void update() override;
 
+public:
+    void setJointsHasMoveDistance(float inValue);
+    float getJointsHasMoveDistance();
+    void setJointsAttractionInc(float inValue);
+    float getJointsAttractionInc();
+    void setJointsAttractionMin(float inValue);
+    float getJointsAttractionMin();
+    void setJointsAttractionMax(float inValue);
+    float getJointsAttractionMax();
+
 private:
     BirdsFlock* mFlock;
 };

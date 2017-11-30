@@ -3,9 +3,9 @@
 BirdsFlock::BirdsFlock()
 : HEFlock<Bird, HEBoxWorld>(200)
 {
-    setFlockMasses(2);
+    setFlockMasses(2.2);
 
-    mNumActiveBoids = 50;
+    mNumActiveBoids = 150;
 }
 
 BirdsFlock::~BirdsFlock()

@@ -11,9 +11,10 @@ void Bird::renderBird() {
     
     // update the global color;
     updateColor ();
-    ofEnableSmoothing();
+    //ofEnableSmoothing();
     
-    
+
+    ofPushStyle();
     // store the coordinates system
     ofPushMatrix();
     // modify the coordination system
@@ -47,11 +48,11 @@ void Bird::renderBird() {
     // ------
     // eye
     ofSetColor(0, 0, 0, 125);
-    ofDrawEllipse(headCenter, headDiameter*2/3, headDiameter*2/3);
+    ofDrawCircle(headCenter, headDiameter*2/6);
     ofSetColor(255);
-    ofDrawEllipse(headCenter, headDiameter/2, headDiameter/2);
+    ofDrawCircle(headCenter, headDiameter/4);
     ofSetColor(0);
-    ofDrawEllipse(headCenter, headDiameter/4, headDiameter/4);
+    ofDrawCircle(headCenter, headDiameter/8);
     
     
     // Wing !
@@ -66,6 +67,7 @@ void Bird::renderBird() {
     
     // restore the normal coodinates system
     ofPopMatrix();
+    ofPopStyle();
     
 }
 

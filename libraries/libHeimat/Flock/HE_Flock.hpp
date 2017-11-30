@@ -29,7 +29,7 @@ void HEFlock<BoidType, WorldType>::update()
     int index = 0;
     for (BoidsIt it = mBoids.begin(); it != mBoids.end(); ++it, ++index)
     {
-        if (index > mNumActiveBoids) break;
+        if (index >= mNumActiveBoids) break;
         
         int index2 = index + 1;
         for (BoidsIt otherIt = it + 1; otherIt != mBoids.end(); ++otherIt, ++index2)
@@ -66,7 +66,7 @@ void HEFlock<BoidType, WorldType>::render()
     int index = 0;
     for (BoidsIt it = mBoids.begin(); it != mBoids.end(); ++it, ++index)
     {
-        if (index > mNumActiveBoids) break;
+        if (index >= mNumActiveBoids) break;
         
         (*it)->render();
     }
@@ -109,7 +109,7 @@ void HEFlock<BoidType, WorldType>::applyForceToBoidsFromPosition(const ofPoint& 
     int index = 0;
     for(BoidsIt it = mBoids.begin(); it != mBoids.end(); ++it, ++index)
     {
-        if(index > mNumActiveBoids) break;
+        if(index >= mNumActiveBoids) break;
 
         (*it)->applyForceFromPosition(inFromPosition,
                                       inMag,
@@ -126,7 +126,7 @@ void HEFlock<BoidType, WorldType>::applyLinearForceToBoidsFromPosition(const ofP
     int index = 0;
     for(BoidsIt it = mBoids.begin(); it != mBoids.end(); ++it, ++index)
     {
-        if(index > mNumActiveBoids) break;
+        if(index >= mNumActiveBoids) break;
 
         (*it)->applyLinearForceFromPosition(inFromPosition,
                                       inMag,
@@ -142,7 +142,7 @@ void HEFlock<BoidType, WorldType>::applyInverselyProportionalToDistanceForceToBo
     int index = 0;
     for(BoidsIt it = mBoids.begin(); it != mBoids.end(); ++it, ++index)
     {
-        if(index > mNumActiveBoids) break;
+        if(index >= mNumActiveBoids) break;
 
         (*it)->applyInverselyProportionalToDistanceForceFromPosition(inFromPosition,
                                       inMag,
@@ -160,7 +160,7 @@ void HEFlock<BoidType, WorldType>::applyExternalFlockForcesToBoids(ofPoint* inFr
     int index = 0;
     for (BoidsIt it = mBoids.begin(); it != mBoids.end(); ++it, ++index)
     {
-        if (index > mNumActiveBoids) break;
+        if (index >= mNumActiveBoids) break;
         
         for (int i = 0; i < inNumExternalBoid; i++)
         {

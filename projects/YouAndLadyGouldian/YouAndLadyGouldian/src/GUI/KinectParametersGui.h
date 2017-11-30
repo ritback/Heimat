@@ -21,6 +21,13 @@ public:
     void saveParameters();
     void loadParameters();
 
+
+public:
+    void setSilhouetteRenderNormal(bool& inValue);
+    void setSilhouetteRenderStream(bool& inValue);
+    void setSilhouetteRenderBackground(bool& inValue);
+    void setSilhouetteRenderDepthLessBackground(bool& inValue);
+
 public:
     void setJointsHasMoveDistance(float& inValue);
     void setJointsAttractionInc(float& inValue);
@@ -30,8 +37,12 @@ public:
 public:
     ofxPanel mPanel;
 
+    ofParameter<bool> mRenderSkeletons;
+
     ofParameter<bool> mSilhouetteRenderNormal;
+    ofParameter<bool> mSilhouetteRenderStream;
     ofParameter<bool> mSilhouetteRenderBackground;
+    ofParameter<bool> mSilhouetteRenderDepthLessBackground;
 
     ofParameter<float> mSkeletonsJointsHasMoveDistance;
     ofParameter<float> mSkeletonsJointsAttractionInc;

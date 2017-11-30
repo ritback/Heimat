@@ -11,7 +11,7 @@ HEBoid::HEBoid(const ofPoint& inPos)
     , mRulesSqrDistance(rulesDistance*rulesDistance,
                         rulesDistance*rulesDistance * 4/5,
                         rulesDistance*rulesDistance)
-    , mRulesWeight(0.5, 0.6, 0.5)
+    , mRulesWeight(0.7, 3.14, 7.3)
 {
 
 }
@@ -110,8 +110,10 @@ void HEBoid::applyFlockingForces()
         // steering to the barycenter of all Neighborss.
         mResultingCohesionForce /= mWeightNeighborsInRange.mCohesion;
         
+
+        mResultingCohesionForce -= mVel;
         
-        
+
         mResultingCohesionForce *= mRulesWeight.mCohesion;
         
         mResultingCohesionForce.limit(mMaxSteering);
@@ -124,6 +126,11 @@ void HEBoid::applyFlockingForces()
         // Global Separation Force
         mResultingSeparationForce /= mWeightNeighborsInRange.mSeparation;
         
+
+        mResultingCohesionForce -= mVel;
+
+
+
         mResultingSeparationForce *= mRulesWeight.mSeparation;
         
         mResultingSeparationForce.limit(mMaxSteering);
@@ -154,7 +161,7 @@ void HEBoid::applyFlockingForces()
     // limit speed thanks to viscosity
     if (mVel.lengthSquared() > 20)
     {
-        applyForce(- 0.1 * mVel);
+        applyForce(- 0.05 * mVel);
     }
 }
 

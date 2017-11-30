@@ -35,14 +35,9 @@ public:
 #if USE_KINECT
     KinectParametersGui mKinectParametersGui;
 #endif
-
-public:
-    ofxPanel mGeneralPanel;
-    ofParameter<bool> mRenderSkeletons;
     
 private:
     ofApp* mApp;
-    
     
 };
 

@@ -4,7 +4,7 @@
 
 Bird::Bird(const ofPoint& inPos)
 : HEBoid(inPos)
-, maxHeight(50)
+, maxHeight(75)
 , shape(ofPath())
 , shape2(ofPath())
 , shape3(ofPath())
@@ -78,7 +78,7 @@ void Bird::mayAddNewFeather()
         probability = true;
     
     // ADD feather at the end of the tail
-    if (mAcc.lengthSquared() > 500/*0.030*/ || probability)
+    if (mAcc.lengthSquared() > 400/*0.030*/ || probability)
     {
         FeathersIt it = mFeathers.begin();
         while(it != mFeathers.end())

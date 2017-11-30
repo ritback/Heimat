@@ -44,6 +44,9 @@ public:
     
 public:
     BirdsFlock* getFlock();
+#if USE_KINECT
+    Kinect* getKinect();
+#endif
 
 public:
     BirdsFlock mFlock;

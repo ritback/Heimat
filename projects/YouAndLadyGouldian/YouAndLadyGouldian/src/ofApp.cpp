@@ -50,13 +50,22 @@ void ofApp::draw()
 
 
 #if USE_KINECT
-    mKinect.renderSilhouette();
 
-    if(mGui.mRenderSkeletons)
+    if(mGui.mKinectParametersGui.mSilhouetteRenderNormal)
+        mKinect.renderSilhouette();
+    else if(mGui.mKinectParametersGui.mSilhouetteRenderStream)
+        mKinect.mSilhouette.renderStreamImage();
+    else if(mGui.mKinectParametersGui.mSilhouetteRenderBackground)
+        mKinect.mSilhouette.renderBkgnd();
+    else if(mGui.mKinectParametersGui.mSilhouetteRenderDepthLessBackground)
+        mKinect.mSilhouette.renderDepthLessBkgnd();
+
+    if(mGui.mKinectParametersGui.mRenderSkeletons)
         mKinect.renderScarecrows();
 #endif
 
     drawFlock();
+
 
     mGui.renderGui();
 
@@ -85,6 +94,11 @@ void ofApp::keyPressed(int key)
         case 'f': case 'F':
             ofToggleFullscreen();
             break;
+
+        case 'b': case 'B':
+            mKinect.mSilhouette.refreshBackground();
+            break;
+
         case 'd': case 'D':
             mGui.mDisplayGui = !mGui.mDisplayGui;
             if(mGui.mDisplayGui)
@@ -173,3 +187,10 @@ BirdsFlock* ofApp::getFlock()
 {
     return &mFlock;
 }
+
+Kinect* ofApp::getKinect()
+{
+    return &mKinect;
+}
+
+

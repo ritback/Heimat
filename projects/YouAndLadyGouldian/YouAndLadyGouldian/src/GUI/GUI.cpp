@@ -25,9 +25,6 @@ void AppGui::initGui()
 {
     mDisplayGui = true;
     
-    mGeneralPanel.setup("Misc Panel");
-    mGeneralPanel.add(mRenderSkeletons.set("Render Flock or Kinect", true));
-
     mFlockParametersGui.initGui();
 #if USE_KINECT
     mKinectParametersGui.initGui();
@@ -37,12 +34,11 @@ void AppGui::initGui()
 void AppGui::launchGui()
 {
     mDisplayGui = true;
-    mGeneralPanel.setPosition(5, 5);
     mFlockParametersGui.launchGui();
-    mFlockParametersGui.mPanel.setPosition(220, 5);
+    mFlockParametersGui.mPanel.setPosition(5, 5);
 #if USE_KINECT
     mKinectParametersGui.launchGui();
-    mKinectParametersGui.mPanel.setPosition(435, 5);
+    mKinectParametersGui.mPanel.setPosition(220, 5);
 #endif
 
 }
@@ -59,26 +55,19 @@ void AppGui::removeGui()
 //------------------------------------------------------------------------------
 void AppGui::renderGui()
 {
-
     if (!mDisplayGui) return;
-
-
-
-    
-    mGeneralPanel.draw();
 
     mFlockParametersGui.renderGui();
 #if USE_KINECT
     mKinectParametersGui.renderGui();
 #endif
 
-
     std::stringstream frameRate;
     frameRate << "Framerate ";
     frameRate << ofGetFrameRate();
     ofPushStyle();
     ofSetColor(255, 0, 0);
-    ofDrawBitmapString(frameRate.str(), 20, ofGetWindowHeight() - 20);
+    ofDrawBitmapString(frameRate.str(), ofGetWindowWidth() - 200, 20);
     ofPopStyle();
 }
 
@@ -86,7 +75,6 @@ void AppGui::renderGui()
 //------------------------------------------------------------------------------
 void AppGui::saveParameters()
 {
-    mGeneralPanel.saveToFile("GeneralSettings.xml");
     mFlockParametersGui.saveParameters();
 #if USE_KINECT
     mKinectParametersGui.saveParameters();
@@ -95,7 +83,6 @@ void AppGui::saveParameters()
 
 void AppGui::loadParameters()
 {
-    mGeneralPanel.loadFromFile("GeneralSettings.xml");
     mFlockParametersGui.loadParameters();
 
 #if USE_KINECT

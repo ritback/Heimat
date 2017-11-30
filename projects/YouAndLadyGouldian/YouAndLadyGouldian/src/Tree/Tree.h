@@ -16,8 +16,9 @@ public:
     void update();
     void render();
 
-
 private:
+    ofPoint mPos;
+    ofPoint mSize;
     HEShaderHelper mTreeShader;
     ofImage mPixelCanvas;
 };

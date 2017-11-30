@@ -17,6 +17,7 @@ public:
     void update();
     void render();
     void renderStreamImage();
+    void renderDepthLessBkgnd();
     void renderBkgnd();
 
 public:

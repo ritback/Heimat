@@ -1,9 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "HEHelpers_Shader.h"
+#include "Tree.h"
 
-class HEKinect;
 
 class Trees
 {
@@ -16,7 +15,9 @@ public:
     void render();
 
 private:
-    HEShaderHelper mTreesShader;
-    ofImage mPixelCanvas;
+    typedef std::vector<Tree*> Forest;
+    typedef Forest::iterator TreesIt;
+    Forest mTrees;
+
 };
  

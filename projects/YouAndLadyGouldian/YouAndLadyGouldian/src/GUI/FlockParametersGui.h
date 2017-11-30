@@ -27,6 +27,7 @@ public:
     void setFlockMasses(float & inValue);
 
 public:
+    void setWorldLimitRepulsion(float & inLimit);
     void resizeFlockWorld(float & inLimit);
     void resizeFlockWorldDistance(float & inLimit);
 
@@ -42,6 +43,7 @@ public:
     ofParameter<float> mFlockRulesAlignement;
 
     ofParameter<bool> mRenderWorld;
+    ofParameter<float> mWorldLimitRepuslion;
 
     ofParameter<float> mWorldLimitMinX;
     ofParameter<float> mWorldLimitMinY;
