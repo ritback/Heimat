@@ -37,7 +37,15 @@ Bird::Bird(const ofPoint& inPos)
 
 Bird::~Bird()
 {
-    
+    for (FeathersIt it = mFeathers.begin(); it < mFeathers.end(); ++it)
+    {
+        delete (*it);
+    }
+
+    for (TailIt it = mTail.begin(); it < mTail.end(); ++it)
+    {
+        delete (*it);
+    }
 }
 
 // -----------------------------------------------------------------------------

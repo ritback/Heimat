@@ -21,7 +21,7 @@ void Feather::update()
     applyForce(ofPoint(-0.01 * mVel.x, 0.01));
     incrementPos();
     
-    updateColor ();
+    updateColor();
     angle += angleInc;
 }
 
