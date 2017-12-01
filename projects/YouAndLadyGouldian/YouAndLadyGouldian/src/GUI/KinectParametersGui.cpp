@@ -1,5 +1,7 @@
 #include "KinectParametersGui.h"
 
+#if USE_KINECT
+
 #include "ofApp.h"
 
 #include "Kinect.h"
@@ -157,3 +159,5 @@ void KinectParametersGui::setJointsAttractionMax(float& inValue)
     Kinect* kinect = mApp->getKinect();
     (kinect->mScarecrowsTracker).setJointsAttractionMax(inValue);
 }
+
+#endif

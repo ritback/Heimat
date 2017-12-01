@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 
+#if USE_KINECT
+
 class ofApp;
 
 class KinectParametersGui
@@ -56,6 +58,7 @@ private:
 
 };
 
+#endif
 
 
 

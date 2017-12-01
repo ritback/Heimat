@@ -94,10 +94,11 @@ void ofApp::keyPressed(int key)
         case 'f': case 'F':
             ofToggleFullscreen();
             break;
-
+#if USE_KINECT
         case 'b': case 'B':
             mKinect.mSilhouette.refreshBackground();
             break;
+#endif
 
         case 'd': case 'D':
             mGui.mDisplayGui = !mGui.mDisplayGui;
@@ -188,9 +189,10 @@ BirdsFlock* ofApp::getFlock()
     return &mFlock;
 }
 
+#if USE_KINECT
 Kinect* ofApp::getKinect()
 {
     return &mKinect;
 }
-
+#endif
 
