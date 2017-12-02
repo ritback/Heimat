@@ -1,5 +1,5 @@
 #include "HE_Boid.h"
-#include "..\Helpers\HEHelpers_Maths.h"
+#include "HEHelpers_Maths.h"
 
 const float rulesDistance = 50;
 

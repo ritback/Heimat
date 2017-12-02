@@ -8,7 +8,7 @@ JungleBackgound::JungleBackgound()
     {
         mJungleImage.setUseTexture(true);
     }
-    mJungleImage.loadImage("images/Rousseau_ApesInTheOrangeGrove.jpg");
+    mJungleImage.load("images/Rousseau_ApesInTheOrangeGrove.jpg");
 
     mPixelCanvas.allocate(mJungleImage.getWidth(), mJungleImage.getHeight(), OF_IMAGE_COLOR);
 }
