@@ -3,9 +3,8 @@
 Tree::Tree()
     : mPos(ofGetWindowHeight() / 2, ofGetWindowWidth() / 2)
     , mSize(ofGetWindowHeight()/2, ofGetWindowWidth()/2)
-    , mTreeShader("Tree")
 {
-    mPixelCanvas.allocate(mSize.x, mSize.y, OF_IMAGE_COLOR);
+    mTreeShader.load("shaders/Tree.frag");
 }
 
 Tree::~Tree()
@@ -27,27 +26,18 @@ void Tree::render()
     if (!mIsVisible) return;
 
     mTreeShader.begin();
-
-    ofPoint sResolution = ofGetWindowSize();
-    float pRes[3] = {sResolution.x, sResolution.y, 0};
-    mTreeShader.setUniform3fv("uResolution", pRes, 1);
-
-    mTreeShader.setUniform1f("uGlobalTime", ofGetElapsedTimef());
-
-    mTreeShader.setUniform1f("uAlpha", mAlpha);
-
-    float pOnScreenPos[3] = {mPos.x, mPos.y, mPos.z};
-    mTreeShader.setUniform3fv("uOnScreenPos", pOnScreenPos, 1);
-    float pTreeSize[3] = {mSize.x, mSize.y, mSize.z};
-    mTreeShader.setUniform3fv("uTreeSize", pTreeSize, 1);
-    float pMousePos[3] = {(float)ofGetMouseX(), (float)ofGetMouseY(), 0};
-    mTreeShader.setUniform3fv("uMouse", pMousePos, 1);
-
     
-    //mPixelCanvas.draw(mPos.x - mSize.x/2, ofGetWindowHeight() - mSize.y, mSize.x, mSize.y);
-
-    mPixelCanvas.draw(0, 0, ofGetWidth(), ofGetHeight());
-
+    mTreeShader.setUniform1f("uAlpha", mAlpha);
+    
+    
+    float pOnScreenPos[3] = {mPos.x, mPos.y, mPos.z};
+    mTreeShader.setUniform3fv("uOnScreenPos", pOnScreenPos);
+    
+    
+    
+    ofDrawRectangle(0, 0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+    
+    
     mTreeShader.end();
 }
 

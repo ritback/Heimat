@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 
-#include "HEHelpers_Shader.h"
+#include "HEShadertoyHelper.h"
 
 class HEKinect;
 
@@ -28,8 +28,7 @@ public:
 private:
     ofPoint mPos;
     ofPoint mSize;
-    HEShaderHelper mTreeShader;
-    ofImage mPixelCanvas;
+    HEShadertoyHelper mTreeShader;
 
 private:
     float mAlpha;
