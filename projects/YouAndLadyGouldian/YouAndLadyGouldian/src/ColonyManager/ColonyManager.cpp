@@ -15,7 +15,8 @@ ColonyManager::~ColonyManager()
 //------------------------------------------------------------------------------
 void ColonyManager::update()
 {
-
+    ofHttpRequest httpRequest;
+    
 }
 
 

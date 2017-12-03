@@ -9,6 +9,7 @@ ofApp::ofApp()
     , mJungleBackgound()
     , mForest()
     , mGui(this)
+    , mColonyManager(&mFlock)
 {
     
 }
@@ -34,7 +35,10 @@ void ofApp::exit()
 //------------------------------------------------------------------------------
 void ofApp::update()
 {
+    mColonyManager.update();
+    
     mJungleBackgound.update();
+    
     mForest.update();
 
 #if USE_KINECT

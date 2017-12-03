@@ -5,6 +5,7 @@
 #include "JungleBackgound.h"
 #include "GUI.h"
 #include "Forest.h"
+#include "ColonyManager.h"
 
 #include "UseKinect.h"
 #if USE_KINECT
@@ -62,7 +63,9 @@ public:
     
 public:
     JungleBackgound mJungleBackgound;
-
+    
+public:
+    ColonyManager mColonyManager;
 
 private:
     AppGui mGui;
