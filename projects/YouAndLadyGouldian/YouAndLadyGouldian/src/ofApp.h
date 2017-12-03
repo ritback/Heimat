@@ -4,7 +4,7 @@
 #include "BirdsFlock.h"
 #include "JungleBackgound.h"
 #include "GUI.h"
-#include "Tree/Forest.h"
+#include "Forest.h"
 
 #include "UseKinect.h"
 #if USE_KINECT
