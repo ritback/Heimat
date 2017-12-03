@@ -5,6 +5,7 @@
 
 #include <deque>
 
+
 class Forest
 {
 public:
@@ -16,12 +17,19 @@ public:
     void render();
 
 public:
-    void activateATree(const ofPoint& inPos);
+    static void createTreeAt(const ofPoint& inPos);
+    
+private:
+    void activateATree();
 
 private:
     typedef std::deque<Tree*> Trees;
     typedef Trees::iterator TreesIt;
     Trees mTrees;
+    
+private:
+    static bool bShouldActivateATree;
+    static ofPoint mCreateTreeAtPos;
 
 };
  

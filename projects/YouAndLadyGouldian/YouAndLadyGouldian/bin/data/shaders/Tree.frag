@@ -3,8 +3,10 @@
 uniform vec3            uResolution;           // viewport resolution (in pixels)
 uniform float           uGlobalTime;           // shader playback time (in seconds)
 
-uniform sampler2DRect	uSilhouetteTexture;
-uniform vec3            uSilhouetteTextureRes;
+uniform float           uAlpha;
+uniform vec3            uOnScreenPos;
+uniform vec3            uTreeSize;
+uniform vec3            uMouse;
 
 in vec2 iFragCoord; // coordinate in pixel.
 in vec2 iChannelCoord0;
@@ -13,60 +15,9 @@ out vec4 oColor;
 
 
 
-// -----------------------------------------------------------------------------
-// -----------------------------------------------------------------------------
-
-
 
 // -----------------------------------------------------------------------------
-
-const float heatAmount = 0.04;
-
-void main()
-{
-    vec2 p = iFragCoord.xy / uResolution.xy;
-	float phase = uGlobalTime * 0.1;
-
-	vec2 pBackground1 = (p + heatAmount * offset(p, phase)) * uSilhouetteTextureRes.xy;
-	vec2 pBackground2 = (p + heatAmount * offset(p, phase + 0.5849)) * uSilhouetteTextureRes.xy;
-    
-	vec4 s1 = texture(uSilhouetteTexture, pBackground2);
-	vec4 s2 = texture(uSilhouetteTexture, pBackground2);
-
-	vec4 depth =  mix(s1, s2, abs(2 * (sin(phase*2.0) - 0.5)));
-
-	float alpha = 0.0;
-	if (depth.r > 0.5)
-	{
-		alpha = 0.5;
-	}
-	
-	depth.r = 0.0;
-	depth.b = 0.0;
-	depth.g = 0.0;
-	depth.a = alpha;
-
-    // Out
-    //oColor = mix(s1, s2, abs(2 * (sin(phase*2.0) - 0.5)));
-    oColor = depth;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// -----------------------------------------------------------------------------
 
 
 // Can add more if your GPU can handle it! :)
@@ -79,7 +30,7 @@ void main()
 ///////////////////////////////////////////
 const float PI = 3.14159265;
 const float WSCALE = 0.8;
-#define T (iTime*0.5)
+//#define T (uGlobalTime*0.5)
 const float LEAF = 1.0;
 const float TRUNK = 2.0;
 
@@ -176,46 +127,36 @@ vec2 Tree (vec2 pos, vec2 uv)
     for (int i = 0; i < TRUNKS; ++i)
     {
         b = smin(b, Cursor(uv, pos, H, angle, W));
-        
-        
+        /*
         vec2 p = pos;
-        float h = H; 
-        float a = randA + angle + sin((iTime*0.5) + float(i)) * 0.1;
+        float h = H;
+        float a = randA + angle + sin((uGlobalTime*0.5) + float(i)) * 0.1;
         float w = W;
-		
+        
         for (int j = 0; j < BRANCHES; ++j)
         {
-            b = smin(b, Cursor(uv, p, h, a, w));    
-            
+            b = smin(b, Cursor(uv, p, h, a, w));
             
             vec2 p1 = p;
-            float h1 = max(randH * 0.06, 0.006); 
-            float a1 = randA + a + sin(T + float(j) * 0.4) * 0.1;
+            float h1 = max(randH * 0.06, 0.006);
+            float a1 = randA + a + sin((uGlobalTime*0.5) + float(j) * 0.4) * 0.1;
             float w1 = w;
-
+            
             for (int k = 0; k < LEAFS; ++k)
             {
-               b = smin(b, Cursor(uv, p1, h1, a1, w1));    
-               float angl = mod(float(k), 2.0)  == 0.0 ? 1.0 : -1.0;
+                b = smin(b, Cursor(uv, p1, h1, a1, w1));
+                float angl = mod(float(k), 2.0)  == 0.0 ? 1.0 : -1.0;
                 
-                
-               float newLeaf = sdLeaf(p1, uv, vec2(0.0, -leafSize.y),  (a1 + angl * LEAFANGLE), leafSize.x, leafSize.y);
-               if(newLeaf < lf) leafIndex = i * 100 + j * 10 + k;
-               lf = min(lf, newLeaf);
-               if(lf < 0.0 || b < 0.0) break; 
-				
-                
+                float newLeaf = sdLeaf(p1, uv, vec2(0.0, -leafSize.y),  (a1 + angl * LEAFANGLE), leafSize.x, leafSize.y);
+                if(newLeaf < lf) leafIndex = i * 100 + j * 10 + k;
+                lf = min(lf, newLeaf);
+                if(lf < 0.0 || b < 0.0) break;
             }
             if(lf < 0.0 || b < 0.0) break;
-
-			
         }
         if(lf < 0.0 || b < 0.0) break;
-		
-		
+        */
     }
-    
-    
     if(b < lf)
     {
         return vec2(TRUNK, b);
@@ -223,21 +164,28 @@ vec2 Tree (vec2 pos, vec2 uv)
     return vec2(LEAF, lf);
 }
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+
+// -----------------------------------------------------------------------------
+
+const float heatAmount = 0.04;
+
+void main()
 {
-    // random vec2
-    im = iMouse.xy;
+    //vec2 p = iFragCoord.xy / uResolution.xy;
+	//float phase = uGlobalTime * 0.1;
+    
+    im = vec2(0, 0);//uOnScreenPos.xy;
     
     
+    vec2 uv = (iFragCoord - uResolution.xy / 2) / uResolution.xy;
     
-	vec2 uv = fragCoord.xy / iResolution.xy;
-    uv -= vec2(0.5);
-    uv.y /= iResolution.x / iResolution.y;
+    //vec2 uv = iFragCoord.xy / uResolution.xy;
+    //uv -= vec2(0.5);
+    //uv.y /= uResolution.xy.x / uResolution.xy.y;
     
     
-    vec2 pos = vec2(-0., -0.2);
+    vec2 pos = uMouse.xy;//vec2(0.0, -0.5);
     vec2 material = Tree(pos, uv);
-    
     
     
     float t = material.y / 0.001;
@@ -246,9 +194,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
     vec4 col = vec4(material.y);
     
-    
-    
-	col = smoothstep(.5, 0.0, col);
+    col = smoothstep(.5, 0.0, col);
     
     
     if(material.x == LEAF)
@@ -262,9 +208,14 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         col *= vec4(.8, 0.7, 0.3, 0.0);
     }
     
-    fragColor = vec4(0);
-    fragColor = mix(col, fragColor, t);
+    oColor = vec4(0);
+    oColor = mix(col, oColor, t);
     
+    //oColor = vec4(255, 0, 0, uAlpha);
 }
+
+
+
+
 
 

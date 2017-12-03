@@ -7,6 +7,7 @@ ofApp::ofApp()
     , mKinect(&mFlock)
 #endif
     , mJungleBackgound()
+    , mForest()
     , mGui(this)
 {
     
@@ -34,6 +35,7 @@ void ofApp::exit()
 void ofApp::update()
 {
     mJungleBackgound.update();
+    mForest.update();
 
 #if USE_KINECT
     mKinect.updateSilhoutte();
@@ -46,7 +48,10 @@ void ofApp::update()
 void ofApp::draw()
 {   
     ofBackground(0);
+    
     mJungleBackgound.render();
+    
+    mForest.render();
 
 
 #if USE_KINECT
@@ -141,7 +146,7 @@ void ofApp::mousePressed(int x, int y, int button)
 
 void ofApp::mouseReleased(int x, int y, int button)
 {
-    
+    Forest::createTreeAt(ofPoint(x, y));
 }
 
 void ofApp::mouseEntered(int x, int y)

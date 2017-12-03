@@ -4,6 +4,7 @@
 #include "BirdsFlock.h"
 #include "JungleBackgound.h"
 #include "GUI.h"
+#include "Forest.h"
 
 #include "UseKinect.h"
 #if USE_KINECT
@@ -56,6 +57,9 @@ public:
     Kinect mKinect;
 #endif
 
+public:
+    Forest mForest;
+    
 public:
     JungleBackgound mJungleBackgound;
 

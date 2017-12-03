@@ -36,11 +36,15 @@ void Tree::render()
 
     mTreeShader.setUniform1f("uAlpha", mAlpha);
 
-    float pScreenPos[3] = {mPos.x, mPos.y, mPos.z};
-    mTreeShader.setUniform3fv("uScreenPos", pScreenPos, 1);
+    float pOnScreenPos[3] = {mPos.x, mPos.y, mPos.z};
+    mTreeShader.setUniform3fv("uOnScreenPos", pOnScreenPos, 1);
     float pTreeSize[3] = {mSize.x, mSize.y, mSize.z};
     mTreeShader.setUniform3fv("uTreeSize", pTreeSize, 1);
+    float pMousePos[3] = {(float)ofGetMouseX(), (float)ofGetMouseY(), 0};
+    mTreeShader.setUniform3fv("uMouse", pMousePos, 1);
 
+    
+    //mPixelCanvas.draw(mPos.x - mSize.x/2, ofGetWindowHeight() - mSize.y, mSize.x, mSize.y);
 
     mPixelCanvas.draw(0, 0, ofGetWidth(), ofGetHeight());
 
@@ -55,7 +59,7 @@ void Tree::activate(const ofPoint& inPos)
     mPos = inPos;
 
     mActivationTime = ofGetElapsedTimef();
-    mActivationDuration = ofRandom(1, 2) * 60 * 1000;
+    mActivationDuration = ofRandom(1, 2) * 60;
 }
 
 //------------------------------------------------------------------------------
@@ -63,7 +67,7 @@ void Tree::updateAlpha()
 {
     // 2 phases:
     // First alpha increase: during 1 % of the total phase.
-    float maxAlphaTime = mActivationDuration * 0.01;
+    float maxAlphaTime = 5;//mActivationDuration;
     float currentTime = ofGetElapsedTimef() - mActivationTime;
     float coef = 1;
     if (currentTime > mActivationTime + mActivationDuration)
@@ -73,15 +77,14 @@ void Tree::updateAlpha()
     }
     else if (currentTime <= maxAlphaTime)
     {
-        coef = 10;
+        coef = 0.2;
     }
     else if (currentTime >= maxAlphaTime)
     {
-        coef = 0.5;
+        coef = 0.00025;
     }
 
     mAlpha = 1;
     mAlpha /= coef * std::pow(currentTime - maxAlphaTime, 2) + 1;
-    mAlpha *= 255;
 
 }

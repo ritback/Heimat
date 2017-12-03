@@ -19,3 +19,13 @@ void main()
     iChannelCoord0 = texcoord;
     gl_Position = modelViewProjectionMatrix * position;
 }
+
+
+
+
+precision mediump float;
+uniform mat4 modelViewProjectionMatrix;
+uniform mat4 tCameraMatrix;
+in vec4 position;
+void main(){
+    gl_Position = modelViewProjectionMatrix * position;
