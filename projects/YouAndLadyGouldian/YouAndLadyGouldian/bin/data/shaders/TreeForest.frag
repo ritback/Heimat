@@ -1,9 +1,9 @@
 #version 150
 
 // Can add more if your GPU can handle it! :)
-#define LEAFS 8
-#define BRANCHES 6
-#define TRUNKS 6
+#define LEAFS 6
+#define BRANCHES 4
+#define TRUNKS 4
 
 
 uniform vec3            uResolution;           // viewport resolution (in pixels)

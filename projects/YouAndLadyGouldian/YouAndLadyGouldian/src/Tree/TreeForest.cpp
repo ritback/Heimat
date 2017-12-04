@@ -1,11 +1,9 @@
-#include "Tree.h"
-
-bool Tree::mShouldActivateTreeGrowth = false;
-int Tree::mActivationCounter = 0;
+#include "TreeForest.h"
 
 Tree::Tree()
-    : mRandomPos(ofRandom(0, ofGetWindowHeight()), ofRandom(0, ofGetWindowWidth()))
-    , mTreeShader("Tree")
+    : mIsVisible(false)
+    , mRandomPos(ofRandom(0, ofGetWindowHeight()), ofRandom(0, ofGetWindowWidth()))
+    , mTreeShader("TreeForest")
     , mGlobalTime(0)
     , mAlpha(0)
     , mActivationTime(0)
@@ -22,14 +20,7 @@ Tree::~Tree()
 //------------------------------------------------------------------------------
 void Tree::update()
 {
-    if (mActivationCounter == 0) return;
-
-    if (mShouldActivateTreeGrowth)
-    {
-        growthActivation();
-        mShouldActivateTreeGrowth = false;
-    }
-
+    if (!mIsVisible) return;
 
     updateAlpha();
 
@@ -37,10 +28,9 @@ void Tree::update()
 
 void Tree::render()
 {
-    if (mActivationCounter == 0) return;
-
-
+    if (!mIsVisible) return;
     mTreeShader.begin();
+
 
     mGlobalTime += ofGetLastFrameTime();
 
@@ -50,33 +40,27 @@ void Tree::render()
     mTreeShader.setUniform1f("uAlpha", mAlpha);
 
     mTreeShader.setUniform4f("uPosition", mRandomPos.x, mRandomPos.y, 0, 0);
+    mRandomPos.x += 0.000001;
+    mRandomPos.y += 0.000001;
+    
+    //float pOnScreenPos[3] = {mPos.x, mPos.y, mPos.z};
+    //mTreeShader.setUniform3fv("uOnScreenPos", pOnScreenPos);
+    
+    
     
     ofDrawRectangle(0, 0, 0, ofGetWindowWidth(), ofGetWindowHeight());
     
+
 
     mTreeShader.end();
 }
 
 //------------------------------------------------------------------------------
-void Tree::incrementTreeGrowth()
+void Tree::activate(const ofPoint& inPos)
 {
-    mShouldActivateTreeGrowth = true;
-    mActivationCounter += 1;
-}
+    mIsVisible = true;
 
-//------------------------------------------------------------------------------
-void Tree::growthActivation()
-{
-    mRandomPos.x = ofRandom(0, ofGetWindowHeight());
-    mRandomPos.y = ofRandom(0, ofGetWindowWidth());
-
-    mActivationTime = ofGetElapsedTimef();
-    mActivationDuration = ofRandom(1, 2) * 60;
-}
-
-void Tree::restart()
-{
-
+    mRandomPos = inPos;
 
     mActivationTime = ofGetElapsedTimef();
     mActivationDuration = ofRandom(1, 2) * 60;

@@ -15,21 +15,17 @@ public:
     void render();
 
 public:
-    static void incrementTreeGrowth();
-
-private:
-    void growthActivation();
-    void restart();
+    void activate(const ofPoint& inPos);
 
 private:
     void updateAlpha();
 
-private:
-    static bool mShouldActivateTreeGrowth;
-    static int mActivationCounter;
+public:
+    bool mIsVisible;
 
 private:
     ofPoint mRandomPos;
+    ofPoint mSize;
     HEShaderHelper mTreeShader;
     double mGlobalTime;
 
@@ -37,7 +33,6 @@ private:
     float mAlpha;
     float mActivationTime;
     float mActivationDuration;
-
 
 };
  

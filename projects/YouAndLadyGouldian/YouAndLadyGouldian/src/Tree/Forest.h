@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Tree.h"
+#include "TreeForest.h"
 
 #include <deque>
 
