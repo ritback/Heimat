@@ -16,8 +16,9 @@ Makefile
 *.exp
 *.dll
 *.lib
-## open framework
+## Libraries
 libraries/of*
+libraries/curl*
 
 ### Archive ###
 

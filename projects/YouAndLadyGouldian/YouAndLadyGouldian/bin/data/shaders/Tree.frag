@@ -149,7 +149,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec2 uv = fragCoord.xy / iResolution.xy;
     uv -= vec2(0.5);
     uv.y /= iResolution.x / iResolution.y;
-    fragColor = vec4(1.0 - (uv.y + 0.4)) * vec4(.3, 0.3, 0.5, 0.0) * 0.7;
     
     
     vec2 pos = vec2(-0., -0.32);
@@ -173,7 +172,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         col *= vec4(.8, 0.5, 0.3, 0.0);
     }
     
+    fragColor = vec4(0);
     fragColor = mix(col, fragColor, t);
-    
+
+	//fragColor.r = 1.0;
+	//fragColor.g = 0.0;
+	//fragColor.b = 0.0;
+	//fragColor.a = 0.01;
     
 }

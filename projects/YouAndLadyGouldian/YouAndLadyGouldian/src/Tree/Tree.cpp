@@ -5,6 +5,8 @@ Tree::Tree()
     , mSize(ofGetWindowHeight()/2, ofGetWindowWidth()/2)
 {
     mTreeShader.load("shaders/Tree.frag");
+
+    mPixelCanvas.allocate(ofGetWindowWidth(), ofGetWindowHeight(), OF_IMAGE_COLOR_ALPHA);
 }
 
 Tree::~Tree()
@@ -24,20 +26,21 @@ void Tree::update()
 void Tree::render()
 {
     if (!mIsVisible) return;
-
     mTreeShader.begin();
-    
-    mTreeShader.setUniform1f("uAlpha", mAlpha);
+
+    //mTreeShader.setUniform1f("uAlpha", mAlpha);
     
     
     float pOnScreenPos[3] = {mPos.x, mPos.y, mPos.z};
-    mTreeShader.setUniform3fv("uOnScreenPos", pOnScreenPos);
+    //mTreeShader.setUniform3fv("uOnScreenPos", pOnScreenPos);
     
     
     
-    ofDrawRectangle(0, 0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+    //ofDrawRectangle(0, 0, 0, ofGetWindowWidth(), ofGetWindowHeight());
     
-    
+
+    mPixelCanvas.draw(0, 0, ofGetWidth(), ofGetHeight());
+
     mTreeShader.end();
 }
 

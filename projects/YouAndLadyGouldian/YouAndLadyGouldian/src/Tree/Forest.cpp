@@ -7,7 +7,7 @@ ofPoint Forest::mCreateTreeAtPos = ofPoint(0, 0);
 //------------------------------------------------------------------------------
 Forest::Forest()
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 1; i++)
     {
         Tree * newTree = new Tree();
         mTrees.push_back(newTree);

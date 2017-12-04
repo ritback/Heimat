@@ -13,10 +13,21 @@ public:
 public:
     void update();
 
+public:
+    void urlResponse(ofHttpResponse& inResponse);
+
+private:
+    void setNumBirds();
+
+private:
+    void updateURL();
+
 private:
     BirdsFlock* mFlock;
-    int mSeedNum;
-    int mTreeNum;
+    int mNumSeed;
 
+private:
+    float mNextUpdateTime;
+    bool mShouldUpdateNumBirds;
 };
  

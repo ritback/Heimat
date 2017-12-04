@@ -29,6 +29,7 @@ private:
     ofPoint mPos;
     ofPoint mSize;
     HEShadertoyHelper mTreeShader;
+    ofImage mPixelCanvas;
 
 private:
     float mAlpha;

@@ -75,7 +75,6 @@ void ofApp::draw()
 
     drawFlock();
 
-
     mGui.renderGui();
 
 }
@@ -150,7 +149,7 @@ void ofApp::mousePressed(int x, int y, int button)
 
 void ofApp::mouseReleased(int x, int y, int button)
 {
-    //Forest::createTreeAt(ofPoint(x, y));
+    Forest::createTreeAt(ofPoint(x, y));
 }
 
 void ofApp::mouseEntered(int x, int y)
