@@ -86,6 +86,19 @@ float ScarecrowsTracker::getJointsAttractionMax()
     return mTrackedSkeletons[0].getJointsAttractionMax();
 }
 
+//------------------------------------------------------------------------------
+void ScarecrowsTracker::setTreeCreationTime(float inValue)
+{
+    for(int i = 0; i < NUI_SKELETON_COUNT; ++i)
+    {
+        mTrackedSkeletons[i].setTreeCreationTime(inValue);
+    }
+}
+
+float ScarecrowsTracker::getTreeCreationTime()
+{
+    return mTrackedSkeletons[0].getTreeCreationTime();
+}
 
 
 

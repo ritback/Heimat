@@ -25,5 +25,15 @@ public:
     void setJointsAttractionMax(float inValue);
     float getJointsAttractionMax();
 
+public:
+    void setTreeCreationTime(float inValue);
+    float getTreeCreationTime();
+
+private:
+    void checkTreeCreation(const ofPoint& inPos);
+
+private:
+    float mTreeCreationTime;
+    float mLastTrunkMoveTime;
 
 };

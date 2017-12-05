@@ -37,7 +37,7 @@ void FlockParametersGui::initGui()
     
     mPanel.setup("Flock Panel");
     
-    mPanel.add(mNumBoids.set("NumBoids", flockNumBoids, 0, 200));
+    mPanel.add(mNumBoids.set("NumBoids", flockNumBoids, 0, 300));
     mPanel.add(mBoidsMasses.set("Masses", flockMasses, 0, 5));
 
     ofParameterGroup flockRulesParam;
@@ -95,6 +95,25 @@ void FlockParametersGui::launchGui()
     mWorldLimitDistanceMinY = worldLimitDistanceMin.y;
     mWorldLimitDistanceMaxX = worldLimitDistanceMax.x;
     mWorldLimitDistanceMaxY = worldLimitDistanceMax.y;
+
+    mNumBoids.addListener(this, &FlockParametersGui::setFlockNumBoids);
+    mBoidsMasses.addListener(this, &FlockParametersGui::setFlockMasses);
+
+    mFlockRulesCohesion.addListener(this, &FlockParametersGui::setFlockRules);
+    mFlockRulesSeparation.addListener(this, &FlockParametersGui::setFlockRules);
+    mFlockRulesAlignement.addListener(this, &FlockParametersGui::setFlockRules);
+
+    mWorldLimitRepuslion.addListener(this, &FlockParametersGui::setWorldLimitRepulsion);
+
+    mWorldLimitMinX.addListener(this, &FlockParametersGui::resizeFlockWorld);
+    mWorldLimitMinY.addListener(this, &FlockParametersGui::resizeFlockWorld);
+    mWorldLimitMaxX.addListener(this, &FlockParametersGui::resizeFlockWorld);
+    mWorldLimitMaxY.addListener(this, &FlockParametersGui::resizeFlockWorld);
+
+    mWorldLimitDistanceMinX.addListener(this, &FlockParametersGui::resizeFlockWorldDistance);
+    mWorldLimitDistanceMinY.addListener(this, &FlockParametersGui::resizeFlockWorldDistance);
+    mWorldLimitDistanceMaxX.addListener(this, &FlockParametersGui::resizeFlockWorldDistance);
+    mWorldLimitDistanceMaxY.addListener(this, &FlockParametersGui::resizeFlockWorldDistance);
 
 
 }

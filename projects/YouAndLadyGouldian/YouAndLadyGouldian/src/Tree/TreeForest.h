@@ -24,7 +24,7 @@ public:
     bool mIsVisible;
 
 private:
-    ofPoint mRandomPos;
+    ofPoint mPos;
     ofPoint mSize;
     HEShaderHelper mTreeShader;
     double mGlobalTime;

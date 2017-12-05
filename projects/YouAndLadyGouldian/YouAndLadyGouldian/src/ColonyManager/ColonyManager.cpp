@@ -35,7 +35,7 @@ void ColonyManager::setNumBirds()
 {
     int numBirds = 0;
 
-
+    //numBirds = 10 + 2 * mNumSeed + 20 * numTree;
 
 
 
@@ -48,19 +48,21 @@ void ColonyManager::setNumBirds()
 void ColonyManager::updateURL()
 {
     // get food
-    ofLoadURLAsync("https://youandladygouldian.com/birdparams/food", "GET");
+    ofLoadURLAsync("https://youandladygouldian.com/birdparams/food", "GetNumSeed");
 
     // push number of birds
     std::stringstream sendNumBirds;
     sendNumBirds << "https://youandladygouldian.com/birdparams/birds/";
     sendNumBirds << mFlock->getNumActiveBoids();
 
-    ofLoadURLAsync(sendNumBirds.str(), "PUT");
+    string str(sendNumBirds.str());
+
+    ofLoadURLAsync(str, "PushNumBirds");
 }
 
 void ColonyManager::urlResponse(ofHttpResponse& inResponse)
 {
-    if(inResponse.status == 200 && inResponse.request.name == "GET")
+    if(inResponse.status == 200 && inResponse.request.name == "GetNumSeed")
     {
         mNumSeed = atoi(inResponse.data.getData());
         mShouldUpdateNumBirds = true;

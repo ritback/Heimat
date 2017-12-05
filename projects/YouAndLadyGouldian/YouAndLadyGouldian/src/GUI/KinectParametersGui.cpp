@@ -27,6 +27,8 @@ void KinectParametersGui::initGui()
     float attractionMin = (kinect->mScarecrowsTracker).getJointsAttractionMin();
     float attractionMax = (kinect->mScarecrowsTracker).getJointsAttractionMax();
 
+    float treeCreationTime = (kinect->mScarecrowsTracker).getTreeCreationTime();
+
     mPanel.setup("Kinect Panel");
     
     mPanel.add(mRenderSkeletons.set("Render skeleton", false));
@@ -42,6 +44,7 @@ void KinectParametersGui::initGui()
 
     ofParameterGroup skeletons;
     skeletons.setName("Skeletons");
+    skeletons.add(mSkeletonsTreeCreationTime.set("Tree creation Time", treeCreationTime, 0, 200));
     skeletons.add(mSkeletonsJointsHasMoveDistance.set("Has Move Distance", hasMoove, 0, 200));
     skeletons.add(mSkeletonsJointsAttractionInc.set("Attraction Inc", attractionInc, 0, 2));
     skeletons.add(mSkeletonsJointsAttractionMin.set("Attraction Min", attractionMin, -20, 20));
@@ -57,6 +60,7 @@ void KinectParametersGui::launchGui()
     mSilhouetteRenderBackground.addListener(this, &KinectParametersGui::setSilhouetteRenderBackground);
     mSilhouetteRenderDepthLessBackground.addListener(this, &KinectParametersGui::setSilhouetteRenderDepthLessBackground);
 
+    mSkeletonsTreeCreationTime.addListener(this, &KinectParametersGui::setTreeCreationTime);
     mSkeletonsJointsHasMoveDistance.addListener(this, &KinectParametersGui::setJointsHasMoveDistance);
     mSkeletonsJointsAttractionInc.addListener(this, &KinectParametersGui::setJointsAttractionInc);
     mSkeletonsJointsAttractionMin.addListener(this, &KinectParametersGui::setJointsAttractionMin);
@@ -70,6 +74,7 @@ void KinectParametersGui::removeGui()
     mSilhouetteRenderBackground.removeListener(this, &KinectParametersGui::setSilhouetteRenderBackground);
     mSilhouetteRenderDepthLessBackground.removeListener(this, &KinectParametersGui::setSilhouetteRenderDepthLessBackground);
 
+    mSkeletonsTreeCreationTime.addListener(this, &KinectParametersGui::setTreeCreationTime);
     mSkeletonsJointsHasMoveDistance.removeListener(this, &KinectParametersGui::setJointsHasMoveDistance);
     mSkeletonsJointsAttractionInc.removeListener(this, &KinectParametersGui::setJointsAttractionInc);
     mSkeletonsJointsAttractionMin.removeListener(this, &KinectParametersGui::setJointsAttractionMin);
@@ -136,6 +141,12 @@ void KinectParametersGui::setSilhouetteRenderDepthLessBackground(bool& inValue)
 
 
 //------------------------------------------------------------------------------
+void KinectParametersGui::setTreeCreationTime(float& inValue)
+{
+    Kinect* kinect = mApp->getKinect();
+    (kinect->mScarecrowsTracker).setTreeCreationTime(inValue);
+}
+
 void KinectParametersGui::setJointsHasMoveDistance(float& inValue)
 {
     Kinect* kinect = mApp->getKinect();

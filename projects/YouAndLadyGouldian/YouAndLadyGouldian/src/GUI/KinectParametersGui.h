@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 
+#include "UseKinect.h"
 #if USE_KINECT
 
 class ofApp;
@@ -31,6 +32,7 @@ public:
     void setSilhouetteRenderDepthLessBackground(bool& inValue);
 
 public:
+    void setTreeCreationTime(float& inValue);
     void setJointsHasMoveDistance(float& inValue);
     void setJointsAttractionInc(float& inValue);
     void setJointsAttractionMin(float& inValue);
@@ -46,11 +48,12 @@ public:
     ofParameter<bool> mSilhouetteRenderBackground;
     ofParameter<bool> mSilhouetteRenderDepthLessBackground;
 
+
+    ofParameter<float> mSkeletonsTreeCreationTime;
     ofParameter<float> mSkeletonsJointsHasMoveDistance;
     ofParameter<float> mSkeletonsJointsAttractionInc;
     ofParameter<float> mSkeletonsJointsAttractionMin;
     ofParameter<float> mSkeletonsJointsAttractionMax;
-
 
 private:
     ofApp* mApp;

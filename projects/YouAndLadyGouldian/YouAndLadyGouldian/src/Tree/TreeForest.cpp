@@ -2,7 +2,8 @@
 
 Tree::Tree()
     : mIsVisible(false)
-    , mRandomPos(ofRandom(0, ofGetWindowHeight()), ofRandom(0, ofGetWindowWidth()))
+    , mPos(ofRandom(0, ofGetWindowHeight()), ofRandom(0, ofGetWindowWidth()))
+    , mSize(ofGetWindowHeight() / 4, ofGetWindowWidth() / 4)
     , mTreeShader("TreeForest")
     , mGlobalTime(0)
     , mAlpha(0)
@@ -39,20 +40,24 @@ void Tree::render()
 
     mTreeShader.setUniform1f("uAlpha", mAlpha);
 
-    mTreeShader.setUniform4f("uPosition", mRandomPos.x, mRandomPos.y, 0, 0);
-    mRandomPos.x += 0.000001;
-    mRandomPos.y += 0.000001;
-    
-    //float pOnScreenPos[3] = {mPos.x, mPos.y, mPos.z};
-    //mTreeShader.setUniform3fv("uOnScreenPos", pOnScreenPos);
-    
-    
-    
-    ofDrawRectangle(0, 0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+    mTreeShader.setUniform4f("uPosition", mPos.x, mPos.y, 0, 0);
     
 
+
+    mSize.x = ofGetWindowWidth() / 2;
+    mSize.y = ofGetWindowHeight() * 2 / 3;
+    ofDrawRectangle(mPos.x - mSize.x / 2, ofGetWindowHeight() - mSize.y, mSize.x, mSize.y);
 
     mTreeShader.end();
+
+    /*
+    ofPushStyle();
+    ofSetColor(255, 0, 0);
+    ofNoFill();
+
+    ofDrawRectangle(mPos.x - mSize.x / 2, ofGetWindowHeight() - mSize.y, mSize.x, mSize.y);
+    ofPopStyle();
+    */
 }
 
 //------------------------------------------------------------------------------
@@ -60,10 +65,10 @@ void Tree::activate(const ofPoint& inPos)
 {
     mIsVisible = true;
 
-    mRandomPos = inPos;
+    mPos = inPos;
 
     mActivationTime = ofGetElapsedTimef();
-    mActivationDuration = ofRandom(1, 2) * 60;
+    mActivationDuration = ofRandom(2, 3) * 10;
 }
 
 //------------------------------------------------------------------------------
@@ -73,13 +78,15 @@ void Tree::updateAlpha()
     // First alpha increase: during 1 % of the total phase.
     float maxAlphaTime = 5;//mActivationDuration;
     float currentTime = ofGetElapsedTimef() - mActivationTime;
-    float coef = 1;
-    if (currentTime > mActivationTime + mActivationDuration)
+    
+    if (currentTime > mActivationDuration)
     {
         mIsVisible = false;
         return;
     }
-    else if (currentTime <= maxAlphaTime)
+
+    float coef = 1;
+    if (currentTime <= maxAlphaTime)
     {
         coef = 0.2;
     }

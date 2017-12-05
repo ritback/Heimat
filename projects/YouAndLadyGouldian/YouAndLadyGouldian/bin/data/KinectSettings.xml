@@ -2,12 +2,18 @@
 	<Silhouette>
 		<Min_X>0</Min_X>
 		<Min_Y>0</Min_Y>
+	<Silhouette>1</Silhouette>
+		<Stream>0</Stream>
+		<Background>0</Background>
+		<Depth_Background>0</Depth_Background>
 	</Silhouette>
 	<Skeletons>
-		<Has_Move_Distance>75</Has_Move_Distance>
+		<Has_Move_Distance>100</Has_Move_Distance>
 		<Attraction_Inc>0.25</Attraction_Inc>
 		<Attraction_Min>-20</Attraction_Min>
-		<Attraction_Max>20</Attraction_Max>
+		<Attraction_Max>5</Attraction_Max>
+	<Tree_creation_Time>20</Tree_creation_Time>
 	</Skeletons>
 <group/>
+<Render_skeleton>0</Render_skeleton>
 </group>

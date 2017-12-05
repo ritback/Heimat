@@ -26,6 +26,10 @@ public:
     void setJointsAttractionMax(float inValue);
     float getJointsAttractionMax();
 
+public:
+    void setTreeCreationTime(float inValue);
+    float getTreeCreationTime();
+
 private:
     BirdsFlock* mFlock;
 };

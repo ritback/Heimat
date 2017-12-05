@@ -5,8 +5,12 @@
 #include "HE_FlockingWorld.h"
 #include "HEHelpers_Maths.h"
 
+#include "Forest.h"
+
 Scarecrow::Scarecrow()
     : HESkeleton<ScarecrowJoint>()
+    , mTreeCreationTime(20)
+    , mLastTrunkMoveTime(10000)
 {
 
 }
@@ -54,6 +58,19 @@ void Scarecrow::applyEffectOnBirds(BirdsFlock* inFlock)
                 }
             }
 
+            // get if a trunk has moved
+            if(i == NUI_SKELETON_POSITION_SHOULDER_CENTER ) // isJointOnTrunk((NUI_SKELETON_POSITION_INDEX)i)
+            {
+                if(joint->getAttraction() < joint->getAttractionMax() - 0.5)
+                {
+                    mLastTrunkMoveTime = ofGetElapsedTimef();
+                }
+                else
+                {
+                    checkTreeCreation(joint->mPos);
+                }
+            }
+
             // set the force
             float forceMag = 0.5 * joint->getAttraction();
 
@@ -80,7 +97,7 @@ void Scarecrow::applyEffectOnBirds(BirdsFlock* inFlock)
             scaleToRange(forcePos,
                          ofPoint(0, 0, 0), screenSize,
                          worldLimitMin, worldLimitMax);
-            float viscosity = forceMag > 0 ? 0 : 0.5;
+            float viscosity = 0;// forceMag > 0 ? 0 : 1.0;
             inFlock->applyForceToBoidsFromPosition(forcePos, forceMag, 75, viscosity);
         }
     }
@@ -147,5 +164,27 @@ float Scarecrow::getJointsAttractionMax()
     return joint->getAttractionMax();
 }
 
+//------------------------------------------------------------------------------
+void Scarecrow::setTreeCreationTime(float inValue)
+{
+    mTreeCreationTime = inValue;
+}
 
+float Scarecrow::getTreeCreationTime()
+{
+    return mTreeCreationTime;
+}
+
+
+//------------------------------------------------------------------------------
+void Scarecrow::checkTreeCreation(const ofPoint& inPos)
+{
+    float mEllapsedTime = ofGetElapsedTimef();
+    
+    if(mEllapsedTime - mLastTrunkMoveTime >= mTreeCreationTime)
+    {
+        Forest::createTreeAt(inPos);
+        mLastTrunkMoveTime = mEllapsedTime;
+    }
+}
 

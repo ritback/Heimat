@@ -72,10 +72,18 @@ float sdLeaf(vec2 pos, vec2 uv, vec2 pivot, float angle, float w, float h)
     uv -= pos;
     uv = rotate(uv, angle) + pivot;
     
+	/*
     w -= cos(uv.y * 500.) * 0.001;
     h -= sin(uv.x * 500.) * 0.002;
     float y = max(uv.y - h, -h - uv.y);
     float x = max(uv.x - w, -w - uv.x);
+	*/
+	
+    w -= cos(uv.y * 500.) * 0.001;
+    h -= sin(uv.x * 500.) * 0.002;
+    float y = max(uv.y - h, -h - uv.y);
+    float x = max(uv.x - w, -w - uv.x);
+    
     
     return max(x, y);
 }
@@ -160,7 +168,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     uv.y /= uResolution.x / uResolution.y;
     
     
-    vec2 pos = vec2(-0., -0.32);
+    vec2 pos = vec2(-0., -0.3);
     pos.x = uPosition.x / uResolution.x - 0.5;
     vec2 material = Tree(pos, uv);
     
@@ -175,26 +183,25 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     {
         float leafCol = sin(float(leafIndex) * .5) * 0.5 + 0.5;
         leafCol = mix(leafCol, 1.0, 0.5);
-        col = vec4(leafCol) * vec4(1.0, 0.2, 0.1, 0.0);
+        col = vec4(leafCol) * vec4(0.05, 0.46, 0.15, 0.0);
     }
     else if (material.x == TRUNK)
     {
-        col *= vec4(.8, 0.5, 0.3, 0.0);
+        col *= vec4(.65, 0.36, 0.15, 0.0);
     }
     
     fragColor = vec4(0);
     fragColor = mix(col, fragColor, t);
 
-    if (fragColor.r <  0.1 && fragColor.r < 0.1 && fragColor.r < 0.1)
+	
+    if (fragColor.r <  0.2 && fragColor.g < 0.2 && fragColor.b < 0.2)
     {
         fragColor.a = 0.0;
     }
     else
     {
-	    fragColor.a = 0.5;//uAlpha;
+	    fragColor.a = uAlpha;
     }
-    
-
 }
 
 out vec4 FragColor;

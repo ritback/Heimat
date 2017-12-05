@@ -2,7 +2,7 @@
 
 ScarecrowJoint::ScarecrowJoint()
     : HESkeletonJoint()
-    , mAttraction(0)
+    , mAttraction(-20)
     , mAttractionMin(-20)
     , mAttractionMax(5)
     , mAttractionInc(0.25)
@@ -148,9 +148,11 @@ bool ScarecrowJoint::hasMove()
         it != mTail.end() - 1;
         ++it)
     {
-        ofPoint* currentPos = (*it);
-        ofPoint* nextPos = (*(it + 1));
-        if((*currentPos).squareDistance(*nextPos) > mHasMoveDistance)
+        ofPoint currentPos = *(*it);
+        ofPoint nextPos = *(*(it + 1));
+        currentPos.z = 0;
+        nextPos.z = 0;
+        if(currentPos.squareDistance(nextPos) > mHasMoveDistance)
         {
             return true;
         }
