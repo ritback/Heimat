@@ -20,6 +20,8 @@ public:
     float getAttraction();
 
 public:
+    void setEffectRange(float inValue);
+    float getEffectRange();
     void setHasMoveDistance(float inValue);
     float getHasMoveDistance();
     void setAttractionInc(float inValue);
@@ -42,6 +44,7 @@ private:
     Tail mTail;
 
 private:
+    float mEffectRange;
     float mAttraction;
     float mAttractionMin;
     float mAttractionMax;

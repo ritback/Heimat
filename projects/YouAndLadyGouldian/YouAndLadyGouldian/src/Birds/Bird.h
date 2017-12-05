@@ -16,6 +16,11 @@ public:
     virtual void update() override;
     virtual void render() override;
     
+public:
+    void reduceSpeedInDistance(const ofPoint& inFromPosition,
+                               float inReduceSpeedFactor,
+                               float inRange);
+    
 private:
     void renderBird();
     void createShape();
@@ -50,13 +55,14 @@ private:    // tail
     Tail mTail;
     int mNumPointsInTail;
     
-protected: // wingManagement
+private: // wingManagement
     float wingAngle;
     float wingAngleInc;
     float wingAngleAmp;
     float wingCurrentAngle;
     float wingAnglePhase;
-public:
+
+private:
     void updateWingPosition ();
     
 private:    // tail
@@ -64,5 +70,8 @@ private:    // tail
     typedef Feathers::iterator FeathersIt;
     Feathers mFeathers;
     
+private:
+    float mReduceSpeedFactor;
+
 };
 

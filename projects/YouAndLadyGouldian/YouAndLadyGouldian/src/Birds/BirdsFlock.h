@@ -11,4 +11,10 @@ public:
     BirdsFlock();
     virtual ~BirdsFlock();
 
+
+public:
+    void reduceSpeedOfBirdsInDistance(const ofPoint& inFromPosition,
+                                       float inReduceSpeedFactor,
+                                       float inRange);
+
 };

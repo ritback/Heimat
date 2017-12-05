@@ -33,6 +33,7 @@ public:
 
 public:
     void setTreeCreationTime(float& inValue);
+    void setJointsEffectRange(float& inValue);
     void setJointsHasMoveDistance(float& inValue);
     void setJointsAttractionInc(float& inValue);
     void setJointsAttractionMin(float& inValue);
@@ -50,6 +51,7 @@ public:
 
 
     ofParameter<float> mSkeletonsTreeCreationTime;
+    ofParameter<float> mSkeletonsJointsEffectRange;
     ofParameter<float> mSkeletonsJointsHasMoveDistance;
     ofParameter<float> mSkeletonsJointsAttractionInc;
     ofParameter<float> mSkeletonsJointsAttractionMin;

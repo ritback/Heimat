@@ -34,6 +34,19 @@ void ScarecrowsTracker::update()
 
 
 //------------------------------------------------------------------------------
+void ScarecrowsTracker::setJointsEffectRange(float inValue)
+{
+    for (int i = 0; i < NUI_SKELETON_COUNT; ++i)
+    {
+        mTrackedSkeletons[i].setJointsEffectRange(inValue);
+    }
+}
+
+float ScarecrowsTracker::getJointsEffectRange()
+{
+    return mTrackedSkeletons[0].getJointsEffectRange();
+}
+
 void ScarecrowsTracker::setJointsHasMoveDistance(float inValue)
 {
     for(int i = 0; i < NUI_SKELETON_COUNT; ++i)

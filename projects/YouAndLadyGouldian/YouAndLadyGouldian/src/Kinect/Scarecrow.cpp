@@ -97,13 +97,33 @@ void Scarecrow::applyEffectOnBirds(BirdsFlock* inFlock)
             scaleToRange(forcePos,
                          ofPoint(0, 0, 0), screenSize,
                          worldLimitMin, worldLimitMax);
-            float viscosity = forceMag > 0 ? 0 : 0.8;
-            inFlock->applyForceToBoidsFromPosition(forcePos, forceMag, 75, viscosity);
+            inFlock->applyForceToBoidsFromPosition(forcePos, forceMag, joint->getEffectRange());
+
+            if (forceMag > 0)
+            {
+                inFlock->reduceSpeedOfBirdsInDistance(forcePos, 0.5, joint->getEffectRange());
+            }
+
         }
     }
 }
 
 //------------------------------------------------------------------------------
+void Scarecrow::setJointsEffectRange(float inValue)
+{
+    ScarecrowJoint* joint = &mJoints[0];
+    for (int i = 0; i < NUI_SKELETON_POSITION_COUNT; ++i, ++joint)
+    {
+        joint->setEffectRange(inValue);
+    }
+}
+
+float Scarecrow::getJointsEffectRange()
+{
+    ScarecrowJoint* joint = &mJoints[0];
+    return joint->getEffectRange();
+}
+
 void Scarecrow::setJointsHasMoveDistance(float inValue)
 {
     ScarecrowJoint* joint = &mJoints[0];

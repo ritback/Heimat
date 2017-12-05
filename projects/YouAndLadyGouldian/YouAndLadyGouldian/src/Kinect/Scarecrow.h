@@ -16,6 +16,8 @@ public:
     void applyEffectOnBirds(BirdsFlock* inFlock);
 
 public:
+    void setJointsEffectRange(float inValue);
+    float getJointsEffectRange();
     void setJointsHasMoveDistance(float inValue);
     float getJointsHasMoveDistance();
     void setJointsAttractionInc(float inValue);

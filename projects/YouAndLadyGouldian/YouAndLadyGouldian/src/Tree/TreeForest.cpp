@@ -95,7 +95,7 @@ void Tree::updateAlpha()
         coef = 0.00025;
     }
 
-    mAlpha = 1;
+    mAlpha = 0.9;
     mAlpha /= coef * std::pow(currentTime - maxAlphaTime, 2) + 1;
 
 }

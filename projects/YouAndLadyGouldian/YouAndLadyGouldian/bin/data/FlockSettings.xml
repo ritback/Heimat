@@ -21,4 +21,5 @@
 	</World_Limit_Distance>
 <group/>
 <Min_X>-960</Min_X>
+<Repulsion>10</Repulsion>
 </group>

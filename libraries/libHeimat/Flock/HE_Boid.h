@@ -23,8 +23,7 @@ public: // called by the flock
 public: // external force to a boid
     void applyForceFromPosition(const ofPoint& inFromPosition,
                                 float inMag,
-                                float inRange,
-                                float inViscosity = 0);
+                                float inRange);
     void applyLinearForceFromPosition(const ofPoint& inFromPosition,
                                       float inMag,
                                       float inRange);
@@ -55,8 +54,5 @@ private: // use for forces computations!
     ofPoint mResultingCohesionForce = ofPoint(0, 0, 0);
     ofPoint mResultingSeparationForce = ofPoint(0, 0, 0);
     ofPoint mResultingAlignmentForce = ofPoint(0, 0, 0);
-
-private:
-    float mFinalViscosity;
 };
 

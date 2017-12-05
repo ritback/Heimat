@@ -2,6 +2,7 @@
 
 ScarecrowJoint::ScarecrowJoint()
     : HESkeletonJoint()
+    , mEffectRange(75)
     , mAttraction(-10)
     , mAttractionMin(-10)
     , mAttractionMax(3)
@@ -67,6 +68,17 @@ float ScarecrowJoint::getAttraction()
 }
 
 //------------------------------------------------------------------------------
+
+void ScarecrowJoint::setEffectRange(float inValue)
+{
+    mEffectRange = inValue;
+}
+
+float ScarecrowJoint::getEffectRange()
+{
+    return mEffectRange;
+}
+
 void ScarecrowJoint::setHasMoveDistance(float inValue)
 {
     mHasMoveDistance = inValue;
@@ -111,7 +123,7 @@ float ScarecrowJoint::getAttractionMax()
 void ScarecrowJoint::renderTracked()
 {
     ofSetColor(255, 30, 50, 50);
-    ofDrawCircle(ofPoint(mPos.x, mPos.y), 75);
+    ofDrawCircle(ofPoint(mPos.x, mPos.y), mEffectRange);
 
     if(mAttraction > mAttractionMin + 0.5)
         ofSetColor(0, 255, 0);

@@ -1,6 +1,6 @@
 #pragma once
 
-#define USE_KINECT 1
+#define USE_KINECT 0
 
 
 

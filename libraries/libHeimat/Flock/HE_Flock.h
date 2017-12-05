@@ -26,8 +26,7 @@ public:
     void applyForceToBoids(const ofPoint& inForce);
     void applyForceToBoidsFromPosition(const ofPoint& inFromPosition,
                                        float inMag,
-                                       float inRange,
-                                       float inViscosity = 0);
+                                       float inRange);
     void applyLinearForceToBoidsFromPosition(const ofPoint& inFromPosition,
                                              float inMag,
                                              float inRange);

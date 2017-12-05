@@ -17,6 +17,8 @@ public:
     virtual void update() override;
 
 public:
+    void setJointsEffectRange(float inValue);
+    float getJointsEffectRange();
     void setJointsHasMoveDistance(float inValue);
     float getJointsHasMoveDistance();
     void setJointsAttractionInc(float inValue);

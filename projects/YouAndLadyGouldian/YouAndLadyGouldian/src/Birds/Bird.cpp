@@ -9,6 +9,7 @@ Bird::Bird(const ofPoint& inPos)
 , shape2(ofPath())
 , shape3(ofPath())
 , mNumPointsInTail(10)
+, mReduceSpeedFactor(0)
 {
     // tail
     for (int i = 0; i < mNumPointsInTail; i++)
@@ -54,8 +55,17 @@ void Bird::update()
     // may add new feathers if the accelration is too strong
     mayAddNewFeather();
     
-    HEBoid::update();
-    
+    // handle speedReduction
+    //HEBoid::update();
+    mVel += mAcc;
+    mVel *= 1 - mReduceSpeedFactor;
+    mPos += mVel;
+
+    mAcc = ofPoint(0, 0);
+    mReduceSpeedFactor = 0;
+    // end speed reduction
+
+
     updateTail();
     
     for (FeathersIt it = mFeathers.begin(); it < mFeathers.end(); ++it)
@@ -75,6 +85,17 @@ void Bird::render()
     }
 }
 
+// -----------------------------------------------------------------------------
+void Bird::reduceSpeedInDistance(const ofPoint& inFromPosition,
+                                             float inReduceSpeedFactor,
+                                             float inRange)
+{
+    float sqrDist = inFromPosition.squareDistance(mPos);
+    if (sqrDist < inRange*inRange)
+    {
+        mReduceSpeedFactor = inReduceSpeedFactor;
+    }
+}
 
 // -----------------------------------------------------------------------------
 void Bird::mayAddNewFeather()

@@ -103,8 +103,7 @@ void HEFlock<BoidType, WorldType>::applyForceToBoids(const ofPoint& inForce)
 template<class BoidType, class WorldType>
 void HEFlock<BoidType, WorldType>::applyForceToBoidsFromPosition(const ofPoint& inFromPosition,
                                                                  float inMag,
-                                                                 float inRange,
-                                                                 float inViscosity)
+                                                                 float inRange)
 {
     int index = 0;
     for(BoidsIt it = mBoids.begin(); it != mBoids.end(); ++it, ++index)
@@ -113,8 +112,7 @@ void HEFlock<BoidType, WorldType>::applyForceToBoidsFromPosition(const ofPoint& 
 
         (*it)->applyForceFromPosition(inFromPosition,
                                       inMag,
-                                      inRange,
-                                      inViscosity);
+                                      inRange);
     }
 }
 
