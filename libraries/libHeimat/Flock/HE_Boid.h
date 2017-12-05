@@ -55,5 +55,8 @@ private: // use for forces computations!
     ofPoint mResultingCohesionForce = ofPoint(0, 0, 0);
     ofPoint mResultingSeparationForce = ofPoint(0, 0, 0);
     ofPoint mResultingAlignmentForce = ofPoint(0, 0, 0);
+
+private:
+    float mFinalViscosity;
 };
 

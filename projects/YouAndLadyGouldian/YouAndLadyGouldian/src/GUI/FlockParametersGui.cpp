@@ -50,7 +50,7 @@ void FlockParametersGui::initGui()
 
     mPanel.add(mRenderWorld.set("Render World Limits", false));
 
-    mPanel.add(mWorldLimitMinX.set("Repulsion", repulsion, 0, 20));
+    mPanel.add(mWorldLimitRepuslion.set("Repulsion", repulsion, 0, 20));
 
     ofParameterGroup worldLimit;
     worldLimit.setName("World Limit");

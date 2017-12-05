@@ -12,6 +12,7 @@ HEBoid::HEBoid(const ofPoint& inPos)
                         rulesDistance*rulesDistance * 4/5,
                         rulesDistance*rulesDistance)
     , mRulesWeight(0.7, 3.14, 7.3)
+    , mFinalViscosity(0)
 {
 
 }
@@ -163,6 +164,10 @@ void HEBoid::applyFlockingForces()
     {
         applyForce(- 0.05 * mVel);
     }
+
+
+    applyForce(-mFinalViscosity * mVel);
+    mFinalViscosity = 0;
 }
 
 
@@ -182,7 +187,7 @@ void HEBoid::applyForceFromPosition(const ofPoint& inFromPosition,
 
         if(inViscosity > 0) // apply the optional viscosity
         {
-            applyForce(-inViscosity * mVel);
+            mFinalViscosity += inViscosity;
         }
     }
 }

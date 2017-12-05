@@ -2,9 +2,9 @@
 
 ScarecrowJoint::ScarecrowJoint()
     : HESkeletonJoint()
-    , mAttraction(-20)
-    , mAttractionMin(-20)
-    , mAttractionMax(5)
+    , mAttraction(-10)
+    , mAttractionMin(-10)
+    , mAttractionMax(3)
     , mAttractionInc(0.25)
     , mHasMoveDistance(100)
     , mUpdateTailFrameCount(0)

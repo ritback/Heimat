@@ -97,7 +97,7 @@ void Scarecrow::applyEffectOnBirds(BirdsFlock* inFlock)
             scaleToRange(forcePos,
                          ofPoint(0, 0, 0), screenSize,
                          worldLimitMin, worldLimitMax);
-            float viscosity = 0;// forceMag > 0 ? 0 : 1.0;
+            float viscosity = forceMag > 0 ? 0 : 0.8;
             inFlock->applyForceToBoidsFromPosition(forcePos, forceMag, 75, viscosity);
         }
     }
