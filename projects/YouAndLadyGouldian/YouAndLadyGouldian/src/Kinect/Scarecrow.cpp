@@ -9,7 +9,7 @@
 
 Scarecrow::Scarecrow()
     : HESkeleton<ScarecrowJoint>()
-    , mTreeCreationTime(60)
+    , mTreeCreationTime(8)
     , mLastTrunkMoveTime(10000)
 {
 

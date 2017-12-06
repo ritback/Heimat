@@ -32,6 +32,10 @@ void ColonyManager::update()
     {
         setNumBirds();
     }
+    else
+    {
+        mSmoothNumBirds = mFlock->getNumActiveBoids();
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -50,7 +54,7 @@ void ColonyManager::setNumBirds()
     }
     else
     {
-        mSmoothNumBirds -= 0.01; // at 30 frame per sec it'll take 2 seconds for 1 bird to disapear.
+        mSmoothNumBirds -= 2.0 / 30.0; // at 30 frame per sec it'll take 2 seconds for 1 bird to disapear.
         numBirds = std::ceil(mSmoothNumBirds);
     }
 

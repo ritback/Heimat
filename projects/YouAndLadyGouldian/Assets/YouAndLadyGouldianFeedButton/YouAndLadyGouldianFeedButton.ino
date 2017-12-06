@@ -67,7 +67,7 @@ void writeSerial()
 {
   if (shouldSendFood)
   {
-    Serial.print("F:1 ");
+    Serial.print("1");
     //Serial.print(1);
     shouldSendFood = false;
   }  
