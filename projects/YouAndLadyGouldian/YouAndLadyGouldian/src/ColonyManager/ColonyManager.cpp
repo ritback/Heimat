@@ -1,10 +1,15 @@
 #include "ColonyManager.h"
 
-ColonyManager::ColonyManager(BirdsFlock* inFlock)
+#include "BirdsFlock.h"
+#include "Forest.h"
+
+ColonyManager::ColonyManager(BirdsFlock* inFlock, Forest * inForest)
     : mFlock(inFlock)
-    , mNextUpdateTime(0)
+    , mForest(inForest)
     , mNumSeed(0)
-    , mShouldUpdateNumBirds(true)
+    , mSmoothNumBirds(0)
+    , mNextUpdateTime(0)
+    , mUpdateNumBirdsWithWeb(false)
 {
     ofRegisterURLNotification(this);
 }
@@ -20,23 +25,34 @@ void ColonyManager::update()
     if(mNextUpdateTime < ofGetElapsedTimef())
     {
         updateURL();
-        mNextUpdateTime = ofGetElapsedTimef() + 1;
+        mNextUpdateTime = ofGetElapsedTimef() + 0.5;
     }
     
-    if(mShouldUpdateNumBirds)
+    if(mUpdateNumBirdsWithWeb)
     {
-        //setNumBirds();
-        mShouldUpdateNumBirds = false;
+        setNumBirds();
     }
 }
 
 //------------------------------------------------------------------------------
 void ColonyManager::setNumBirds()
 {
-    int numBirds = 0;
+    int numBirds = mFlock->getNumActiveBoids();
 
-    //numBirds = 10 + 2 * mNumSeed + 20 * numTree;
+    int aimedNumBirds = 3
+                        + 2 * mNumSeed
+                        + 20 * mForest->getNumTree();
 
+    if(numBirds <= aimedNumBirds)
+    {
+        numBirds = aimedNumBirds;
+        mSmoothNumBirds = numBirds;
+    }
+    else
+    {
+        mSmoothNumBirds -= 0.01; // at 30 frame per sec it'll take 2 seconds for 1 bird to disapear.
+        numBirds = std::ceil(mSmoothNumBirds);
+    }
 
 
     mFlock->setNumActiveBoids(numBirds);
@@ -65,7 +81,16 @@ void ColonyManager::urlResponse(ofHttpResponse& inResponse)
     if(inResponse.status == 200 && inResponse.request.name == "GetNumSeed")
     {
         mNumSeed = atoi(inResponse.data.getData());
-        mShouldUpdateNumBirds = true;
     }
 }
 
+//------------------------------------------------------------------------------
+void ColonyManager::updateFlockWithWeb(bool inValue)
+{
+    mUpdateNumBirdsWithWeb = inValue;
+}
+
+bool ColonyManager::isFlockUpdatedWithWeb()
+{
+    return mUpdateNumBirdsWithWeb;
+}

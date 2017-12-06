@@ -2,7 +2,7 @@
 
 Feather::Feather()
 : HEMassParticle()
-, lenght(ofRandom(17, 25)) //(40)
+, lenght(ofRandom(20, 40)) //(40)
 , shape(ofPath())
 , mIsVisible(false)
 {

@@ -68,7 +68,7 @@ void Tree::activate(const ofPoint& inPos)
     mPos = inPos;
 
     mActivationTime = ofGetElapsedTimef();
-    mActivationDuration = ofRandom(2, 3) * 10;
+    mActivationDuration = ofRandom(0.5, 1.5) * 60;
 }
 
 //------------------------------------------------------------------------------

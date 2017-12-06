@@ -3,13 +3,13 @@
 ofApp::ofApp()
     : ofBaseApp()
     , mFlock()
+    , mJungleBackgound()
+    , mForest()
+    , mColonyManager(&mFlock, &mForest)
 #if USE_KINECT
     , mKinect(&mFlock)
 #endif
-    , mJungleBackgound()
-    , mForest()
     , mGui(this)
-    , mColonyManager(&mFlock)
 {
     
 }
@@ -204,3 +204,7 @@ Kinect* ofApp::getKinect()
 }
 #endif
 
+ColonyManager* ofApp::getColonyManager()
+{
+    return &mColonyManager;
+}

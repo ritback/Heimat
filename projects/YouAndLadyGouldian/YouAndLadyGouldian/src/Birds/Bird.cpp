@@ -100,15 +100,17 @@ void Bird::reduceSpeedInDistance(const ofPoint& inFromPosition,
 // -----------------------------------------------------------------------------
 void Bird::mayAddNewFeather()
 {
-    bool probability = false;
-    
-    float i = ofRandom (0,100);
-    if (i<0.01)  // probability that a fether drop
-        probability = true;
-    
-    // ADD feather at the end of the tail
-    if (mAcc.lengthSquared() > 400/*0.030*/ || probability)
+    float probability = 0.01; // probability that a fether drop
+    if(mAcc.lengthSquared() > 150)
     {
+        probability = 5;
+    }
+
+    float random = ofRandom(0, 100);
+    
+    if (random < probability)
+    {
+        // ADD feather at the end of the tail
         FeathersIt it = mFeathers.begin();
         while(it != mFeathers.end())
         {

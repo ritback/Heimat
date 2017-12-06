@@ -22,6 +22,7 @@ public:
     void loadParameters();
 
 public:
+    void setUpdateFlockWithWeb(bool& inValue);
     void setFlockNumBoids(float& inValue);
     void setFlockRules(float & inValue);
     void setFlockMasses(float & inValue);
@@ -34,6 +35,7 @@ public:
 public:
     ofxPanel mPanel;
 
+    ofParameter<bool> mUpdateNumFlockWithWeb;
     ofParameter<float> mNumBoids;
 
     ofParameter<float> mBoidsMasses;

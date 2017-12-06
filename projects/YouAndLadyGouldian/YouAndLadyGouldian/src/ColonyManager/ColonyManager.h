@@ -2,12 +2,13 @@
 
 #include "ofMain.h"
 
-#include "BirdsFlock.h"
+class BirdsFlock;
+class Forest;
 
 class ColonyManager
 {
 public:
-    ColonyManager(BirdsFlock* inFlock);
+    ColonyManager(BirdsFlock* inFlock, Forest * inForest);
     ~ColonyManager();
 
 public:
@@ -15,6 +16,10 @@ public:
 
 public:
     void urlResponse(ofHttpResponse& inResponse);
+
+public:
+    void updateFlockWithWeb(bool inValue);
+    bool isFlockUpdatedWithWeb();
 
 private:
     void setNumBirds();
@@ -24,10 +29,12 @@ private:
 
 private:
     BirdsFlock* mFlock;
+    Forest* mForest;
     int mNumSeed;
+    float mSmoothNumBirds;
 
 private:
     float mNextUpdateTime;
-    bool mShouldUpdateNumBirds;
+    bool mUpdateNumBirdsWithWeb;
 };
  

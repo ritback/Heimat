@@ -49,14 +49,10 @@ public:
 #if USE_KINECT
     Kinect* getKinect();
 #endif
+    ColonyManager* getColonyManager();
 
 public:
     BirdsFlock mFlock;
-
-#if USE_KINECT
-public:
-    Kinect mKinect;
-#endif
 
 public:
     Forest mForest;
@@ -66,6 +62,12 @@ public:
     
 public:
     ColonyManager mColonyManager;
+
+#if USE_KINECT
+public:
+    Kinect mKinect;
+#endif
+
 
 private:
     AppGui mGui;

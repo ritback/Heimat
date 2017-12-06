@@ -2,6 +2,7 @@
 
 #include "ofApp.h"
 #include "BirdsFlock.h"
+#include "ColonyManager.h"
 #include "HE_FlockingWorld.h"
 
 
@@ -21,6 +22,7 @@ void FlockParametersGui::initGui()
 {
     BirdsFlock* flock = mApp->getFlock();
     HEBoxWorld* boxWorld = flock->getWorld();
+    bool updateFlockWithWeb = (mApp->getColonyManager())->isFlockUpdatedWithWeb();
 
     int flockNumBoids = flock->getNumActiveBoids();
     float flockMasses = flock->getFlockMasses();
@@ -36,7 +38,8 @@ void FlockParametersGui::initGui()
 
     
     mPanel.setup("Flock Panel");
-    
+
+    mPanel.add(mUpdateNumFlockWithWeb.set("Update Flock With Web", updateFlockWithWeb));
     mPanel.add(mNumBoids.set("NumBoids", flockNumBoids, 0, 300));
     mPanel.add(mBoidsMasses.set("Masses", flockMasses, 0, 5));
 
@@ -75,6 +78,7 @@ void FlockParametersGui::launchGui()
 
     BirdsFlock* flock = mApp->getFlock();
     HEBoxWorld* boxWorld = flock->getWorld();
+    bool updateFlockWithWeb = (mApp->getColonyManager())->isFlockUpdatedWithWeb();
 
     mNumBoids = flock->getNumActiveBoids();
     mBoidsMasses = flock->getFlockMasses();
@@ -96,6 +100,8 @@ void FlockParametersGui::launchGui()
     mWorldLimitDistanceMaxX = worldLimitDistanceMax.x;
     mWorldLimitDistanceMaxY = worldLimitDistanceMax.y;
 
+
+    mUpdateNumFlockWithWeb.addListener(this, &FlockParametersGui::setUpdateFlockWithWeb);
     mNumBoids.addListener(this, &FlockParametersGui::setFlockNumBoids);
     mBoidsMasses.addListener(this, &FlockParametersGui::setFlockMasses);
 
@@ -120,6 +126,8 @@ void FlockParametersGui::launchGui()
 
 void FlockParametersGui::removeGui()
 {
+
+    mUpdateNumFlockWithWeb.removeListener(this, &FlockParametersGui::setUpdateFlockWithWeb);
     mNumBoids.removeListener(this, &FlockParametersGui::setFlockNumBoids);
     mBoidsMasses.removeListener(this, &FlockParametersGui::setFlockMasses);
 
@@ -161,6 +169,11 @@ void FlockParametersGui::loadParameters()
 
 
 //------------------------------------------------------------------------------
+void FlockParametersGui::setUpdateFlockWithWeb(bool & inValue)
+{
+    (mApp->getColonyManager())->updateFlockWithWeb(inValue);
+}
+
 void FlockParametersGui::setFlockNumBoids(float & inValue)
 {
     BirdsFlock* flock = mApp->getFlock();

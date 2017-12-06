@@ -18,6 +18,9 @@ public:
 
 public:
     static void createTreeAt(const ofPoint& inPos);
+
+public:
+    int getNumTree();
     
 private:
     void activateATree();

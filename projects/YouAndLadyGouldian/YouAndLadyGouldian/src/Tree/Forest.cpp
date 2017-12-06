@@ -67,3 +67,18 @@ void Forest::activateATree()
     }
 }
 
+//------------------------------------------------------------------------------
+int Forest::getNumTree()
+{
+    int count = 0;
+    TreesIt it = mTrees.begin();
+    while(it != mTrees.end())
+    {
+        if((*it)->mIsVisible)
+        {
+            ++count;
+        }
+        ++it;
+    }
+    return count;
+}
