@@ -9,7 +9,7 @@ ColonyManager::ColonyManager(BirdsFlock* inFlock, Forest * inForest)
     , mNumSeed(0)
     , mSmoothNumBirds(0)
     , mNextUpdateTime(0)
-    , mUpdateNumBirdsWithWeb(false)
+    , mUpdateNumBirdsWithWeb(true)
 {
     ofRegisterURLNotification(this);
 }
