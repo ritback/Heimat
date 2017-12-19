@@ -1,13 +1,12 @@
 #include "UsersTracker.h"
 
-#include "User.h"
-#include "Flock/Flock_Flock.h"
-#include "Flock/Flock_FlockingWorld.h"
-#include "Flock/DrawnPerson.h"
+#include "HE_FlockingWorld.h"
+#include "Actor.h"
+#include "HE_Flock.h"
 
-UsersTracker::UsersTracker(Flock<DrawnPerson, StreetWorld> *inFlock)
+UsersTracker::UsersTracker(HEFlock<Actor, StreetWorld> *inFlock)
 	: mSafeZone(ofPoint(-10000, -10000))
-    , mRoomRect(inFlock->getWorldLimit())
+    , mRoomRect((inFlock->getWorld())->getWorldLimit())
     , mActualRoomSize(mRoomRect.getWidth(), mRoomRect.getHeight())
 	, mFlock(inFlock)
     , mUsersCohesionInfluence(0)

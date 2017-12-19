@@ -6,17 +6,18 @@
 
 #define PORT 12345
 
-template<class BoidType, class WorldType>
-class Flock;
-class DrawnPerson;
+
+#include "User.h"
+
+class Actor;
 class StreetWorld;
-class BoxWorld;
-class User;
+class BoxWorld; template<class BoidType, class WorldType>
+class HEFlock;
 
 class UsersTracker
 {
 public:
-	UsersTracker(Flock<DrawnPerson, StreetWorld> *mFlock);
+	UsersTracker(HEFlock<Actor, StreetWorld> *mFlock);
 	~UsersTracker();
 
 public:
@@ -66,7 +67,7 @@ private:
     ofxOscReceiver mOSCReceiver;
 
 private:
-	Flock<DrawnPerson, StreetWorld>* mFlock;
+    HEFlock<Actor, StreetWorld>* mFlock;
     
 private:
     float mUsersCohesionInfluence;

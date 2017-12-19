@@ -1,8 +1,8 @@
 #include "ofApp.h"
 
-#include "Users/UsersTracker.h"
-#include "Flock/Flock_FlockingWorld.h"
-#include "Flock/Flock_Flock.h"
+#include "UsersTracking/UsersTracker.h"
+#include "Flock/HE_FlockingWorld.h"
+#include "Flock/HE_Flock.h"
 
 //------------------------------------------------------------------------------
 void ofApp::initGui()

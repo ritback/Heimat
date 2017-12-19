@@ -1,17 +1,17 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Flock/DrawnPerson.h"
+#include "Actor.h"
 
-class User : public DrawnPerson
+class User : public Actor
 {
 public:
 	User(ofPoint inPoint);
 	virtual ~User();
 
 public:
+    virtual void update() override;
 	virtual void render() override;
-    virtual void updatePosition() override;
 
 public:
 	void updatePositionAndVelocity(ofPoint inPos);

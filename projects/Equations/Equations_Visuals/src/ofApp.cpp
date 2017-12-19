@@ -1,40 +1,44 @@
 #include "ofApp.h"
 
-#include "Flock/DrawnPerson.h"
-#include "Flock/Flock_FlockingWorld.h"
-#include "Flock/Flock_Flock.h"
-#include "Users/UsersTracker.h"
+ofApp::ofApp()
+    : mFlock(200)
+    , mUsersTracker(&mFlock)
+{
+}
+
+ofApp::~ofApp()
+{
+
+}
 
 //--------------------------------------------------------------
 void ofApp::setup()
 {
     ofSetFrameRate(30);
-	mFlock = new Flock<DrawnPerson, StreetWorld>(200); // 200
 
-	mUsersTracker = new UsersTracker(mFlock);
 
 	mCam.setDistance(650);
 	//ofToggleFullscreen();
 
-	initGui();
+    /*
+    initGui();
     launchGui();
 
     mGuiPanel.loadFromFile("Settings.xml");
     removeGui();
+    */
 }
 
 void ofApp::exit()
 {
-	removeGui();
+	//removeGui();
 
-	delete mUsersTracker;
-	delete mFlock;
 }
 
 void ofApp::update()
 {
-	mFlock->update();
-	mUsersTracker->update();
+	mFlock.update();
+	mUsersTracker.update();
 }
 
 void ofApp::draw()
@@ -51,11 +55,12 @@ void ofApp::draw()
 	ofEnableAlphaBlending();
 	ofEnableDepthTest();
 
-	mFlock->render();
+	mFlock.render();
 
 	ofDisableDepthTest();
 	ofDisableAlphaBlending();
 
+    /*
 	if (mDisplayGui)
 	{
 		if (mFlockRenderWorld)
@@ -71,12 +76,14 @@ void ofApp::draw()
             mUsersTracker->renderUsers();
         }
 	}
+    */
 	mCam.end();
 	
 
 	ofPopMatrix();
 	ofPopStyle();
 
+    /*
 	if (mDisplayGui)
 	{
 
@@ -95,7 +102,7 @@ void ofApp::draw()
 		reportStr << std::endl;
 
 		ofDrawBitmapString(reportStr.str(), 20, 600);
-	}
+	}*/
 }
 
 
@@ -104,6 +111,7 @@ void ofApp::keyPressed(int key)
 {
 	switch (key)
 	{
+        /*
 		case 'd': case 'D':
 			if (mDisplayGui)
 			{
@@ -114,16 +122,17 @@ void ofApp::keyPressed(int key)
 				launchGui();
 			}
 			break;
+            */
         case 'f': case 'F':
             ofToggleFullscreen();
             break;
 
 		case 's': case 'S':
-			mGuiPanel.saveToFile("Settings.xml");
+			//mGuiPanel.saveToFile("Settings.xml");
 			break;
             
         case 'l': case 'L':
-            mGuiPanel.loadFromFile("Settings.xml");
+            //mGuiPanel.loadFromFile("Settings.xml");
             break;
     }
 }

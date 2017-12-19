@@ -1,20 +1,17 @@
 #pragma once
 
-#include "Flock/Flock_Boid.h"
+#include "HE_Boid.h"
 
 #include "ElectricLine.h"
 
-class DrawnPerson: public Boid
+class Actor: public HEBoid
 {
 public:
-    DrawnPerson(ofPoint inPoint);
-    virtual ~DrawnPerson();
-    
-protected:
-    virtual void init() override;
+    Actor(const ofPoint& inPos);
+    virtual ~Actor();
     
 public:
-    virtual void renderingUpdate() override;
+    virtual void update() override;
     virtual void render() override;
     
 protected:
@@ -22,9 +19,9 @@ protected:
     virtual void drawLines();
     
 protected:
-    virtual void setOtherFlockingInteraction(Boid* inBoid,
+    virtual void otherFlockingInteraction(HEBoid* inBoid,
                                              float inBoidSqrDistance) override;
-    virtual void applyOtherFlockingForces() override;
+    virtual void applyOtherFlockingInteraction() override;
     
 protected:
     static const int NUM_IMAGES = 4;
@@ -44,7 +41,7 @@ protected:
     
 private:
 	static const int NUM_LINK = 2;
-    Boid* mNeighborsBoids[NUM_LINK];
+    HEBoid* mNeighborsBoids[NUM_LINK];
 	float mMinimalSqrDistances[NUM_LINK];
 
     ElectricLine mLines[NUM_LINK];
