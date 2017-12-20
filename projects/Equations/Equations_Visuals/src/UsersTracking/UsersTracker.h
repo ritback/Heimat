@@ -6,18 +6,18 @@
 
 #define PORT 12345
 
-
 #include "User.h"
 
 class Actor;
-class StreetWorld;
-class BoxWorld; template<class BoidType, class WorldType>
+class HEStreetWorld;
+class HEBoxWorld;
+template<class BoidType, class WorldType>
 class HEFlock;
 
 class UsersTracker
 {
 public:
-	UsersTracker(HEFlock<Actor, StreetWorld> *mFlock);
+    UsersTracker(HEFlock<Actor, HEStreetWorld> *mFlock);
 	~UsersTracker();
 
 public:
@@ -36,17 +36,19 @@ public:
 
 public:
     void changeUsersInfluenceCohesion(float & inValue);
-    void changeUsersInfluenceAlignement(float & inValue);
     void changeUsersInfluenceSeparation(float & inValue);
+    void changeUsersInfluenceAlignement(float & inValue);
 
 public:
     float getUsersInfluenceCohesion();
-    float getUsersInfluenceAlignement();
     float getUsersInfluenceSeparation();
+    float getUsersInfluenceAlignement();
 
+    /*
     float getUsersInfluenceCohesionMaxValue();
     float getUsersInfluenceAlignementMaxValue();
     float getUsersInfluenceSeparationMaxValue();
+    */
 
 private:
 	typedef std::vector<User*> Users;
@@ -67,13 +69,11 @@ private:
     ofxOscReceiver mOSCReceiver;
 
 private:
-    HEFlock<Actor, StreetWorld>* mFlock;
+    HEFlock<Actor, HEStreetWorld>* mFlock;
     
 private:
-    float mUsersCohesionInfluence;
-    float mUsersSeparationInfluence;
-    float mUsersAlignmentInfluence;
-    float mUsersCohesionInfluenceMaxValue;
-    float mUsersSeparationInfluenceMaxValue;
-    float mUsersAlignmentInfluenceMaxValue;
+    HEFlockRules mUsersInfluence;
+    //float mUsersCohesionInfluenceMaxValue;
+    //float mUsersSeparationInfluenceMaxValue;
+    //float mUsersAlignmentInfluenceMaxValue;
 };

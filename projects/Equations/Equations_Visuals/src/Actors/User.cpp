@@ -1,11 +1,11 @@
 #include "User.h"
 
+#include "HEHelpers_Maths.h"
+
 User::User(ofPoint inPoint)
 	: Actor(inPoint)
 {
-    //mCohesionInfluenceFactor = 0;
-    //mSeparationInfluenceFactor = 0;
-    //mAlignmentInfluenceFactor = 0;
+
     
 }
 
@@ -15,27 +15,33 @@ User::~User()
 }
 
 //--------------------------------------------------------------
-void User::update()
+void User::render()
 {
-    Actor::update();
+    ofPushMatrix();
+    ofTranslate(mPos);
+    float heading = 0;
+
     if (mVel.lengthSquared() > 20)
     {
-        //mHeading = heading2D(mVel);
+        heading = heading2D(mVel);
+        if (heading < -90 || heading > 90)
+        {
+            ofScale(-1, 1, 1);
+        }
     }
     else
     {
-        //mHeading = -90;
+        heading = -90;
     }
+    ofRotate(45, 1, 0, 0);
 
-}
+
+    ofColor charColor(200);
+    drawCharacter(charColor, heading);
+
+    ofPopMatrix();
 
 
-void User::render()
-{
-	//DrawnPerson::render();
-    ofColor userColor(200);
-	Actor::drawCharacter(userColor);
-	
 	/*
     ofPushStyle();
 	ofSetColor(0, 255, 0, 100);
@@ -52,8 +58,3 @@ void User::updatePositionAndVelocity(ofPoint inPos)
 	mPos = inPos;
 }
 
-
-ofPoint User::getPos()
-{
-	return mPos;
-}

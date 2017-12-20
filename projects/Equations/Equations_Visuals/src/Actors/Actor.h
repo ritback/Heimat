@@ -11,16 +11,15 @@ public:
     virtual ~Actor();
     
 public:
-    virtual void update() override;
     virtual void render() override;
     
 protected:
-    virtual void drawCharacter(ofColor& inColor);
+    virtual void drawCharacter(ofColor& inColor, float inHeading);
     virtual void drawLines();
     
 protected:
     virtual void otherFlockingInteraction(HEBoid* inBoid,
-                                             float inBoidSqrDistance) override;
+                                          float inBoidSqrDistance) override;
     virtual void applyOtherFlockingInteraction() override;
     
 protected:

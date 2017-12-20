@@ -4,17 +4,15 @@
 #include "Actor.h"
 #include "HE_Flock.h"
 
-UsersTracker::UsersTracker(HEFlock<Actor, StreetWorld> *inFlock)
+UsersTracker::UsersTracker(HEFlock<Actor, HEStreetWorld> *inFlock)
 	: mSafeZone(ofPoint(-10000, -10000))
     , mRoomRect((inFlock->getWorld())->getWorldLimit())
     , mActualRoomSize(mRoomRect.getWidth(), mRoomRect.getHeight())
 	, mFlock(inFlock)
-    , mUsersCohesionInfluence(0)
-    , mUsersSeparationInfluence(0)
-    , mUsersAlignmentInfluence(0)
-    , mUsersCohesionInfluenceMaxValue(2.5)
-    , mUsersSeparationInfluenceMaxValue(2.5)
-    , mUsersAlignmentInfluenceMaxValue(2.5)
+    , mUsersInfluence()
+    //, mUsersCohesionInfluenceMaxValue(2.5)
+    //, mUsersSeparationInfluenceMaxValue(2.5)
+    //, mUsersAlignmentInfluenceMaxValue(2.5)
     , mDetectedUsersPos()
     , mDetectedUsersVel()
     , mNumDetectedUsers(0)
@@ -48,10 +46,6 @@ void UsersTracker::update()
     ofPoint streamToRoomRatio = roomSize / mActualRoomSize;
     ofPoint streamToRoomOffset = mRoomRect.getTopLeft();
     
-    float newUsersCohesionInfluence = -1;
-    float newUsersSeparationInfluence = -1;
-    float newUsersAlignmentInfluence = -1;
-
     while(mOSCReceiver.hasWaitingMessages())
     {
         ofxOscMessage message;
@@ -85,18 +79,18 @@ void UsersTracker::update()
         }
         if(message.getAddress() == "/Cohesion")
         {
-            mUsersCohesionInfluence = (float)message.getArgAsInt(0);
-            mUsersCohesionInfluence = remap(mUsersCohesionInfluence, 0, 1023, 0, mUsersCohesionInfluenceMaxValue);
+            mUsersInfluence.mCohesion = (float)message.getArgAsInt(0);
+            //mUsersInfluence.mCohesion = remap(mUsersInfluence.mCohesion, 0, 1023, 0, mUsersCohesionInfluenceMaxValue);
         }
         if(message.getAddress() == "/Separation")
         {
-            mUsersSeparationInfluence = (float)message.getArgAsInt(0);
-            mUsersSeparationInfluence = remap(mUsersSeparationInfluence, 0, 1023, 0, mUsersSeparationInfluenceMaxValue);
+            mUsersInfluence.mSeparation = (float)message.getArgAsInt(0);
+            //mUsersInfluence.mSeparation = remap(mUsersInfluence.mSeparation, 0, 1023, 0, mUsersSeparationInfluenceMaxValue);
         }
         if(message.getAddress() == "/Alignment")
         {
-            mUsersAlignmentInfluence = (float)message.getArgAsInt(0);
-            mUsersAlignmentInfluence = remap(mUsersAlignmentInfluence, 0, 1023, 0, mUsersAlignmentInfluenceMaxValue);
+            mUsersInfluence.mAlignement = (float)message.getArgAsInt(0);
+            //mUsersInfluence.mAlignement = remap(mUsersInfluence.mAlignement, 0, 1023, 0, mUsersAlignmentInfluenceMaxValue);
         }
     }
 
@@ -112,13 +106,10 @@ void UsersTracker::update()
 
     for(int i = 0; i < mNumDetectedUsers; ++i)
     {
-        
         mFlock->applyExternalFlockForcesToBoids(mDetectedUsersPos,
                                                 mDetectedUsersVel,
                                                 mNumDetectedUsers,
-                                                mUsersCohesionInfluence,
-                                                -mUsersSeparationInfluence,
-                                                mUsersAlignmentInfluence,
+                                                mUsersInfluence,
                                                 200);
         
     }
@@ -182,37 +173,37 @@ ofRectangle UsersTracker::getRoomLimit()
 //------------------------------------------------------------------------------
 void UsersTracker::changeUsersInfluenceCohesion(float & inValue)
 {
-    mUsersCohesionInfluence = inValue;
-}
-
-void UsersTracker::changeUsersInfluenceAlignement(float & inValue)
-{
-    mUsersAlignmentInfluence = inValue;
+    mUsersInfluence.mCohesion = inValue;
 }
 
 void UsersTracker::changeUsersInfluenceSeparation(float & inValue)
 {
-    mUsersSeparationInfluence = inValue;
+    mUsersInfluence.mSeparation = inValue;
+}
+
+void UsersTracker::changeUsersInfluenceAlignement(float & inValue)
+{
+    mUsersInfluence.mAlignement = inValue;
 }
 
 //------------------------------------------------------------------------------
-
 float UsersTracker::getUsersInfluenceCohesion()
 {
-    return mUsersCohesionInfluence;
-}
-
-float UsersTracker::getUsersInfluenceAlignement()
-{
-    return mUsersAlignmentInfluence;
+    return mUsersInfluence.mCohesion;
 }
 
 float UsersTracker::getUsersInfluenceSeparation()
 {
-    return mUsersSeparationInfluence;
+    return mUsersInfluence.mSeparation;
+}
+
+float UsersTracker::getUsersInfluenceAlignement()
+{
+    return mUsersInfluence.mAlignement;
 }
 
 //------------------------------------------------------------------------------
+/*
 float UsersTracker::getUsersInfluenceCohesionMaxValue()
 {
     return mUsersCohesionInfluenceMaxValue;
@@ -227,3 +218,4 @@ float UsersTracker::getUsersInfluenceSeparationMaxValue()
 {
     return mUsersSeparationInfluenceMaxValue;
 }
+*/

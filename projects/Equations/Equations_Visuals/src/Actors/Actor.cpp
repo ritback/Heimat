@@ -11,19 +11,17 @@ ofImage Actor::mDrawnBehind[Actor::NUM_IMAGES];
 
 // -----------------------------------------------------------------------------
 Actor::Actor(const ofPoint& inPos)
-: HEBoid(inPos)
-, mNeighborsBoids()
-, mMinimalSqrDistances()
-, mImagesWidth(0)
-, mImagesHeight(0)
-, mImagesPos(0)
-, mCurrentImgIndex(floor(ofRandom(0, 3.99999)))
-, mFrameCounterImgChange(0)
-, mNextImgChange(0)
+    : HEBoid(inPos)
+    , mNeighborsBoids()
+    , mMinimalSqrDistances()
+    , mImagesWidth(0)
+    , mImagesHeight(0)
+    , mImagesPos(0)
+    , mCurrentImgIndex(floor(ofRandom(0, 3.99999)))
+    , mFrameCounterImgChange(0)
+    , mNextImgChange(0)
 {
     // Flock
-
-    mMaxSteering = 100000.0;
     /*
     mCohesionInfluenceFactor = 1;
     mSeparationInfluenceFactor = 1;
@@ -37,6 +35,7 @@ Actor::Actor(const ofPoint& inPos)
     mSeparationForceScale = ofRandom(12, 13);
     mAlignmentForceScale = ofRandom(7, 10);
     */
+
     // lines
     mMinimalSqrDistances[0] = 1000000000000;
     for (int i = 1; i < NUM_LINK; ++i)
@@ -89,104 +88,106 @@ Actor::Actor(const ofPoint& inPos)
 
 Actor::~Actor()
 {
-    
+
 }
 
 // -----------------------------------------------------------------------------
-void Actor::update()
-{
-    HEBoid::update();
-}
-
 void Actor::render()
 {
     drawLines();
-    
-    ofColor charColor(255);
-    drawCharacter(charColor);
 
-    /*
-     ofPushStyle();
-     ofNoFill();
-     
-     ofSetColor(255, 0, 0, 100);
-     ofDrawCircle(mPos, mCohesionDistance);
-     
-     ofSetColor(0, 255, 0, 100);
-     ofDrawCircle(mPos, mSeparationDistance);
-     
-     ofSetColor(0, 0, 255, 100);
-     ofDrawCircle(mPos, mAlignmentDistance);
-     
-     ofPopStyle();
-     */
-}
-
-
-// -----------------------------------------------------------------------------
-void Actor::drawCharacter(ofColor& inColor)
-{
-    
     ofPushMatrix();
-    ofPushStyle();
     ofTranslate(mPos);
-    
     float heading = heading2D(mVel);
-
     if (heading < -90 || heading > 90)
     {
         ofScale(-1, 1, 1);
     }
-    
     ofRotate(45, 1, 0, 0);
-    
+
+
+    ofColor charColor(255);
+    drawCharacter(charColor, heading);
+
+    ofPopMatrix();
+
+    /*
+    ofPushStyle();
+    ofNoFill();
+
+    ofSetColor(255, 0, 0, 100);
+    ofDrawCircle(mPos, mCohesionDistance);
+
+    ofSetColor(0, 255, 0, 100);
+    ofDrawCircle(mPos, mSeparationDistance);
+
+    ofSetColor(0, 0, 255, 100);
+    ofDrawCircle(mPos, mAlignmentDistance);
+
+    ofPopStyle();
+    */
+}
+
+
+// -----------------------------------------------------------------------------
+void Actor::drawCharacter(ofColor& inColor, float inHeading)
+{
+    ofPushStyle();
+
     ofSetColor(inColor);
-    
-    float imgWidth = mDrawnFront[0].getWidth()/5;
-    float imgHeight = mDrawnFront[0].getHeight()/5;
-    
-    ofPoint imgPos = ofPoint(-imgWidth/2, -imgHeight * 5/8, 0);
-    
-    if(mFrameCounterImgChange >= mNextImgChange)
+
+    float imgWidth = mDrawnFront[0].getWidth() / 5;
+    float imgHeight = mDrawnFront[0].getHeight() / 5;
+
+    ofPoint imgPos = ofPoint(-imgWidth / 2, -imgHeight * 5 / 8, 0);
+
+    if (mFrameCounterImgChange >= mNextImgChange)
     {
-        mCurrentImgIndex = (mCurrentImgIndex+1)%4;
+        mCurrentImgIndex = (mCurrentImgIndex + 1) % 4;
         mFrameCounterImgChange = 0;
-        mNextImgChange = floor(ofRandom(4,6));
+        mNextImgChange = floor(ofRandom(4, 6));
     }
     ++mFrameCounterImgChange;
-    
-    
-    if (heading >= 67.5 && heading <= 112.5)
+
+
+    // find the correct image corresponding to heading.
+    ofImage* drawn = 0;
+
+    if (inHeading >= 67.5 && inHeading <= 112.5)
     {
-        mDrawnBehind[mCurrentImgIndex].draw(mImagesPos, mImagesWidth, mImagesHeight);
+        drawn = &mDrawnBehind[mCurrentImgIndex];
     }
-    
-    else if ((heading >= 22.5 && heading <= 67.5) ||
-             (heading >= 112.5 && heading <= 157.5))
+
+    else if ((inHeading >= 22.5 && inHeading <= 67.5) ||
+             (inHeading >= 112.5 && inHeading <= 157.5))
     {
-        mDrawnBehindSide[mCurrentImgIndex].draw(mImagesPos, mImagesWidth, mImagesHeight);
+        drawn = &mDrawnBehindSide[mCurrentImgIndex];
     }
-    
-    else if ((heading <= 22.5 && heading >= -22.5) ||
-             (heading >= 157.5 || heading <= -157.5))
+
+    else if ((inHeading <= 22.5 && inHeading >= -22.5) ||
+             (inHeading >= 157.5 || inHeading <= -157.5))
     {
-        mDrawnSide[mCurrentImgIndex].draw(mImagesPos, mImagesWidth, mImagesHeight);
+        drawn = &mDrawnSide[mCurrentImgIndex];
     }
-    
-    else if ((heading <= -22.5 && heading >= -67.5) ||
-             (heading <= -112.5 && heading >= -157.5))
+
+    else if ((inHeading <= -22.5 && inHeading >= -67.5) ||
+             (inHeading <= -112.5 && inHeading >= -157.5))
     {
-        mDrawnFrontSide[mCurrentImgIndex].draw(mImagesPos, mImagesWidth, mImagesHeight);
+        drawn = &mDrawnFrontSide[mCurrentImgIndex];
     }
-    
-    else if (heading <= -67.5 && heading >= -112.5)
+
+    else if (inHeading <= -67.5 && inHeading >= -112.5)
     {
-        mDrawnFront[mCurrentImgIndex].draw(mImagesPos, mImagesWidth, mImagesHeight);
+        drawn = &mDrawnFront[mCurrentImgIndex];
     }
-    
+
+    // draw correct image
+    if (drawn)
+    {
+        drawn->draw(mImagesPos, mImagesWidth, mImagesHeight);
+    }
+
     ofPopStyle();
-    ofPopMatrix();
-    
 }
 
 void Actor::drawLines()
@@ -218,10 +219,9 @@ void Actor::otherFlockingInteraction(HEBoid* inBoid,
     }
 }
 
-// -----------------------------------------------------------------------------
 void Actor::applyOtherFlockingInteraction()
 {
-    
+
     for (int i = 0; i < NUM_LINK; ++i)
     {
         if (mNeighborsBoids[i] != 0)
@@ -230,12 +230,12 @@ void Actor::applyOtherFlockingInteraction()
             mLines[i].update(&mPos, &it);
         }
     }
-    
+
     mMinimalSqrDistances[0] = 1000000000000;
     for (int i = 1; i < NUM_LINK; ++i)
     {
         mMinimalSqrDistances[i] = mMinimalSqrDistances[0] + i;
     }
-    
+
 }
 
