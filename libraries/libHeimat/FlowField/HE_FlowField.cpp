@@ -4,7 +4,7 @@ HEFlowField::HEFlowField()
 : mFboDrawn(false)
 , mFbo()
 , mFboPixels()
-, mShader("Noises")
+, mShader("Noises", "../../../../MvtP1_VisualsAssets/shaders")
 , mPixelCanvas()
 {
     resizeFboAndCanvas(ofGetWidth(), ofGetHeight());

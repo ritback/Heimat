@@ -9,7 +9,7 @@ SnowFlakes::SnowFlakes(HEFlowField* inFlowField)
 , mFlakesParameters()
 {
     //mFlakesImg.load("images/Flakes_50_400.png");
-    mFlakesImg.load("images/Flake_round.png");
+    mFlakesImg.load("../../../../MvtP1_VisualsAssets/images/Flake_round.png");
     
     mFlakesParameters.setDefault();
     

@@ -7,31 +7,31 @@ GridShapesGroup::GridShapesGroup(HEFlowField* inFlowField)
 : mFlowField(inFlowField)
 {
     ofImage* img1 = new ofImage();
-    img1->load("images/Shapes/Shapes1.png");
+    img1->load("../../../../MvtP1_VisualsAssets/images/Shapes/Shapes1.png");
     mImages.push_back(img1);
 
     ofImage* img2 = new ofImage();
-    img2->load("images/Shapes/Shapes2.png");
+    img2->load("../../../../MvtP1_VisualsAssets/images/Shapes/Shapes2.png");
     mImages.push_back(img2);
 
     ofImage* img3 = new ofImage();
-    img3->load("images/Shapes/Shapes3.png");
+    img3->load("../../../../MvtP1_VisualsAssets/images/Shapes/Shapes3.png");
     mImages.push_back(img3);
     
     ofImage* img4 = new ofImage();
-    img4->load("images/Shapes/Shapes4.png");
+    img4->load("../../../../MvtP1_VisualsAssets/images/Shapes/Shapes4.png");
     mImages.push_back(img4);
     
     ofImage* img5 = new ofImage();
-    img5->load("images/Shapes/Shapes5.png");
+    img5->load("../../../../MvtP1_VisualsAssets/images/Shapes/Shapes5.png");
     mImages.push_back(img5);
     
     ofImage* img6 = new ofImage();
-    img6->load("images/Shapes/Shapes6.png");
+    img6->load("../../../../MvtP1_VisualsAssets/images/Shapes/Shapes6.png");
     mImages.push_back(img6);
     
     ofImage* img7 = new ofImage();
-    img7->load("images/Shapes/Shapes7.png");
+    img7->load("../../../../MvtP1_VisualsAssets/images/Shapes/Shapes7.png");
     mImages.push_back(img7);
     
     

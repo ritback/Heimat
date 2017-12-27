@@ -187,14 +187,13 @@ vec3 colorizeBlobs(vec2 p, float blobVal, vec3 blobMainColor,
     
     
     // making collored shade noise.
-    /*
+    
     vec3 coloredNoiseRange = blobMainColor * colorShadingRange;
     coloredNoiseRange.r = coloredNoiseRange.r * (2.0 * simplex3d_fractal(p3 + 3.55));
     coloredNoiseRange.g = coloredNoiseRange.g * (2.0 * simplex3d_fractal(p3 + 1.35));
     coloredNoiseRange.b = coloredNoiseRange.b * (2.0 * simplex3d_fractal(p3 + 6.87));
     
     ret += coloredNoiseRange * blobVal;
-    */
     
     return ret;
 }

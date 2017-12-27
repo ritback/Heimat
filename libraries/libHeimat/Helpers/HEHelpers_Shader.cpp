@@ -7,12 +7,12 @@ HEShaderHelper::HEShaderHelper(const std::string &inShadersFileName)
     load("shaders/" + inShadersFileName);
 }
 
-HEShaderHelper::HEShaderHelper(const std::string &inVertShaderFileName,
-                   const std::string &inFragShaderFileName)
-    : mVertShaderFileName("shaders/" + inVertShaderFileName)
-    , mFragShaderFileName("shaders/" + inFragShaderFileName)
+HEShaderHelper::HEShaderHelper(const std::string &inShadersFileName,
+                               const std::string &inFolderDir)
+    : mVertShaderFileName(inFolderDir + "/" + inShadersFileName + ".vert")
+    , mFragShaderFileName(inFolderDir + "/" + inShadersFileName + ".frag")
 {
-    load(mVertShaderFileName, mFragShaderFileName);
+    load(inFolderDir + "/" + inShadersFileName);
 }
 
 HEShaderHelper::~HEShaderHelper()

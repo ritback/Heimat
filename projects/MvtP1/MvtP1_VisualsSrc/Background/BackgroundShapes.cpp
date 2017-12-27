@@ -2,9 +2,9 @@
 
 
 BackgroundShapes::BackgroundShapes()
-: mBlobsShader("Blobs")
-, mSandShader("Sand")
-, mBlinkingColorShader("BlinkingColor")
+: mBlobsShader("Blobs", "../../../../MvtP1_VisualsAssets/shaders")
+, mSandShader("Sand", "../../../../MvtP1_VisualsAssets/shaders")
+, mBlinkingColorShader("BlinkingColor", "../../../../MvtP1_VisualsAssets/shaders")
 , mPixelCanvas()
 {
     mPixelCanvas.allocate(ofGetWidth(), ofGetHeight(), OF_IMAGE_GRAYSCALE);

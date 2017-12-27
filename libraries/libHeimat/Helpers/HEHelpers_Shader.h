@@ -6,8 +6,8 @@ class HEShaderHelper : public ofShader
 {
 public:
     HEShaderHelper(const std::string &inShadersFileName);
-    HEShaderHelper(const std::string &inVertShaderFileName,
-             const std::string &inFragShaderFileName);
+    HEShaderHelper(const std::string &inShaderFileName,
+                   const std::string &inFolderDir);
     virtual ~HEShaderHelper();
     
 private:
