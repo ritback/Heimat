@@ -15,7 +15,7 @@ public:
     void applySpineForces(); //linking between vertebrae
 
 public:
-    virtual void updatePos() override;
+    void updatePos();
     
 public:
     void connectFrontTo(Vertebra* inVertebra);

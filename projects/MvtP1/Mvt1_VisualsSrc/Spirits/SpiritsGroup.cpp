@@ -36,7 +36,7 @@ void SpiritsGroup::update()
         HEMassParticle* vertebra = (*it)->getHead();
         
         // set Mass:
-        vertebra->mMass = mSpiritsParameters.mHeadMass;
+        vertebra->setMass(mSpiritsParameters.mHeadMass);
         
         // forceField force
         if (mFlowField)
@@ -44,7 +44,7 @@ void SpiritsGroup::update()
             if (mFlowField->mFboDrawn)
             {
                 float flowFieldForceMag = mSpiritsParameters.mForceFieldMag;
-                ofPoint flowFieldForce = mFlowField->getForceFieldForce(vertebra->mPos,
+                ofPoint flowFieldForce = mFlowField->getForceFieldForce(vertebra->getPos(),
                                                                         flowFieldForceMag);
                 vertebra->applyForce(flowFieldForce);
             }
@@ -57,7 +57,7 @@ void SpiritsGroup::update()
             if (index2 >= mSpiritsParameters.mNumSpirits) break;
             
             HEMassParticle* vertebra2 = (*it2)->getHead();
-            ofPoint relativePos = vertebra->mPos - vertebra2->mPos;
+            ofPoint relativePos = vertebra->getPos() - vertebra2->getPos();
             
             float relativePosLength = relativePos.lengthSquared();
             if (relativePosLength > 50*50)
@@ -71,7 +71,7 @@ void SpiritsGroup::update()
         
         // attract to center
         ofPoint screenCenter = ofGetWindowSize() / 2;
-        ofPoint vertebraPosToCenter = vertebra->mPos - screenCenter;
+        ofPoint vertebraPosToCenter = vertebra->getPos() - screenCenter;
         if (vertebraPosToCenter.lengthSquared() > 10000)
         {
             vertebraPosToCenter.normalize();

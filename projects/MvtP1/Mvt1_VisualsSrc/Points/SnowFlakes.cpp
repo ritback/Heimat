@@ -2,6 +2,7 @@
 
 #include "Flake.h"
 #include "HE_FlowField.h"
+#include "HEHelpers_Maths.h"
 
 SnowFlakes::SnowFlakes(HEFlowField* inFlowField)
 : mFlowField(inFlowField)
@@ -41,7 +42,7 @@ void SnowFlakes::update()
         if (index >= mFlakesParameters.mNumFlakes) break;
         HEMassParticle* flake = (*it);
         // set Mass:
-        flake->mMass = mFlakesParameters.mMass;
+        flake->setMass(mFlakesParameters.mMass);
         
         
         // force field force:
@@ -50,7 +51,7 @@ void SnowFlakes::update()
             if (mFlowField->mFboDrawn)
             {
                 float flowFieldForceMag = mFlakesParameters.mForceFieldMag;
-                ofPoint flowFieldForce = mFlowField->getForceFieldForce(flake->mPos,
+                ofPoint flowFieldForce = mFlowField->getForceFieldForce(flake->getPos(),
                                                                         flowFieldForceMag);
                 
                 flake->applyForce(-flowFieldForce);
@@ -64,7 +65,7 @@ void SnowFlakes::update()
             if (index2 >= mFlakesParameters.mNumFlakes) break;
             
             HEMassParticle* flake2 = (*it2);
-            ofPoint relativePos = flake->mPos - flake2->mPos;
+            ofPoint relativePos = flake->getPos() - flake2->getPos();
             
             float relativePosLength = relativePos.lengthSquared();
             if (relativePosLength > 30*30)
@@ -78,7 +79,7 @@ void SnowFlakes::update()
         
         // attract to center
         ofPoint screenCenter = ofGetWindowSize() / 2;
-        ofPoint flakePosToCenter = flake->mPos - screenCenter;
+        ofPoint flakePosToCenter = flake->getPos() - screenCenter;
         if (flakePosToCenter.lengthSquared() > 10000)
         {
             flakePosToCenter.normalize();
@@ -88,8 +89,8 @@ void SnowFlakes::update()
         
         // world viscosity (limit speed)
         float worldViscosity = mFlakesParameters.mWorldViscosity;
-        (*it)->applyForce(- worldViscosity * (*it)->mVel);
-        (*it)->updatePos();
+        (*it)->applyForce(- worldViscosity * (*it)->getVel());
+        (*it)->incrementPos();
     }
 }
 
@@ -108,8 +109,8 @@ void SnowFlakes::draw()
         
         ofPushMatrix();
         
-        ofTranslate((*it)->mPos);
-        ofRotate((*it)->mHeading);
+        ofTranslate((*it)->getPos());
+        ofRotate(heading2D((*it)->getVel()));
         
         /*
         mFlakesImg.drawSubsection(-(*it)->mWidth/2, -(*it)->mHeight/2,
@@ -155,22 +156,23 @@ void SnowFlakes::limitToScreen()
     
     for (FlakesIt it = mFlakes.begin(); it < mFlakes.end(); ++it)
     {
-        if ((*it)->mPos.x <= restrictedAreaTopLeft.x)
+        ofPoint currentPos = (*it)->getPos();
+        if (currentPos.x <= restrictedAreaTopLeft.x)
         {
-            (*it)->mPos.x = restrictedAreaBottomRigth.x;
+            (*it)->setPos(ofPoint(restrictedAreaBottomRigth.x, currentPos.y));
         }
-        else if ((*it)->mPos.x >= restrictedAreaBottomRigth.x)
+        else if (currentPos.x >= restrictedAreaBottomRigth.x)
         {
-            (*it)->mPos.x = restrictedAreaTopLeft.x;
+            (*it)->setPos(ofPoint(restrictedAreaTopLeft.x, currentPos.y));
         }
         
-        if ((*it)->mPos.y <= restrictedAreaTopLeft.y)
+        if (currentPos.y <= restrictedAreaTopLeft.y)
         {
-            (*it)->mPos.y = restrictedAreaBottomRigth.y;
+            (*it)->setPos(ofPoint(currentPos.x, restrictedAreaBottomRigth.y));
         }
-        else if ((*it)->mPos.y >= restrictedAreaBottomRigth.y)
+        else if (currentPos.y >= restrictedAreaBottomRigth.y)
         {
-            (*it)->mPos.y = restrictedAreaTopLeft.y;
+            (*it)->setPos(ofPoint(currentPos.x, restrictedAreaTopLeft.y));
         }
     }
 }

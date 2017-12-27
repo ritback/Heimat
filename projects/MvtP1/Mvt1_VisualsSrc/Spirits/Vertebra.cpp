@@ -79,7 +79,7 @@ void Vertebra::applySpineForces()
 
 void Vertebra::updatePos()
 {
-    HEMassParticle::updatePos();
+    incrementPos();
     
     if (mFrontVertebra)
     {

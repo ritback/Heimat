@@ -1,6 +1,7 @@
 #include "Spirit.h"
 
 #include "Vertebra.h"
+#include "HEHelpers_Maths.h"
 
 Spirit::Spirit()
 : mWormThickness(20)
@@ -18,12 +19,12 @@ Spirit::Spirit()
     
     for (int i = 0; i < numVertebra; ++i)
     {
-        ofPoint newPos(mSpine[i]->mPos);
+        ofPoint newPos(mSpine[i]->getPos());
         newPos.x += 10;
         Vertebra * newVert = new Vertebra(newPos, mSpine[i]);
         
         newVert->mSpringLenght = springLenght;
-        newVert->mMass = 1.0;
+        newVert->setMass(1.0);
         
         mSpine.push_back(newVert);
     }
@@ -47,7 +48,7 @@ void Spirit::update()
     {
         // apply world Friction
         float worldViscosity = 0.5;
-        (*it)->applyForce(- worldViscosity * (*it)->mVel);
+        (*it)->applyForce(- worldViscosity * (*it)->getVel());
         
         // apply spine effect
         (*it)->applySpineForces();
@@ -92,28 +93,28 @@ void Spirit::drawDebug()
     {
         ofSetColor(0, 0, 178, 150);
         // node pos
-        ofDrawCircle((*it)->mPos, 10);
+        ofDrawCircle((*it)->getPos(), 10);
         if ((*it)->mFrontVertebra)
         {
             // springLink
             ofSetColor(0, 245, 0, 150);
             ofSetLineWidth(5);
-            ofDrawLine((*it)->mPos, (*it)->mFrontVertebra->mPos);
+            ofDrawLine((*it)->getPos(), (*it)->mFrontVertebra->getPos());
             
             // normal
             ofSetColor(0, 255, 255);
             ofPoint normalPoint;
             normalPoint.x = -(*it)->mRelativePosToFront.y;
             normalPoint.y = (*it)->mRelativePosToFront.x;
-            ofDrawLine((*it)->mPos, (*it)->mPos + normalPoint);
-            ofDrawLine((*it)->mPos, (*it)->mPos - normalPoint);
+            ofDrawLine((*it)->getPos(), (*it)->getPos() + normalPoint);
+            ofDrawLine((*it)->getPos(), (*it)->getPos() - normalPoint);
             
             // velocity
             ofPushMatrix();
             ofSetColor(255, 0, 0, 255);
             
-            ofTranslate((*it)->mPos.x, (*it)->mPos.y);
-            ofRotate(heading2D((*it)->mVel));
+            ofTranslate((*it)->getPos().x, (*it)->getPos().y);
+            ofRotate(heading2D((*it)->getVel()));
             
             ofDrawLine(0, 0, 30, 0);
             
@@ -139,10 +140,10 @@ void Spirit::drawWorm()
     
     
     ofPoint firstBackwardRelativePos = mSpine[0]->mBackVertebra->mRelativePosToFront;
-    ofPoint firstVertex = mSpine[0]->mPos + firstBackwardRelativePos / 2;
+    ofPoint firstVertex = mSpine[0]->getPos() + firstBackwardRelativePos / 2;
     
     ofPoint lastFrontRelativePos = mSpine[mSpine.size()-1]->mRelativePosToFront;
-    ofPoint lastVertex = mSpine[mSpine.size()-1]->mPos - lastFrontRelativePos / 2;
+    ofPoint lastVertex = mSpine[mSpine.size()-1]->getPos() - lastFrontRelativePos / 2;
     
     
     
@@ -161,7 +162,7 @@ void Spirit::drawWorm()
             normalPoint.y = (*it)->mRelativePosToFront.x;
             normalPoint.normalize();
             normalPoint *= mWormThickness + currentThickness;
-            ofPoint large = (*it)->mPos + normalPoint;
+            ofPoint large = (*it)->getPos() + normalPoint;
             ofCurveVertex(large);
         }
         else
@@ -180,7 +181,7 @@ void Spirit::drawWorm()
                 float currentThickness = getCurrentWormThickness(wormCurrentLenght);
                 normalPointToVel *= mWormThickness + currentThickness;
                 
-                ofPoint firstCurveVertex = (*it)->mPos + normalPointToVel;
+                ofPoint firstCurveVertex = (*it)->getPos() + normalPointToVel;
                 ofCurveVertex(firstCurveVertex);
             }
         }
@@ -208,7 +209,7 @@ void Spirit::drawWorm()
             normalPoint.y = -(*it)->mRelativePosToFront.x;
             normalPoint.normalize();
             normalPoint *= mWormThickness + getCurrentWormThickness(wormCurrentLenght);;
-            ofPoint large = (*it)->mPos + normalPoint;
+            ofPoint large = (*it)->getPos() + normalPoint;
             ofCurveVertex(large);
         }
         else
@@ -223,7 +224,7 @@ void Spirit::drawWorm()
                 float currentThickness = getCurrentWormThickness(wormCurrentLenght);
                 normalPointToVel *= mWormThickness + currentThickness;
                 
-                ofPoint firstCurveVertex = (*it)->mPos + normalPointToVel;
+                ofPoint firstCurveVertex = (*it)->getPos() + normalPointToVel;
                 ofCurveVertex(firstCurveVertex);
                 
                 ofCurveVertex(firstVertex);
@@ -268,15 +269,15 @@ void Spirit::limitToScreen()
     // if head and tail are ouside, translate them to the other side.
     
     
-    ofPoint headPos((*mSpine.begin())->mPos);
-    ofPoint tailPos((*(mSpine.end()-1))->mPos);
+    ofPoint headPos((*mSpine.begin())->getPos());
+    ofPoint tailPos((*(mSpine.end()-1))->getPos());
     
     
     if (headPos.x < restrictedAreaTopLeft.x && tailPos.x < restrictedAreaTopLeft.x)
     {
         for (VertebraeIt it = mSpine.begin(); it < mSpine.end(); ++it)
         {
-            (*it)->mPos += ofPoint(TeleportationOffSet.x, 0);
+            (*it)->setPos((*it)->getPos() + ofPoint(TeleportationOffSet.x, 0));
             mAlpha = 0;
         }
     }
@@ -284,7 +285,7 @@ void Spirit::limitToScreen()
     {
         for (VertebraeIt it = mSpine.begin(); it < mSpine.end(); ++it)
         {
-            (*it)->mPos += ofPoint(-TeleportationOffSet.x, 0);
+            (*it)->setPos((*it)->getPos() + ofPoint(-TeleportationOffSet.x, 0));
             mAlpha = 0;
         }
     }
@@ -293,7 +294,7 @@ void Spirit::limitToScreen()
     {
         for (VertebraeIt it = mSpine.begin(); it < mSpine.end(); ++it)
         {
-            (*it)->mPos += ofPoint(0, TeleportationOffSet.y);
+            (*it)->setPos((*it)->getPos() + ofPoint(0, TeleportationOffSet.y));
             mAlpha = 0;
         }
     }
@@ -301,7 +302,7 @@ void Spirit::limitToScreen()
     {
         for (VertebraeIt it = mSpine.begin(); it < mSpine.end(); ++it)
         {
-            (*it)->mPos += ofPoint(0, -TeleportationOffSet.y);
+            (*it)->setPos((*it)->getPos() + ofPoint(0, -TeleportationOffSet.y));
             mAlpha = 0;
         }
     }

@@ -44,7 +44,7 @@ GridShapesGroup::GridShapesGroup(HEFlowField* inFlowField)
                        ofRandom(ofGetWindowHeight()));
         
         GridShape * newShape = new GridShape(newPos, imgIndex);
-        newShape->mMass = 15.0;
+        newShape->setMass(15.0);
         
         mGridShapes.push_back(newShape);
         
@@ -79,7 +79,7 @@ void GridShapesGroup::update()
             for (GridShapesIt it = mGridShapes.begin(); it < mGridShapes.end(); ++it)
             {
                 HEMassParticle* shape = (*it);
-                ofPoint flowFieldForce = mFlowField->getForceFieldForce(shape->mPos,
+                ofPoint flowFieldForce = mFlowField->getForceFieldForce(shape->getPos(),
                                                                         flowFieldForceMag);
                 shape->applyForce(-flowFieldForce);
                 
@@ -98,7 +98,7 @@ void GridShapesGroup::update()
         {
             
             HEMassParticle* shape2 = (*it2);
-            ofPoint relativePos = shape->mPos - shape2->mPos;
+            ofPoint relativePos = shape->getPos() - shape2->getPos();
             
             float relativePosLength = relativePos.lengthSquared();
             if (relativePosLength > 100*100)
@@ -111,7 +111,7 @@ void GridShapesGroup::update()
         }
         
         // attract to center
-        ofPoint shapePosToCenter = shape->mPos - (*it)->mCentralPos;
+        ofPoint shapePosToCenter = shape->getPos() - (*it)->mCentralPos;
         if (shapePosToCenter.lengthSquared() > 20000)
         {
             shapePosToCenter.normalize();
@@ -126,8 +126,8 @@ void GridShapesGroup::update()
     for (GridShapesIt it = mGridShapes.begin(); it < mGridShapes.end(); ++it)
     {
         float worldViscosity = 1.0;
-        (*it)->applyForce(- worldViscosity * (*it)->mVel);
-        (*it)->updatePos();
+        (*it)->applyForce(- worldViscosity * (*it)->getVel());
+        (*it)->incrementPos();
     }
     
 }
@@ -143,7 +143,7 @@ void GridShapesGroup::draw()
         
         ofPushMatrix();
         
-        ofTranslate((*it)->mPos);
+        ofTranslate((*it)->getPos());
         ofRotate(56 * sin(0.8*ofGetElapsedTimef()));//(*it)->mHeading);
         
         mImages[(*it)->mShapeImgIndex]->draw(-(*it)->mWidth/2, -(*it)->mHeight/2,
@@ -179,22 +179,23 @@ void GridShapesGroup::limitToScreen()
     
     for (GridShapesIt it = mGridShapes.begin(); it < mGridShapes.end(); ++it)
     {
-        if ((*it)->mPos.x <= restrictedAreaTopLeft.x)
+        ofPoint currentPos = (*it)->getPos();
+        if (currentPos.x <= restrictedAreaTopLeft.x)
         {
-            (*it)->mPos.x = restrictedAreaBottomRigth.x;
+            (*it)->setPos(ofPoint(restrictedAreaBottomRigth.x, currentPos.y));
         }
-        else if ((*it)->mPos.x >= restrictedAreaBottomRigth.x)
+        else if (currentPos.x >= restrictedAreaBottomRigth.x)
         {
-            (*it)->mPos.x = restrictedAreaTopLeft.x;
+            (*it)->setPos(ofPoint(restrictedAreaTopLeft.x, currentPos.y));
         }
         
-        if ((*it)->mPos.y <= restrictedAreaTopLeft.y)
+        if (currentPos.y <= restrictedAreaTopLeft.y)
         {
-            (*it)->mPos.y = restrictedAreaBottomRigth.y;
+            (*it)->setPos(ofPoint(currentPos.x, restrictedAreaBottomRigth.y));
         }
-        else if ((*it)->mPos.y >= restrictedAreaBottomRigth.y)
+        else if (currentPos.y >= restrictedAreaBottomRigth.y)
         {
-            (*it)->mPos.y = restrictedAreaTopLeft.y;
+            (*it)->setPos(ofPoint(currentPos.x, restrictedAreaTopLeft.y));
         }
     }
 }
