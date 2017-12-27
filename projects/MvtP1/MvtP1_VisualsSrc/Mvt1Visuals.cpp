@@ -9,7 +9,7 @@ Mvt1Visuals::Mvt1Visuals()
 , mSnowFlakesFront(&mFlowField)
 , mGridShapesGroup(&mFlowField)
 {
-    
+    // Let's strat the visuals
 }
 
 Mvt1Visuals::~Mvt1Visuals()
