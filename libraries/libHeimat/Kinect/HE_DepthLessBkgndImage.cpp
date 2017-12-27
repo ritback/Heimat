@@ -12,7 +12,7 @@ HEDepthLessBkgndImage::HEDepthLessBkgndImage(ofxCvGrayscaleImage* inStreamImage,
 											 const ofPoint& inTopLeft,
 											 const ofPoint& inSize)
 	: mStreamImage(inStreamImage)
-	, mThreshold(80)
+	, mThreshold(20)
 	, mBlur(33)
     , mTopLeft(inTopLeft)
     , mSize(inSize)

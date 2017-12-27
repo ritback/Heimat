@@ -8,11 +8,11 @@
 		<Depth_Background>0</Depth_Background>
 	</Silhouette>
 	<Skeletons>
-		<Has_Move_Distance>100</Has_Move_Distance>
+		<Has_Move_Distance>150</Has_Move_Distance>
 		<Attraction_Inc>0.15</Attraction_Inc>
 		<Attraction_Min>-15</Attraction_Min>
 		<Attraction_Max>2</Attraction_Max>
-	<Tree_creation_Time>60</Tree_creation_Time>
+	<Tree_creation_Time>8</Tree_creation_Time>
 	<Effect_range>75</Effect_range>
 	</Skeletons>
 <group/>

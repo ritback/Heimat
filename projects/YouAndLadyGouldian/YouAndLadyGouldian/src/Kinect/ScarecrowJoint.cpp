@@ -7,7 +7,7 @@ ScarecrowJoint::ScarecrowJoint()
     , mAttractionMin(mAttraction)
     , mAttractionMax(2)
     , mAttractionInc(0.15)
-    , mHasMoveDistance(100)
+    , mHasMoveDistance(150)
     , mUpdateTailFrameCount(0)
 {
     for(int i = 0; i < 10; i++)

@@ -22,5 +22,5 @@
 <group/>
 <Min_X>-960</Min_X>
 <Repulsion>10</Repulsion>
-<Update_Flock_With_Web>0</Update_Flock_With_Web>
+<Update_Flock_With_Web>1</Update_Flock_With_Web>
 </group>
