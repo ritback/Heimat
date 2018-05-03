@@ -18,6 +18,7 @@ Makefile
 *.lib
 ## Libraries
 libraries/of*
+libraries/openFrameworks*
 libraries/curl*
 
 ### Archive ###
