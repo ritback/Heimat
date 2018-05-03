@@ -1,0 +1,40 @@
+<group>
+	<Render_skeleton>0</Render_skeleton>
+	<Silhouette>
+		<Silhouette>1</Silhouette>
+		<Stream>0</Stream>
+		<Background>0</Background>
+		<Depth_Background>0</Depth_Background>
+	</Silhouette>
+	<Skeletons>
+		<Tree_creation_Time>8</Tree_creation_Time>
+		<Effect_range>75</Effect_range>
+		<Has_Move_Distance>150</Has_Move_Distance>
+		<Attraction_Inc>0.15</Attraction_Inc>
+		<Attraction_Min>-15</Attraction_Min>
+		<Attraction_Max>2</Attraction_Max>
+	</Skeletons>
+<group/>
+<Update_Flock_With_Web>1</Update_Flock_With_Web>
+	<NumBoids>150</NumBoids>
+	<Masses>2.2</Masses>
+	<Flock_Rules>
+		<Cohesion>0.7</Cohesion>
+		<Separation>3.14</Separation>
+		<Alignement>7.3</Alignement>
+	</Flock_Rules>
+	<Render_World_Limits>0</Render_World_Limits>
+	<Repulsion>10</Repulsion>
+	<World_Limit>
+		<Min_X>-512</Min_X>
+		<Min_Y>-384</Min_Y>
+		<Max_X>512</Max_X>
+		<Max_Y>384</Max_Y>
+	</World_Limit>
+	<World_Limit_Distance>
+		<Min_X>-412</Min_X>
+		<Min_Y>-284</Min_Y>
+		<Max_X>412</Max_X>
+		<Max_Y>284</Max_Y>
+	</World_Limit_Distance>
+</group>
