@@ -1,10 +1,10 @@
-#include "FaceTracking.h"
-#include "FaceTrackingImg.h"
+#include "ScreensPanel.h"
+#include "ScreenAnalysisRendering.h"
 #include <algorithm>
 
 
 //------------------------------------------------------------------------------
-FaceTracking::FaceTracking(int inImgsCaptureWidth, int inImgsCaptureHeight)
+ScreensPanel::ScreensPanel(int inImgsCaptureWidth, int inImgsCaptureHeight)
     : mImgsCaptureWidth(inImgsCaptureWidth)
     , mImgsCaptureHeight(inImgsCaptureHeight)
     , mCams(inImgsCaptureWidth, inImgsCaptureHeight)
@@ -17,27 +17,28 @@ FaceTracking::FaceTracking(int inImgsCaptureWidth, int inImgsCaptureHeight)
     , mTimeToShuffleCams(ofGetElapsedTimeMillis() + 10000)
     , mTimeToCheckCams(ofGetElapsedTimeMillis() + 10000)
 {
+    float widthSpacing = ofGetWindowWidth() / 4;
+    mColumnsPosX[0] = 1 * widthSpacing;
+    mColumnsPosX[1] = 2 * widthSpacing;
+    mColumnsPosX[2] = 3 * widthSpacing;
 
-    mColumnsPosX[0] = ofGetWindowWidth() * 1 / 4;
-    mColumnsPosX[1] = ofGetWindowWidth() * 2 / 4;
-    mColumnsPosX[2] = ofGetWindowWidth() * 3 / 4;
-
-    mLinesPosY[0] = ofGetWindowHeight() * 1 / 4;
-    mLinesPosY[1] = ofGetWindowHeight() * 2 / 4;
-    mLinesPosY[2] = ofGetWindowHeight() * 3 / 4;
+    float heightSpacing = ofGetWindowWidth() / 4;
+    mLinesPosY[0] = 1 * heightSpacing;
+    mLinesPosY[1] = 2 * heightSpacing;
+    mLinesPosY[2] = 3 * heightSpacing;
 
     updateDrawingsPosition();
     for (int i = 0; i < NUM_IMGS; ++i)
     {
-        mFaceTrackingImgs.push_back(new FaceTrackingImg(mImgsCaptureWidth, mImgsCaptureHeight));
+        mScreens.push_back(new ScreenAnalysisRendering(mImgsCaptureWidth, mImgsCaptureHeight));
     }
     bindCamsToImgs();
 }
 
-FaceTracking::~FaceTracking()
+ScreensPanel::~ScreensPanel()
 {
-    for (FaceTrackingImgsIt it = mFaceTrackingImgs.begin();
-         it != mFaceTrackingImgs.end();
+    for (ScreensIt it = mScreens.begin();
+         it != mScreens.end();
          ++it)
     {
         delete (*it);
@@ -45,7 +46,7 @@ FaceTracking::~FaceTracking()
 }
 
 //------------------------------------------------------------------------------
-void FaceTracking::update()
+void ScreensPanel::update()
 {
     float ellapsedTime = ofGetElapsedTimeMillis();
     if (mTimeToCheckCams < ellapsedTime)
@@ -75,7 +76,7 @@ void FaceTracking::update()
 
     for (int i = 0; i < NUM_IMGS; ++i)
     {
-        mFaceTrackingImgs[i]->updateImg();
+        mScreens[i]->updateImg();
     }
 
     if (mNumSimultaneousFaceTracking > NUM_IMGS)
@@ -84,17 +85,17 @@ void FaceTracking::update()
     for (int i = 0; i < mNumSimultaneousFaceTracking; ++mCurrentImgFaceTrackingIndex, ++i)
     {
         mCurrentImgFaceTrackingIndex = mCurrentImgFaceTrackingIndex % NUM_IMGS;
-        mFaceTrackingImgs[mCurrentImgFaceTrackingIndex]->processFaceTracking();
+        mScreens[mCurrentImgFaceTrackingIndex]->processFaceTracking();
     }
 }
 
 //------------------------------------------------------------------------------
-void FaceTracking::drawImgs()
+void ScreensPanel::drawImgs()
 {
     ofSetColor(255);
     unsigned int i = 0;
-    for (FaceTrackingImgsIt it = mFaceTrackingImgs.begin();
-         it != mFaceTrackingImgs.end();
+    for (ScreensIt it = mScreens.begin();
+         it != mScreens.end();
          ++i, ++it)
     {
         (*it)->drawImg(mDrawingsPositions[i].x, mDrawingsPositions[i].y,
@@ -102,12 +103,12 @@ void FaceTracking::drawImgs()
     }
 }
 
-void FaceTracking::drawFacesRecognition()
+void ScreensPanel::drawFacesRecognition()
 {
     ofSetColor(255);
     unsigned int i = 0;
-    for (FaceTrackingImgsIt it = mFaceTrackingImgs.begin();
-         it != mFaceTrackingImgs.end();
+    for (ScreensIt it = mScreens.begin();
+         it != mScreens.end();
          ++i, ++it)
     {
         (*it)->drawFacesRecognition(mDrawingsPositions[i].x, mDrawingsPositions[i].y,
@@ -115,12 +116,12 @@ void FaceTracking::drawFacesRecognition()
     }
 }
 
-void FaceTracking::drawROIs()
+void ScreensPanel::drawROIs()
 {
     ofSetColor(255);
     unsigned int i = 0;
-    for (FaceTrackingImgsIt it = mFaceTrackingImgs.begin();
-         it != mFaceTrackingImgs.end();
+    for (ScreensIt it = mScreens.begin();
+         it != mScreens.end();
          ++i, ++it)
     {
         float ROIDrawingWidth = mDrawingsWidth / 8;
@@ -131,7 +132,7 @@ void FaceTracking::drawROIs()
     }
 }
 
-void FaceTracking::drawCameras()
+void ScreensPanel::drawCameras()
 {
     ofSetColor(255);
     unsigned int i = 0;
@@ -147,48 +148,48 @@ void FaceTracking::drawCameras()
 
 
 //------------------------------------------------------------------------------
-void FaceTracking::needUpdateCamsDevices()
+void ScreensPanel::needUpdateCamsDevices()
 {
     mUpdateCamsDevices = true;
 }
 
 
-void FaceTracking::setNumSimultaneousFaceTracking(int inNum)
+void ScreensPanel::setNumSimultaneousFaceTracking(int inNum)
 {
     mNumSimultaneousFaceTracking = inNum;
 }
 
-int FaceTracking::getNumSimultaneousFaceTracking()
+int ScreensPanel::getNumSimultaneousFaceTracking()
 {
     return mNumSimultaneousFaceTracking;
 
 }
 
 
-void FaceTracking::setDrawingsWidth(float inDimension)
+void ScreensPanel::setDrawingsWidth(float inDimension)
 {
     mDrawingsWidth = inDimension;
     updateDrawingsPosition();
 }
 
-float FaceTracking::getDrawingsWidth()
+float ScreensPanel::getDrawingsWidth()
 {
     return mDrawingsWidth;
 }
 
-void FaceTracking::setDrawingsHeight(float inDimension)
+void ScreensPanel::setDrawingsHeight(float inDimension)
 {
     mDrawingsHeight = inDimension;
     updateDrawingsPosition();
 }
 
-float FaceTracking::getDrawingsHeight()
+float ScreensPanel::getDrawingsHeight()
 {
     return mDrawingsHeight;
 }
 
 
-void FaceTracking::setDrawingsColumnsPos(float* inDimension)
+void ScreensPanel::setDrawingsColumnsPos(float* inDimension)
 {
     mColumnsPosX[0] = inDimension[0];
     mColumnsPosX[1] = inDimension[1];
@@ -196,7 +197,7 @@ void FaceTracking::setDrawingsColumnsPos(float* inDimension)
     updateDrawingsPosition();
 }
 
-void FaceTracking::setDrawingsLinesPos(float* inDimension)
+void ScreensPanel::setDrawingsLinesPos(float* inDimension)
 {
     mLinesPosY[0] = inDimension[0];
     mLinesPosY[1] = inDimension[1];
@@ -204,18 +205,18 @@ void FaceTracking::setDrawingsLinesPos(float* inDimension)
     updateDrawingsPosition();
 }
 
-float* FaceTracking::getDrawingsColumnsPos()
+float* ScreensPanel::getDrawingsColumnsPos()
 {
     return mColumnsPosX;
 }
 
-float* FaceTracking::getDrawingsLinesPos()
+float* ScreensPanel::getDrawingsLinesPos()
 {
     return mLinesPosY;
 }
 
 //------------------------------------------------------------------------------
-void FaceTracking::updateDrawingsPosition()
+void ScreensPanel::updateDrawingsPosition()
 {
     int numColumn = 3;
     int columnIndex = 0;
@@ -223,11 +224,6 @@ void FaceTracking::updateDrawingsPosition()
 
     for (int i = 0; i < NUM_IMGS; ++columnIndex, ++i)
     {
-        if (columnIndex == 1 && lineIndex == 1)
-        {
-            ++columnIndex;
-        }
-
         if (columnIndex >= numColumn)
         {
             columnIndex = 0;
@@ -239,7 +235,7 @@ void FaceTracking::updateDrawingsPosition()
 }
 
 //------------------------------------------------------------------------------
-void FaceTracking::bindCamsToImgs()
+void ScreensPanel::bindCamsToImgs()
 {
     MultiCamera::VideoGrabbersIt camIt = (mCams.mVideoGrabbers).begin();
 
@@ -255,7 +251,7 @@ void FaceTracking::bindCamsToImgs()
     {
         MultiCamera::VideoGrabbersIt camIt = (mCams.mVideoGrabbers).begin();
         int camIndex = randomIndexes[i];
-        mFaceTrackingImgs[i]->setCam((mCams.mVideoGrabbers)[camIndex]);
+        mScreens[i]->setCam((mCams.mVideoGrabbers)[camIndex]);
 
     }
 }

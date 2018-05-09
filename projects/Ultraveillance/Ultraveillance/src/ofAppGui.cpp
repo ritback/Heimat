@@ -1,6 +1,4 @@
 #include "ofApp.h"
-#include "FaceTracking.h"
-#include "EyesContainer.h"
 
 //------------------------------------------------------------------------------
 void ofApp::initGUI()
@@ -14,21 +12,15 @@ void ofApp::initGUI()
     mGUIPanel.add(mRenderROIs.setup("Render ROIs", true));
     mGUIPanel.add(mRenderCameras.setup("Render Cameras", false));
 
-    mGUIPanel.add(mRenderEyes.setup("Render Eyes", true));
-
-    mGUIPanel.add(mRenderClosestHead.setup("Render Closest Head", false));
-
-    mGUIPanel.add(mEyesFollowMouse.setup("Eyes Follow Mouse", false));
-
 
     mGUIPanel.add(mSimultaneousFaceTracking.setup("Simultaneous tracking",
-                                                  mFaceTracking->getNumSimultaneousFaceTracking(), 0, 8));
+                                                  mPanel.getNumSimultaneousFaceTracking(), 0, 8));
     mGUIPanel.add(mDrawingsWidth.setup("Drawings Width",
-                                       mFaceTracking->getDrawingsWidth(), 0, ofGetWindowWidth()));
+                                       mPanel.getDrawingsWidth(), 0, ofGetWindowWidth()));
     mGUIPanel.add(mDrawingsHeight.setup("Drawings Height",
-                                        mFaceTracking->getDrawingsHeight(), 0, ofGetWindowHeight()));
+                                        mPanel.getDrawingsHeight(), 0, ofGetWindowHeight()));
     
-    float* columnsPos = mFaceTracking->getDrawingsColumnsPos();
+    float* columnsPos = mPanel.getDrawingsColumnsPos();
     mGUIPanel.add(mDrawingsColumnsPos1.setup("Columns X 1",
                                              columnsPos[0], 0, ofGetScreenWidth()));
     mGUIPanel.add(mDrawingsColumnsPos2.setup("Columns X 2",
@@ -36,7 +28,7 @@ void ofApp::initGUI()
     mGUIPanel.add(mDrawingsColumnsPos3.setup("Columns X 3",
                                              columnsPos[2], 0, ofGetScreenWidth()));
     
-    float* linesPos = mFaceTracking->getDrawingsLinesPos();
+    float* linesPos = mPanel.getDrawingsLinesPos();
     mGUIPanel.add(mDrawingsLinesPos1.setup("Lines Y 1",
                                              linesPos[0], 0, ofGetScreenHeight()));
     mGUIPanel.add(mDrawingsLinesPos2.setup("Lines Y 2",
@@ -44,10 +36,7 @@ void ofApp::initGUI()
     mGUIPanel.add(mDrawingsLinesPos3.setup("Lines Y 3",
                                              linesPos[2], 0, ofGetScreenHeight()));
 
-    mGUIPanel.add(mDrawingsEyesWidthPercentage.setup("Eyes Width",
-                                                     80, 0, 100));
-    mGUIPanel.add(mDrawingsEyesHeightPercentage.setup("Eyes Height",
-                                                      80, 0, 100));
+    
 
 }
 
@@ -104,24 +93,22 @@ void ofApp::renderGUI()
 //------------------------------------------------------------------------------
 void ofApp::refreshCamsDevices()
 {
-    mFaceTracking->needUpdateCamsDevices();
+    mPanel.needUpdateCamsDevices();
 }
 
 void ofApp::setSimultaneousFaceTracking(int& inNum)
 {
-    mFaceTracking->setNumSimultaneousFaceTracking(inNum);
+    mPanel.setNumSimultaneousFaceTracking(inNum);
 }
 
 void ofApp::setDrawingsWidth(float& inDimension)
 {
-    mFaceTracking->setDrawingsWidth(inDimension);
-    mEyes->setDrawingsWidth(inDimension * mDrawingsEyesWidthPercentage /100);
+    mPanel.setDrawingsWidth(inDimension);
 }
 
 void ofApp::setDrawingsHeight(float& inDimension)
 {
-    mFaceTracking->setDrawingsHeight(inDimension);
-    mEyes->setDrawingsHeight(inDimension * mDrawingsEyesHeightPercentage / 100);
+    mPanel.setDrawingsHeight(inDimension);
 }
 
 void ofApp::setDrawingsColumnsPos(float& inDimension)
@@ -130,8 +117,7 @@ void ofApp::setDrawingsColumnsPos(float& inDimension)
     dimensionPos[0] = mDrawingsColumnsPos1;
     dimensionPos[1] = mDrawingsColumnsPos2;
     dimensionPos[2] = mDrawingsColumnsPos3;
-    mFaceTracking->setDrawingsColumnsPos(dimensionPos);
-    mEyes->setDrawingsColumnsPos(dimensionPos);
+    mPanel.setDrawingsColumnsPos(dimensionPos);
 }
 
 void ofApp::setDrawingsLinesPos(float& inDimension)
@@ -140,8 +126,7 @@ void ofApp::setDrawingsLinesPos(float& inDimension)
     dimensionPos[0] = mDrawingsLinesPos1;
     dimensionPos[1] = mDrawingsLinesPos2;
     dimensionPos[2] = mDrawingsLinesPos3;
-    mFaceTracking->setDrawingsLinesPos(dimensionPos);
-    mEyes->setDrawingsLinesPos(dimensionPos);
+    mPanel.setDrawingsLinesPos(dimensionPos);
 }
 
 

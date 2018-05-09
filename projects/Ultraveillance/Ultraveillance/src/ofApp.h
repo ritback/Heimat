@@ -4,11 +4,10 @@
 #include "ofxGui.h"
 #include "ofxOsc.h"
 
+#include "ScreensPanel.h"
+
 #define PORT 12345
 
-class FaceTracking;
-class EyesContainer;
-class EyesStareAtController;
 
 /*
  https://pjreddie.com/darknet/yolo/
@@ -52,11 +51,9 @@ private:
     ofxOscReceiver mOSCReceiver;
     
 private:
-    const int mCaptureWidth
+    const int mCaptureWidth;
     const int mCaptureHeight;
-    FaceTracking mFaceTracking;
-    EyesContainer mEyes;
-    EyesStareAtController mEyesStareAtController;
+    ScreensPanel mPanel;
 
 
 private: // GUI
@@ -75,14 +72,10 @@ private:
     ofxToggle mRenderFacesRecognition;
     ofxToggle mRenderROIs;
     ofxToggle mRenderCameras;
-    ofxToggle mRenderEyes;
-    ofxToggle mRenderClosestHead;
-    ofxToggle mEyesFollowMouse;
+    
     ofxIntSlider mSimultaneousFaceTracking;
     ofxFloatSlider mDrawingsWidth;
     ofxFloatSlider mDrawingsHeight;
-    ofxFloatSlider mDrawingsEyesWidthPercentage;
-    ofxFloatSlider mDrawingsEyesHeightPercentage;
     ofxFloatSlider mDrawingsColumnsPos1;
     ofxFloatSlider mDrawingsColumnsPos2;
     ofxFloatSlider mDrawingsColumnsPos3;
@@ -100,8 +93,6 @@ private:
     void setDrawingsHeight(float& inDimension);
     void setDrawingsColumnsPos(float& inDimension);
     void setDrawingsLinesPos(float& inDimension);
-
-
 
 };
 

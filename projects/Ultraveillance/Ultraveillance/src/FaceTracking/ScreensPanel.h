@@ -4,13 +4,13 @@
 #include "MultiCamera/MultiCamera.h"
 #include <vector>
 
-class FaceTrackingImg;
+class ScreenAnalysisRendering;
 
-class FaceTracking
+class ScreensPanel
 {
 public:
-    FaceTracking(int inImgsCaptureWidth, int inImgsCaptureHeight);
-    ~FaceTracking();
+    ScreensPanel(int inImgsCaptureWidth, int inImgsCaptureHeight);
+    ~ScreensPanel();
 
 public:
     void update();
@@ -43,10 +43,10 @@ private:
     void updateDrawingsPosition();
 
 private:
-    static const int NUM_IMGS = 8;
-    typedef std::vector<FaceTrackingImg*> FaceTrackingImgs;
-    typedef FaceTrackingImgs::iterator FaceTrackingImgsIt;
-    FaceTrackingImgs mFaceTrackingImgs;
+    static const int NUM_IMGS = 9;
+    typedef std::vector<ScreenAnalysisRendering*> Screens;
+    typedef Screens::iterator ScreensIt;
+    Screens mScreens;
 
 private:
     MultiCamera mCams;

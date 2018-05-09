@@ -1,7 +1,8 @@
-#include "FaceTrackingImg.h"
+#include "ScreenAnalysisRendering.h"
 
 //------------------------------------------------------------------------------
-FaceTrackingImg::FaceTrackingImg(int inImgCaptureWidth, int inImgCaptureHeight, ofVideoGrabber * inAssociatedCam)
+ScreenAnalysisRendering::ScreenAnalysisRendering(int inImgCaptureWidth, int inImgCaptureHeight,
+                                                 ofVideoGrabber * inAssociatedCam)
     : mImgCaptureWidth(inImgCaptureWidth)
     , mImgCaptureHeight(inImgCaptureHeight)
     , mAssociatedCam(inAssociatedCam)
@@ -13,13 +14,13 @@ FaceTrackingImg::FaceTrackingImg(int inImgCaptureWidth, int inImgCaptureHeight, 
     mCVHaarFinder.setup("haarcascade_frontalface_default.xml");
 }
 
-FaceTrackingImg::~FaceTrackingImg()
+ScreenAnalysisRendering::~ScreenAnalysisRendering()
 {
     
 }
 
 //------------------------------------------------------------------------------
-void FaceTrackingImg::updateImg()
+void ScreenAnalysisRendering::updateImg()
 {
     if (mAssociatedCam)
     {
@@ -32,13 +33,13 @@ void FaceTrackingImg::updateImg()
     }
 }
 
-void FaceTrackingImg::processFaceTracking()
+void ScreenAnalysisRendering::processFaceTracking()
 {
     mCVHaarFinder.findHaarObjects(mGrayCVProcessingImage, 10, 10);
 }
 
 //------------------------------------------------------------------------------
-void FaceTrackingImg::drawImg(float inX, float inY, float inWidth, float inHeight)
+void ScreenAnalysisRendering::drawImg(float inX, float inY, float inWidth, float inHeight)
 {
     if (inWidth == 0) inWidth = mImgCaptureWidth;
     if (inHeight == 0) inHeight = mImgCaptureHeight;
@@ -46,7 +47,7 @@ void FaceTrackingImg::drawImg(float inX, float inY, float inWidth, float inHeigh
     mGrayCVProcessingImage.draw(inX, inY, inWidth, inHeight);
 }
 
-void FaceTrackingImg::drawFacesRecognition(float inX, float inY, float inWidth, float inHeight)
+void ScreenAnalysisRendering::drawFacesRecognition(float inX, float inY, float inWidth, float inHeight)
 {
     if (inWidth == 0) inWidth = mImgCaptureWidth;
     if (inHeight == 0) inHeight = mImgCaptureHeight;
@@ -73,7 +74,7 @@ void FaceTrackingImg::drawFacesRecognition(float inX, float inY, float inWidth, 
     ofPopStyle();
 }
 
-void FaceTrackingImg::drawROI(float inX, float inY, float inWidth, float inHeight)
+void ScreenAnalysisRendering::drawROI(float inX, float inY, float inWidth, float inHeight)
 {
     if (inWidth == 0) inWidth = mImgCaptureWidth / 4;
     if (inHeight == 0) inHeight = mImgCaptureHeight / 4;
@@ -89,12 +90,12 @@ void FaceTrackingImg::drawROI(float inX, float inY, float inWidth, float inHeigh
 }
 
 //------------------------------------------------------------------------------
-void FaceTrackingImg::setCam(ofVideoGrabber* inCam)
+void ScreenAnalysisRendering::setCam(ofVideoGrabber* inCam)
 {
     mAssociatedCam = inCam;
 }
 
-ofVideoGrabber* FaceTrackingImg::getCam()
+ofVideoGrabber* ScreenAnalysisRendering::getCam()
 {
     return mAssociatedCam;
 }

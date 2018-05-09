@@ -4,14 +4,14 @@
 	<Render_ROIs>1</Render_ROIs>
 	<Render_Cameras>0</Render_Cameras>
 	<Simultaneous_tracking>1</Simultaneous_tracking>
-	<Drawings_Width>512</Drawings_Width>
-	<Drawings_Height>353.28</Drawings_Height>
-	<Columns_X_1>384</Columns_X_1>
-	<Columns_X_2>998.4</Columns_X_2>
-	<Columns_X_3>1593.6</Columns_X_3>
-	<Lines_Y_1>194.4</Lines_Y_1>
-	<Lines_Y_2>556.2</Lines_Y_2>
-	<Lines_Y_3>901.8</Lines_Y_3>
+	<Drawings_Width>320</Drawings_Width>
+	<Drawings_Height>240</Drawings_Height>
+	<Columns_X_1>172.8</Columns_X_1>
+	<Columns_X_2>512</Columns_X_2>
+	<Columns_X_3>857.6</Columns_X_3>
+	<Lines_Y_1>124</Lines_Y_1>
+	<Lines_Y_2>380</Lines_Y_2>
+	<Lines_Y_3>632</Lines_Y_3>
 <group/>
 <Render_Eyes>1</Render_Eyes>
 	<Render_Closest_Head>0</Render_Closest_Head>

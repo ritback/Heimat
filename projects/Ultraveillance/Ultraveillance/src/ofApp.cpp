@@ -1,15 +1,10 @@
 #include "ofApp.h"
-#include "FaceTracking.h"
-#include "EyesContainer.h"
-#include "EyesStareAtController.h"
 
 //------------------------------------------------------------------------------
 ofApp::ofApp()
-: mCaptureWith(320)
+: mCaptureWidth(320)
 , mCaptureHeight(240)
-, mFaceTracking(mCaptureWidth, mCaptureHeight)
-, mEyes()
-, mEyesStareAtController(&mEyes)
+, mPanel(mCaptureWidth, mCaptureHeight)
 {
     
 }
@@ -24,60 +19,43 @@ void ofApp::setup()
 {
 
     mOSCReceiver.setup(PORT);
-    mClosestHeadPosition = ofPoint(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2); // if no heads around, look right in front of the scene.
 
     initGUI();
 
-    /* TO UNCOMMENT AT INSTALL*/
     
-    ofToggleFullscreen();
+    // -----------------
+    //ofToggleFullscreen();
     launchGUI();
     mGUIPanel.loadFromFile("settings.xml");
     removeGUI();
     
-
 }
 
 void ofApp::exit()
 {
-    delete mFaceTracking;
+    
 }
 
 //------------------------------------------------------------------------------
 void ofApp::update()
 {
-    mFaceTracking->update();
+    mPanel.update();
 
-    mClosestHeadPositionTarget.x = ofGetWindowWidth() / 2;
-    mClosestHeadPositionTarget.y = ofGetWindowHeight() / 2;
     while (mOSCReceiver.hasWaitingMessages())
     {
         ofxOscMessage message;
         mOSCReceiver.getNextMessage(message);
 
-        if (message.getAddress() == "/windowSize")
+        if (message.getAddress() == "/aMessage")
         {
-            mEyesStareAtController.updateStreamWindowSize(message.getArgAsFloat(0),
-                                                          message.getArgAsFloat(1));
-        }
-        if (message.getAddress() == "/closestHeadPosition")
-        {
-            mEyesStareAtController.updateClosestHeadPosition(message.getArgAsFloat(0),
-                                      message.getArgAsFloat(1));
+            
         }
     }
 
 
     
-    mEyesStareAtController.update();
-    
-    if (!mEyesFollowMouse)
-    {
-        mEyes->stareAt(mClosestHeadPosition.x, mClosestHeadPosition.y);
-    }
     
     
-    mEyes->update();
 }
 
 void ofApp::draw()
@@ -85,26 +63,14 @@ void ofApp::draw()
     ofBackground(0);
 
     if (mRenderImgs)
-        mFaceTracking->drawImgs();
+        mPanel.drawImgs();
     if (mRenderFacesRecognition)
-        mFaceTracking->drawFacesRecognition();
+        mPanel.drawFacesRecognition();
     if (mRenderROIs)
-        mFaceTracking->drawROIs();
+        mPanel.drawROIs();
     if (mRenderCameras)
-        mFaceTracking->drawCameras();
-    if (mRenderEyes)
-    {
-        mEyes->render();
-    }
-    if (mRenderClosestHead)
-    {
-        ofPushStyle();
-        ofSetColor(255, 255, 0);
-        ofDrawSphere(mClosestHeadPosition, 50);
-        ofPopStyle();
-    }
-
-
+        mPanel.drawCameras();
+    
     renderGUI();
 
     
@@ -144,7 +110,7 @@ void ofApp::keyPressed(int key)
 
         case 'R':
         case 'r':
-            mFaceTracking->needUpdateCamsDevices();
+            mPanel.needUpdateCamsDevices();
             break;
 
     }
@@ -157,10 +123,7 @@ void ofApp::keyReleased(int key){
 //------------------------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y )
 {
-    if (mEyesFollowMouse)
-    {
-        mEyes->stareAt(x, y);
-    }
+    
 }
 
 void ofApp::mouseDragged(int x, int y, int button)

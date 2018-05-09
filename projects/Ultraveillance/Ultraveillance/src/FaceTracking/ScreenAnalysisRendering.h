@@ -3,12 +3,12 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 
-class FaceTrackingImg
+class ScreenAnalysisRendering
 {
 public:
-    FaceTrackingImg(int inImgCaptureWidth, int inImgCaptureHeight,
+    ScreenAnalysisRendering(int inImgCaptureWidth, int inImgCaptureHeight,
                     ofVideoGrabber* inAssociatedCam = 0);
-    virtual ~FaceTrackingImg();
+    virtual ~ScreenAnalysisRendering();
 
 public:
     virtual void updateImg();
