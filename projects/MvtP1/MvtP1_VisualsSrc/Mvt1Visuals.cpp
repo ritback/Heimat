@@ -42,7 +42,7 @@ void Mvt1Visuals::draw()
     mBackgroundShapes.drawShader();
     
     mSnowFlakesBack.draw();
-    mGridShapesGroup.draw();
+    //mGridShapesGroup.draw();
     
     mSpiritsGroup.draw();
     mSnowFlakesFront.draw();

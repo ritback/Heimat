@@ -1,5 +1,5 @@
 <group>
-	<NumBoids>300</NumBoids>
+	<NumBoids>150</NumBoids>
 	<Masses>2.2</Masses>
 	<Flock_Rules>
 		<Cohesion>0.7</Cohesion>
@@ -8,19 +8,19 @@
 	</Flock_Rules>
 	<Render_World_Limits>0</Render_World_Limits>
 	<World_Limit>
-		<Min_X>-960</Min_X>
-		<Min_Y>-540</Min_Y>
-		<Max_X>960</Max_X>
-		<Max_Y>540</Max_Y>
+		<Min_X>-512</Min_X>
+		<Min_Y>-384</Min_Y>
+		<Max_X>512</Max_X>
+		<Max_Y>384</Max_Y>
 	</World_Limit>
 	<World_Limit_Distance>
-		<Min_X>-860</Min_X>
-		<Min_Y>-440</Min_Y>
-		<Max_X>860</Max_X>
-		<Max_Y>440</Max_Y>
+		<Min_X>-412</Min_X>
+		<Min_Y>-284</Min_Y>
+		<Max_X>412</Max_X>
+		<Max_Y>284</Max_Y>
 	</World_Limit_Distance>
 <group/>
 <Min_X>-960</Min_X>
 <Repulsion>10</Repulsion>
-<Update_Flock_With_Web>0</Update_Flock_With_Web>
+<Update_Flock_With_Web>1</Update_Flock_With_Web>
 </group>

@@ -8,18 +8,16 @@ class ScreenAnalysisRendering
 public:
     ScreenAnalysisRendering(int inImgCaptureWidth, int inImgCaptureHeight,
                     ofVideoGrabber* inAssociatedCam = 0);
-    virtual ~ScreenAnalysisRendering();
+    ~ScreenAnalysisRendering();
 
 public:
-    virtual void updateImg();
-    virtual void processFaceTracking();
+    void updateImg();
+    void processFaceTracking();
 
 public:
-    virtual void drawImg(float inX, float inY, float inWidth = 0, float inHeight = 0);
-    virtual void drawFacesRecognition(float inX, float inY, float inWidth = 0, float inHeight = 0);
-
-public:
-    virtual void drawROI(float inX, float inY, float inWidth = 0, float inHeight = 0);
+    void drawImg(float inX, float inY, float inWidth = 0, float inHeight = 0);
+    void drawFacesRecognition(float inX, float inY, float inWidth = 0, float inHeight = 0);
+    void drawHaarFaceROI(float inX, float inY, float inWidth = 0, float inHeight = 0);
 
 public:
     void setCam(ofVideoGrabber* inCam);

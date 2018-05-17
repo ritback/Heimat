@@ -14,6 +14,7 @@ public:
 
 public:
     void update();
+    void draw();
 
 public:
     void drawImgs();

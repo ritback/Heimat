@@ -74,7 +74,7 @@ void ScreenAnalysisRendering::drawFacesRecognition(float inX, float inY, float i
     ofPopStyle();
 }
 
-void ScreenAnalysisRendering::drawROI(float inX, float inY, float inWidth, float inHeight)
+void ScreenAnalysisRendering::drawHaarFaceROI(float inX, float inY, float inWidth, float inHeight)
 {
     if (inWidth == 0) inWidth = mImgCaptureWidth / 4;
     if (inHeight == 0) inHeight = mImgCaptureHeight / 4;

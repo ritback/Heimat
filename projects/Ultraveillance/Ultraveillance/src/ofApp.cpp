@@ -62,6 +62,8 @@ void ofApp::draw()
 {
     ofBackground(0);
 
+    mPanel.draw();
+
     if (mRenderImgs)
         mPanel.drawImgs();
     if (mRenderFacesRecognition)

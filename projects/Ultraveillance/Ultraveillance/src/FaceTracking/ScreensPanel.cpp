@@ -89,6 +89,14 @@ void ScreensPanel::update()
     }
 }
 
+void ScreensPanel::draw()
+{
+    drawImgs();
+    drawFacesRecognition();
+    drawROIs();
+    drawCameras();
+}
+
 //------------------------------------------------------------------------------
 void ScreensPanel::drawImgs()
 {
@@ -126,7 +134,7 @@ void ScreensPanel::drawROIs()
     {
         float ROIDrawingWidth = mDrawingsWidth / 8;
         float ROIDrawingHeight = ROIDrawingWidth * 5 / 4;
-        (*it)->drawROI(mDrawingsPositions[i].x + mDrawingsWidth - ROIDrawingWidth,
+        (*it)->drawHaarFaceROI(mDrawingsPositions[i].x + mDrawingsWidth - ROIDrawingWidth,
                        mDrawingsPositions[i].y,
                        ROIDrawingWidth, ROIDrawingHeight);
     }
