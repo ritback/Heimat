@@ -21,6 +21,9 @@ libraries/of*
 libraries/openFrameworks*
 libraries/curl*
 
+##YOLO Weight file
+*.weights
+
 ### Archive ###
 
 ### Mostly from https://en.wikipedia.org/wiki/List_of_archive_formats
