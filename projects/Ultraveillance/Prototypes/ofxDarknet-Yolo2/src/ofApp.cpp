@@ -2,19 +2,37 @@
 
 void ofApp::setup() 
 {
-    // YOLO2 with 9000 classes
-	/**/
-    std::string cfgfile = ofToDataPath( "cfg/yolo9000.cfg" );
-	std::string weightfile = ofToDataPath( "yolo9000.weights" );
-	std::string namesfile = ofToDataPath( "cfg/9k.names" );
+
+    enum YOLO_DATASET
+    {
+        YOLO_9000,
+        MS_COCO,
+        PASCAL_VOC
+    };
+
+    std::string cfgfile;
+    std::string weightfile;
+    std::string namesfile;
+    switch(YOLO_9000)
+    {
+        case YOLO_9000: // YOLO2 with 9000 classes
+            cfgfile = ofToDataPath("cfg/yolo9000.cfg");
+            weightfile = ofToDataPath("yolo9000.weights");
+            namesfile = ofToDataPath("cfg/9k.names");
+            break;
+        case MS_COCO: // MS COCO dataset(80 different classes)
+            cfgfile = ofToDataPath("cfg/yolo.cfg");
+            weightfile = ofToDataPath("yolo.weights");
+            namesfile = ofToDataPath("cfg/coco.names");
+            break;
+        case PASCAL_VOC: // Pascal VOC dataset (20 different classes)
+            cfgfile = ofToDataPath("cfg/yolo-voc.cfg");
+            weightfile = ofToDataPath("yolo-voc.weights");
+            namesfile = ofToDataPath("cfg/voc.names");
+            break;
+    }
     
 
-    // MS COCO dataset (80 different classes)
-    /*
-    std::string cfgfile = ofToDataPath("cfg/yolo.cfg");
-    std::string weightfile = ofToDataPath("yolo.weights");
-    std::string namesfile = ofToDataPath("cfg/coco.names");
-    */
 	darknet.init( cfgfile, weightfile, namesfile );
 
 	video.setDeviceID( 0 );
