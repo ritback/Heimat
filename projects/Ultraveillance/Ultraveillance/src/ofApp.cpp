@@ -51,28 +51,28 @@ void ofApp::update()
             
         }
     }
-
-
-    
-    
-    
 }
 
 void ofApp::draw()
 {
     ofBackground(0);
 
-    mPanel.draw();
+    if(mRenderImgs && mRenderAnalysisResults && mRenderExtractedROIs)
+    {
+        mPanel.draw();
+    }
+    else
+    {
+        if(mRenderImgs)
+            mPanel.drawImgs();
+        if(mRenderAnalysisResults)
+            mPanel.drawAnalysisResults();
+        if(mRenderExtractedROIs)
+            mPanel.drawExtractedROIs();
+        if(mRenderCameras)
+            mPanel.drawCameras();
+    }
 
-    if (mRenderImgs)
-        mPanel.drawImgs();
-    if (mRenderFacesRecognition)
-        mPanel.drawFacesRecognition();
-    if (mRenderROIs)
-        mPanel.drawROIs();
-    if (mRenderCameras)
-        mPanel.drawCameras();
-    
     renderGUI();
 
     

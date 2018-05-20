@@ -3,21 +3,25 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 
-class ScreenAnalysisRendering
+#include "HaarFaceTracking.h"
+
+class ImgAnalysisInterface;
+
+class StreamAnalysisAndDisplay
 {
 public:
-    ScreenAnalysisRendering(int inImgCaptureWidth, int inImgCaptureHeight,
+    StreamAnalysisAndDisplay(int inImgCaptureWidth, int inImgCaptureHeight,
                     ofVideoGrabber* inAssociatedCam = 0);
-    ~ScreenAnalysisRendering();
+    ~StreamAnalysisAndDisplay();
 
 public:
-    void updateImg();
-    void processFaceTracking();
+    void updateCVImg();
+    void processAnalysis();
 
 public:
     void drawImg(float inX, float inY, float inWidth = 0, float inHeight = 0);
-    void drawFacesRecognition(float inX, float inY, float inWidth = 0, float inHeight = 0);
-    void drawHaarFaceROI(float inX, float inY, float inWidth = 0, float inHeight = 0);
+    void drawAnalysisResultsROIs(float inX, float inY, float inWidth = 0, float inHeight = 0);
+    void drawExtractedROIs(float inX, float inY, float inWidth = 0, float inHeight = 0);
 
 public:
     void setCam(ofVideoGrabber* inCam);
@@ -28,8 +32,8 @@ private:
     ofxCvGrayscaleImage mGrayCVProcessingImage;
     ofTexture mROITexture;
 
-private:
-    ofxCvHaarFinder mCVHaarFinder;
+private: // analysis
+    HaarFaceTracking mFaceTracker;
 
 private:
     int mImgCaptureWidth;

@@ -9,15 +9,6 @@
 #define PORT 12345
 
 
-/*
- https://pjreddie.com/darknet/yolo/
- https://www.youtube.com/watch?v=4eIBisqx9_g
- https://www.iotforall.com/objects-recognition-live-stream-yolo-model/
- https://github.com/mrzl/ofxDarknet
- 
- */
-
-
 class ofApp : public ofBaseApp
 {
 public:
@@ -55,7 +46,6 @@ private:
     const int mCaptureHeight;
     ScreensPanel mPanel;
 
-
 private: // GUI
     void initGUI();
     void launchGUI();
@@ -69,11 +59,10 @@ private:
     ofxPanel mGUIPanel;
     ofxButton mRefreshCamsDevices;
     ofxToggle mRenderImgs;
-    ofxToggle mRenderFacesRecognition;
-    ofxToggle mRenderROIs;
+    ofxToggle mRenderAnalysisResults;
+    ofxToggle mRenderExtractedROIs;
     ofxToggle mRenderCameras;
     
-    ofxIntSlider mSimultaneousFaceTracking;
     ofxFloatSlider mDrawingsWidth;
     ofxFloatSlider mDrawingsHeight;
     ofxFloatSlider mDrawingsColumnsPos1;
@@ -87,7 +76,6 @@ private:
     ofxIntSlider mImgsRenderHeight;
 
     void refreshCamsDevices();
-    void setSimultaneousFaceTracking(int& inNum);
 
     void setDrawingsWidth(float& inDimension);
     void setDrawingsHeight(float& inDimension);

@@ -13,9 +13,8 @@ public:
 public:
     virtual void process(const ofxCvGrayscaleImage& inImg);
 
-public:
+private:
     ofxCvHaarFinder mCVHaarFinder;
-
 };
 
 

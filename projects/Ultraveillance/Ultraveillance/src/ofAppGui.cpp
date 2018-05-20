@@ -8,13 +8,11 @@ void ofApp::initGUI()
     mGUIPanel.setup("Flock control Panel");
     mGUIPanel.add(mRefreshCamsDevices.setup("Refresh Cameras Devices"));
     mGUIPanel.add(mRenderImgs.setup("Render Imgs", true));
-    mGUIPanel.add(mRenderFacesRecognition.setup("Render Face Recognition", true));
-    mGUIPanel.add(mRenderROIs.setup("Render ROIs", true));
+    mGUIPanel.add(mRenderAnalysisResults.setup("Render Analysis Results", true));
+    mGUIPanel.add(mRenderExtractedROIs.setup("Render Extracted ROIs", true));
     mGUIPanel.add(mRenderCameras.setup("Render Cameras", false));
 
 
-    mGUIPanel.add(mSimultaneousFaceTracking.setup("Simultaneous tracking",
-                                                  mPanel.getNumSimultaneousFaceTracking(), 0, 8));
     mGUIPanel.add(mDrawingsWidth.setup("Drawings Width",
                                        mPanel.getDrawingsWidth(), 0, ofGetWindowWidth()));
     mGUIPanel.add(mDrawingsHeight.setup("Drawings Height",
@@ -45,8 +43,7 @@ void ofApp::launchGUI()
     mDisplayGUI = true;
 
     mRefreshCamsDevices.addListener(this, &ofApp::refreshCamsDevices);
-    mSimultaneousFaceTracking.addListener(this, &ofApp::setSimultaneousFaceTracking);
-
+    
     mDrawingsWidth.addListener(this, &ofApp::setDrawingsWidth);
     mDrawingsHeight.addListener(this, &ofApp::setDrawingsHeight);
 
@@ -65,8 +62,7 @@ void ofApp::removeGUI()
     mDisplayGUI = false;
 
     mRefreshCamsDevices.removeListener(this, &ofApp::refreshCamsDevices);
-    mSimultaneousFaceTracking.removeListener(this, &ofApp::setSimultaneousFaceTracking);
-
+    
     mDrawingsColumnsPos1.removeListener(this, &ofApp::setDrawingsColumnsPos);
     mDrawingsColumnsPos2.removeListener(this, &ofApp::setDrawingsColumnsPos);
     mDrawingsColumnsPos3.removeListener(this, &ofApp::setDrawingsColumnsPos);
@@ -96,10 +92,6 @@ void ofApp::refreshCamsDevices()
     mPanel.needUpdateCamsDevices();
 }
 
-void ofApp::setSimultaneousFaceTracking(int& inNum)
-{
-    mPanel.setNumSimultaneousFaceTracking(inNum);
-}
 
 void ofApp::setDrawingsWidth(float& inDimension)
 {

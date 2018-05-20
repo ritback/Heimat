@@ -1,5 +1,5 @@
 #include "ScreensPanel.h"
-#include "ScreenAnalysisRendering.h"
+#include "StreamAnalysisAndDisplay.h"
 #include <algorithm>
 
 
@@ -11,11 +11,9 @@ ScreensPanel::ScreensPanel(int inImgsCaptureWidth, int inImgsCaptureHeight)
     , mDrawingsPositions()
     , mDrawingsWidth(inImgsCaptureWidth)
     , mDrawingsHeight(inImgsCaptureHeight)
-    , mCurrentImgFaceTrackingIndex(0)
-    , mNumSimultaneousFaceTracking(1)
-    , mUpdateCamsDevices(false)
-    , mTimeToShuffleCams(ofGetElapsedTimeMillis() + 10000)
-    , mTimeToCheckCams(ofGetElapsedTimeMillis() + 10000)
+    , mRandomDisplayIndexes()
+    , mTimeToShuffleDisplays(ofGetElapsedTimeMillis() + 1000)
+    , mTimeToCheckIfResyncNeeded(ofGetElapsedTimeMillis() + 10000)
 {
     float widthSpacing = ofGetWindowWidth() / 4;
     mColumnsPosX[0] = 1 * widthSpacing;
@@ -28,17 +26,16 @@ ScreensPanel::ScreensPanel(int inImgsCaptureWidth, int inImgsCaptureHeight)
     mLinesPosY[2] = 3 * heightSpacing;
 
     updateDrawingsPosition();
-    for (int i = 0; i < NUM_IMGS; ++i)
-    {
-        mScreens.push_back(new ScreenAnalysisRendering(mImgsCaptureWidth, mImgsCaptureHeight));
-    }
-    bindCamsToImgs();
+
+    resyncCamDevices();
+
+    randomizeDisplays();
 }
 
 ScreensPanel::~ScreensPanel()
 {
-    for (ScreensIt it = mScreens.begin();
-         it != mScreens.end();
+    for (StreamsIt it = mStreams.begin();
+         it != mStreams.end();
          ++it)
     {
         delete (*it);
@@ -49,92 +46,65 @@ ScreensPanel::~ScreensPanel()
 void ScreensPanel::update()
 {
     float ellapsedTime = ofGetElapsedTimeMillis();
-    if (mTimeToCheckCams < ellapsedTime)
-    {
-        mTimeToCheckCams += 30000;
-        if (mNumCamDevice != mCams.getNumCameras())
-        {
-            mUpdateCamsDevices = true;
-        }
-    }
+    checkResyncDevicesNeeded(ellapsedTime);
+    checkTimeToShuffleDisplays(ellapsedTime);
 
-    if (mUpdateCamsDevices)
-    {
-        mNumCamDevice = mCams.getNumCameras();
-        mCams.initCameras();
-        bindCamsToImgs();
-        mUpdateCamsDevices = false;
-    }
-
-    if (mTimeToShuffleCams < ellapsedTime)
-    {
-        mTimeToShuffleCams += ofRandom(60, 120) * 1000;
-        bindCamsToImgs();
-    }
 
     mCams.update();
 
-    for (int i = 0; i < NUM_IMGS; ++i)
+    for (StreamsIt it = mStreams.begin();
+         it != mStreams.end();
+         ++it)
     {
-        mScreens[i]->updateImg();
+        (*it)->updateCVImg();
+        (*it)->processAnalysis();
     }
 
-    if (mNumSimultaneousFaceTracking > NUM_IMGS)
-        mNumSimultaneousFaceTracking = NUM_IMGS;
-
-    for (int i = 0; i < mNumSimultaneousFaceTracking; ++mCurrentImgFaceTrackingIndex, ++i)
-    {
-        mCurrentImgFaceTrackingIndex = mCurrentImgFaceTrackingIndex % NUM_IMGS;
-        mScreens[mCurrentImgFaceTrackingIndex]->processFaceTracking();
-    }
 }
 
 void ScreensPanel::draw()
 {
     drawImgs();
-    drawFacesRecognition();
-    drawROIs();
-    drawCameras();
+    drawAnalysisResults();
+    drawExtractedROIs();
 }
 
 //------------------------------------------------------------------------------
 void ScreensPanel::drawImgs()
 {
     ofSetColor(255);
-    unsigned int i = 0;
-    for (ScreensIt it = mScreens.begin();
-         it != mScreens.end();
-         ++i, ++it)
+
+    for(int i = 0; i < NUM_SCREENS; ++i)
     {
-        (*it)->drawImg(mDrawingsPositions[i].x, mDrawingsPositions[i].y,
-                       mDrawingsWidth, mDrawingsHeight);
+        int displayIndex = mRandomDisplayIndexes[i];
+        mStreams[displayIndex]->drawImg(mDrawingsPositions[i].x, mDrawingsPositions[i].y,
+                                        mDrawingsWidth, mDrawingsHeight);
     }
 }
 
-void ScreensPanel::drawFacesRecognition()
+void ScreensPanel::drawAnalysisResults()
 {
     ofSetColor(255);
-    unsigned int i = 0;
-    for (ScreensIt it = mScreens.begin();
-         it != mScreens.end();
-         ++i, ++it)
+
+    for (int i = 0; i < NUM_SCREENS; ++i)
     {
-        (*it)->drawFacesRecognition(mDrawingsPositions[i].x, mDrawingsPositions[i].y,
+        int displayIndex = mRandomDisplayIndexes[i];
+        mStreams[displayIndex]->drawAnalysisResultsROIs(mDrawingsPositions[i].x, mDrawingsPositions[i].y,
                                     mDrawingsWidth, mDrawingsHeight);
     }
 }
 
-void ScreensPanel::drawROIs()
+void ScreensPanel::drawExtractedROIs()
 {
     ofSetColor(255);
-    unsigned int i = 0;
-    for (ScreensIt it = mScreens.begin();
-         it != mScreens.end();
-         ++i, ++it)
+
+    for (int i = 0; i < NUM_SCREENS; ++i)
     {
         float ROIDrawingWidth = mDrawingsWidth / 8;
         float ROIDrawingHeight = ROIDrawingWidth * 5 / 4;
-        (*it)->drawHaarFaceROI(mDrawingsPositions[i].x + mDrawingsWidth - ROIDrawingWidth,
+
+        int displayIndex = mRandomDisplayIndexes[i];
+        mStreams[displayIndex]->drawExtractedROIs(mDrawingsPositions[i].x + mDrawingsWidth - ROIDrawingWidth,
                        mDrawingsPositions[i].y,
                        ROIDrawingWidth, ROIDrawingHeight);
     }
@@ -148,32 +118,19 @@ void ScreensPanel::drawCameras()
          it != (mCams.mVideoGrabbers).end();
          ++i, ++it)
     {
-        if (i >= NUM_IMGS) break;
+        if (i >= NUM_SCREENS) break;
         (*it)->draw(mDrawingsPositions[i].x, mDrawingsPositions[i].y,
                     mDrawingsWidth, mDrawingsHeight);
     }
 }
 
-
 //------------------------------------------------------------------------------
 void ScreensPanel::needUpdateCamsDevices()
 {
-    mUpdateCamsDevices = true;
+    mTimeToCheckIfResyncNeeded = ofGetElapsedTimeMillis() - 10;
 }
 
-
-void ScreensPanel::setNumSimultaneousFaceTracking(int inNum)
-{
-    mNumSimultaneousFaceTracking = inNum;
-}
-
-int ScreensPanel::getNumSimultaneousFaceTracking()
-{
-    return mNumSimultaneousFaceTracking;
-
-}
-
-
+//------------------------------------------------------------------------------
 void ScreensPanel::setDrawingsWidth(float inDimension)
 {
     mDrawingsWidth = inDimension;
@@ -230,7 +187,7 @@ void ScreensPanel::updateDrawingsPosition()
     int columnIndex = 0;
     int lineIndex = 0;
 
-    for (int i = 0; i < NUM_IMGS; ++columnIndex, ++i)
+    for (int i = 0; i < NUM_SCREENS; ++columnIndex, ++i)
     {
         if (columnIndex >= numColumn)
         {
@@ -243,24 +200,66 @@ void ScreensPanel::updateDrawingsPosition()
 }
 
 //------------------------------------------------------------------------------
-void ScreensPanel::bindCamsToImgs()
+void ScreensPanel::randomizeDisplays()
 {
-    MultiCamera::VideoGrabbersIt camIt = (mCams.mVideoGrabbers).begin();
+    int numCams = (mCams.mVideoGrabbers).size();
 
-    int randomIndexes[NUM_IMGS];
-    int camsSize = (mCams.mVideoGrabbers).size();
-    for (int i = 0; i < NUM_IMGS; ++i)
+    for(int i = 0; i < NUM_SCREENS; ++i)
     {
-        randomIndexes[i] = i % camsSize;
+        mRandomDisplayIndexes[i] = i % numCams;
     }
-    std::random_shuffle(&randomIndexes[0], &randomIndexes[NUM_IMGS]);
+    std::random_shuffle(&mRandomDisplayIndexes[0], &mRandomDisplayIndexes[NUM_SCREENS]);
 
-    for (int i = 0; i < NUM_IMGS; ++i)
+}
+
+void ScreensPanel::resyncCamDevices()
+{
+    int numCams = (mCams.mVideoGrabbers).size();
+    
+    // check number of Analysis and cam.
+    if(mStreams.size() != numCams)
     {
-        MultiCamera::VideoGrabbersIt camIt = (mCams.mVideoGrabbers).begin();
-        int camIndex = randomIndexes[i];
-        mScreens[i]->setCam((mCams.mVideoGrabbers)[camIndex]);
+        while(mStreams.size() < numCams)
+        {
+            mStreams.push_back(new StreamAnalysisAndDisplay(mImgsCaptureWidth, mImgsCaptureHeight));
+        }
+        while(mStreams.size() > numCams)
+        {
+            delete mStreams.back();
+            mStreams.pop_back();
+        }
+    }
 
+    // bind Cam and analysis.
+    for (int i = 0; i < numCams; ++i)
+    {
+        mStreams[i]->setCam((mCams.mVideoGrabbers)[i]);
     }
 }
+
+//------------------------------------------------------------------------------
+void ScreensPanel::checkResyncDevicesNeeded(float inEllapsedTime)
+{
+    if(mTimeToCheckIfResyncNeeded < inEllapsedTime)
+    {
+        mTimeToCheckIfResyncNeeded += 3 * 60 * 1000;
+        if(mPreviousNumCamDevices != mCams.getNumCameras())
+        {
+            mPreviousNumCamDevices = mCams.getNumCameras();
+            mCams.initCameras();
+            resyncCamDevices();
+        }
+    } 
+}
+
+void ScreensPanel::checkTimeToShuffleDisplays(float inEllapsedTime)
+{
+    if(mTimeToShuffleDisplays < inEllapsedTime)
+    {
+        mTimeToShuffleDisplays += ofRandom(60, 120) * 1000;
+        resyncCamDevices();
+    }
+
+}
+
 

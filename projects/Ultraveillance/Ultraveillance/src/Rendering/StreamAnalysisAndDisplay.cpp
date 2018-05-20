@@ -1,7 +1,7 @@
-#include "ScreenAnalysisRendering.h"
+#include "StreamAnalysisAndDisplay.h"
 
 //------------------------------------------------------------------------------
-ScreenAnalysisRendering::ScreenAnalysisRendering(int inImgCaptureWidth, int inImgCaptureHeight,
+StreamAnalysisAndDisplay::StreamAnalysisAndDisplay(int inImgCaptureWidth, int inImgCaptureHeight,
                                                  ofVideoGrabber * inAssociatedCam)
     : mImgCaptureWidth(inImgCaptureWidth)
     , mImgCaptureHeight(inImgCaptureHeight)
@@ -11,20 +11,19 @@ ScreenAnalysisRendering::ScreenAnalysisRendering(int inImgCaptureWidth, int inIm
     mGrayCVProcessingImage.allocate(mImgCaptureWidth, mImgCaptureHeight);
     mGrayCVProcessingImage.setUseTexture(true);
 
-    mCVHaarFinder.setup("haarcascade_frontalface_default.xml");
 }
 
-ScreenAnalysisRendering::~ScreenAnalysisRendering()
+StreamAnalysisAndDisplay::~StreamAnalysisAndDisplay()
 {
     
 }
 
 //------------------------------------------------------------------------------
-void ScreenAnalysisRendering::updateImg()
+void StreamAnalysisAndDisplay::updateCVImg()
 {
     if (mAssociatedCam)
     {
-        //if (mAssociatedCam->isFrameNew())
+        if (mAssociatedCam->isFrameNew())
         {
             mColorCVImage.setFromPixels(mAssociatedCam->getPixels());
             mGrayCVProcessingImage = mColorCVImage;
@@ -33,13 +32,13 @@ void ScreenAnalysisRendering::updateImg()
     }
 }
 
-void ScreenAnalysisRendering::processFaceTracking()
+void StreamAnalysisAndDisplay::processAnalysis()
 {
-    mCVHaarFinder.findHaarObjects(mGrayCVProcessingImage, 10, 10);
+    mFaceTracker.process(mGrayCVProcessingImage);
 }
 
 //------------------------------------------------------------------------------
-void ScreenAnalysisRendering::drawImg(float inX, float inY, float inWidth, float inHeight)
+void StreamAnalysisAndDisplay::drawImg(float inX, float inY, float inWidth, float inHeight)
 {
     if (inWidth == 0) inWidth = mImgCaptureWidth;
     if (inHeight == 0) inHeight = mImgCaptureHeight;
@@ -47,7 +46,7 @@ void ScreenAnalysisRendering::drawImg(float inX, float inY, float inWidth, float
     mGrayCVProcessingImage.draw(inX, inY, inWidth, inHeight);
 }
 
-void ScreenAnalysisRendering::drawFacesRecognition(float inX, float inY, float inWidth, float inHeight)
+void StreamAnalysisAndDisplay::drawAnalysisResultsROIs(float inX, float inY, float inWidth, float inHeight)
 {
     if (inWidth == 0) inWidth = mImgCaptureWidth;
     if (inHeight == 0) inHeight = mImgCaptureHeight;
@@ -59,9 +58,9 @@ void ScreenAnalysisRendering::drawFacesRecognition(float inX, float inY, float i
     float widthRatio = inWidth / mImgCaptureWidth;
     float heightRatio = inHeight / mImgCaptureHeight;
 
-    for (unsigned int i = 0; i < mCVHaarFinder.blobs.size(); i++)
+    for (unsigned int i = 0; i < mFaceTracker.getROISize(); i++)
     {
-        ofRectangle cur = mCVHaarFinder.blobs[i].boundingRect;
+        ofRectangle cur(*(mFaceTracker.getROI(i)));
         cur.x *= widthRatio;
         cur.y *= heightRatio;
         cur.width *= widthRatio;
@@ -74,14 +73,14 @@ void ScreenAnalysisRendering::drawFacesRecognition(float inX, float inY, float i
     ofPopStyle();
 }
 
-void ScreenAnalysisRendering::drawHaarFaceROI(float inX, float inY, float inWidth, float inHeight)
+void StreamAnalysisAndDisplay::drawExtractedROIs(float inX, float inY, float inWidth, float inHeight)
 {
     if (inWidth == 0) inWidth = mImgCaptureWidth / 4;
     if (inHeight == 0) inHeight = mImgCaptureHeight / 4;
 
-    for (unsigned int i = 0; i < mCVHaarFinder.blobs.size(); i++)
+    for (unsigned int i = 0; i < mFaceTracker.getROISize(); i++)
     {
-        ofRectangle cur = mCVHaarFinder.blobs[i].boundingRect;        
+        ofRectangle cur(*(mFaceTracker.getROI(i)));
         mROITexture.drawSubsection(inX, inY + i * inHeight,
                                    inWidth, inHeight,
                                    cur.x, cur.y,
@@ -90,12 +89,12 @@ void ScreenAnalysisRendering::drawHaarFaceROI(float inX, float inY, float inWidt
 }
 
 //------------------------------------------------------------------------------
-void ScreenAnalysisRendering::setCam(ofVideoGrabber* inCam)
+void StreamAnalysisAndDisplay::setCam(ofVideoGrabber* inCam)
 {
     mAssociatedCam = inCam;
 }
 
-ofVideoGrabber* ScreenAnalysisRendering::getCam()
+ofVideoGrabber* StreamAnalysisAndDisplay::getCam()
 {
     return mAssociatedCam;
 }
