@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
-#include "ofxOsc.h"
 
 #include "ScreensPanel.h"
 
@@ -36,10 +35,6 @@ public:
 public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
-    void gotMessage(ofMessage msg);
-    
-private:
-    ofxOscReceiver mOSCReceiver;
     
 private:
     const int mCaptureWidth;

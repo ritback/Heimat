@@ -18,8 +18,6 @@ ofApp::~ofApp()
 void ofApp::setup()
 {
 
-    mOSCReceiver.setup(PORT);
-
     initGUI();
 
     
@@ -40,17 +38,6 @@ void ofApp::exit()
 void ofApp::update()
 {
     mPanel.update();
-
-    while (mOSCReceiver.hasWaitingMessages())
-    {
-        ofxOscMessage message;
-        mOSCReceiver.getNextMessage(message);
-
-        if (message.getAddress() == "/aMessage")
-        {
-            
-        }
-    }
 }
 
 void ofApp::draw()
@@ -155,11 +142,6 @@ void ofApp::mouseExited(int x, int y)
 
 //------------------------------------------------------------------------------
 void ofApp::windowResized(int w, int h)
-{
-    
-}
-
-void ofApp::gotMessage(ofMessage msg)
 {
     
 }
