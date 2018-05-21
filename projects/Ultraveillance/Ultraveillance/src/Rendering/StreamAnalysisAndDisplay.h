@@ -30,6 +30,7 @@ private:
     ofxCvColorImage mColorCVImage;
     ofxCvGrayscaleImage mGrayCVProcessingImage;
     ofTexture mROITexture;
+    ofPixels* mCamPixels;
 
 private: // analysis
     HaarFaceTracking mFaceTracker;

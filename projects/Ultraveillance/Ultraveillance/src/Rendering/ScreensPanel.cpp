@@ -13,7 +13,7 @@ ScreensPanel::ScreensPanel(int inImgsCaptureWidth, int inImgsCaptureHeight)
     , mDrawingsHeight(inImgsCaptureHeight)
     , mRandomDisplayIndexes()
     , mTimeToShuffleDisplays(ofGetElapsedTimeMillis() + 1000)
-    , mTimeToCheckIfResyncNeeded(ofGetElapsedTimeMillis() + 10000)
+    , mTimeToCheckIfResyncNeeded(ofGetElapsedTimeMillis() + 30*1000)
 {
     float widthSpacing = ofGetWindowWidth() / 4;
     mColumnsPosX[0] = 1 * widthSpacing;
@@ -242,12 +242,15 @@ void ScreensPanel::checkResyncDevicesNeeded(float inEllapsedTime)
 {
     if(mTimeToCheckIfResyncNeeded < inEllapsedTime)
     {
-        mTimeToCheckIfResyncNeeded += 3 * 60 * 1000;
+        mTimeToCheckIfResyncNeeded += 60 * 60 * 1000;
         if(mPreviousNumCamDevices != mCams.getNumCameras())
         {
             mPreviousNumCamDevices = mCams.getNumCameras();
             mCams.initCameras();
+
+            // resync and reorganize display
             resyncCamDevices();
+            randomizeDisplays();
         }
     } 
 }

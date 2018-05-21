@@ -1,6 +1,7 @@
 #include "StreamAnalysisAndDisplay.h"
 
-float StreamAnalysisAndDisplay::mTimeToPrintAPerson = 5 * 60 * 1000;
+static float sPrintingFrequency = 5 * 1000;
+float StreamAnalysisAndDisplay::mTimeToPrintAPerson = sPrintingFrequency;
 
 //------------------------------------------------------------------------------
 StreamAnalysisAndDisplay::StreamAnalysisAndDisplay(int inImgCaptureWidth, int inImgCaptureHeight,
@@ -8,11 +9,11 @@ StreamAnalysisAndDisplay::StreamAnalysisAndDisplay(int inImgCaptureWidth, int in
     : mImgCaptureWidth(inImgCaptureWidth)
     , mImgCaptureHeight(inImgCaptureHeight)
     , mAssociatedCam(inAssociatedCam)
+    , mCamPixels(0)
 {
     mColorCVImage.allocate(mImgCaptureWidth, mImgCaptureHeight);
     mGrayCVProcessingImage.allocate(mImgCaptureWidth, mImgCaptureHeight);
     mGrayCVProcessingImage.setUseTexture(true);
-
 }
 
 StreamAnalysisAndDisplay::~StreamAnalysisAndDisplay()
@@ -30,6 +31,7 @@ void StreamAnalysisAndDisplay::updateCVImg()
             mColorCVImage.setFromPixels(mAssociatedCam->getPixels());
             mGrayCVProcessingImage = mColorCVImage;
             mROITexture = mGrayCVProcessingImage.getTexture();
+            mCamPixels = &(mAssociatedCam->getPixels());
         }
     }
 }
@@ -37,7 +39,7 @@ void StreamAnalysisAndDisplay::updateCVImg()
 void StreamAnalysisAndDisplay::processAnalysis()
 {
     mFaceTracker.process(mGrayCVProcessingImage);
-    mObjectRecognition.process(mGrayCVProcessingImage);
+    mObjectRecognition.process(mCamPixels);
 
     printAPerson();
 }
@@ -137,14 +139,13 @@ void StreamAnalysisAndDisplay::printAPerson()
         // save the subsection as PNG.
         // reset timer.
 
-
         for(auto& r : mObjectRecognition.mLastResults)
         {
-            if(mObjectRecognition.mYolo.getName(r.obj_id) == "Person" && r.prob > 0.95)
+            if(mObjectRecognition.mYolo.getName(r.obj_id) == "person" && r.prob > 0.9)
             {
                 ofRectangle cur(r.x, r.y, r.w, r.h);
                 savePersonROIToDir(cur);
-                mTimeToPrintAPerson += 5 * 60 * 1000;
+                mTimeToPrintAPerson = ellapsedTime + sPrintingFrequency;
                 return;
             }
         }
@@ -153,9 +154,10 @@ void StreamAnalysisAndDisplay::printAPerson()
 
 void StreamAnalysisAndDisplay::savePersonROIToDir(ofRectangle& inROI)
 {
+    printf("printing someone\n");
     static int index = 0;
     std::ostringstream destination;
-    destination << "ToPrints/";
+    destination << "C:\\Users\\Henri\\Google Drive\\Tycrois\\Ultraveillance\\TempPersonsImg\\";
     destination << "APerson";
     destination << index;
     destination << ".png";

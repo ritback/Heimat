@@ -1,8 +1,15 @@
 #include "HaarFaceTracking.h"
 
+ofxCvHaarFinder HaarFaceTracking::mCVHaarFinder;
+
 HaarFaceTracking::HaarFaceTracking()
 {
-    mCVHaarFinder.setup("haarcascade_frontalface_default.xml");
+    static bool isSetup = false;
+    if(!isSetup)
+    {
+        mCVHaarFinder.setup("haarcascade_frontalface_default.xml");
+        isSetup = true;
+    }
 }
 
 HaarFaceTracking::~HaarFaceTracking()

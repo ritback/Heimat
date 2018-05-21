@@ -12,10 +12,10 @@ public:
     virtual ~Yolo2ObjRecognition();
 
 public:
-    virtual void process(const ofxCvGrayscaleImage& inImg);
+    virtual void process(ofPixels* inImg);
 
 public:
-    ofxYolo2 mYolo;
+    static ofxYolo2 mYolo;
     std::vector<bbox_t> mLastResults;
 };
 
