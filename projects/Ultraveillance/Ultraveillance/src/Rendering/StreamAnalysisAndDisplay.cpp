@@ -1,5 +1,7 @@
 #include "StreamAnalysisAndDisplay.h"
 
+float StreamAnalysisAndDisplay::mTimeToPrintAPerson = 5 * 60 * 1000;
+
 //------------------------------------------------------------------------------
 StreamAnalysisAndDisplay::StreamAnalysisAndDisplay(int inImgCaptureWidth, int inImgCaptureHeight,
                                                  ofVideoGrabber * inAssociatedCam)
@@ -35,6 +37,9 @@ void StreamAnalysisAndDisplay::updateCVImg()
 void StreamAnalysisAndDisplay::processAnalysis()
 {
     mFaceTracker.process(mGrayCVProcessingImage);
+    mObjectRecognition.process(mGrayCVProcessingImage);
+
+    printAPerson();
 }
 
 //------------------------------------------------------------------------------
@@ -58,6 +63,7 @@ void StreamAnalysisAndDisplay::drawAnalysisResults(float inX, float inY, float i
     float widthRatio = inWidth / mImgCaptureWidth;
     float heightRatio = inHeight / mImgCaptureHeight;
 
+    //--------------------------------------------------------------------------
     for (unsigned int i = 0; i < mFaceTracker.mCVHaarFinder.blobs.size(); i++)
     {
         ofRectangle cur(mFaceTracker.mCVHaarFinder.blobs[i].boundingRect);
@@ -68,6 +74,26 @@ void StreamAnalysisAndDisplay::drawAnalysisResults(float inX, float inY, float i
         cur.x += inX;
         cur.y += inY;
         ofDrawRectangle(cur.x, cur.y, cur.width, cur.height);
+    }
+
+    //--------------------------------------------------------------------------
+    ofNoFill();
+    
+    for(auto& r : mObjectRecognition.mLastResults)
+    {
+        ofSetLineWidth(ofMap(r.prob, 0, 1, 0, 5));
+
+        ofRectangle cur(r.x, r.y, r.w, r.h);
+        cur.x *= widthRatio;
+        cur.y *= heightRatio;
+        cur.width *= widthRatio;
+        cur.height *= heightRatio;
+        cur.x += inX;
+        cur.y += inY;
+        ofDrawRectangle(cur.x, cur.y, cur.width, cur.height);
+
+        ofDrawBitmapStringHighlight(mObjectRecognition.mYolo.getName(r.obj_id) + ": " + ofToString(r.prob), cur.x, cur.y);
+
     }
 
     ofPopStyle();
@@ -97,4 +123,47 @@ void StreamAnalysisAndDisplay::setCam(ofVideoGrabber* inCam)
 ofVideoGrabber* StreamAnalysisAndDisplay::getCam()
 {
     return mAssociatedCam;
+}
+
+
+//------------------------------------------------------------------------------
+void StreamAnalysisAndDisplay::printAPerson()
+{
+    float ellapsedTime = ofGetElapsedTimeMillis();
+
+    if(mTimeToPrintAPerson < ellapsedTime)
+    {
+        // If a person with probal > 0.95 is found.
+        // save the subsection as PNG.
+        // reset timer.
+
+
+        for(auto& r : mObjectRecognition.mLastResults)
+        {
+            if(mObjectRecognition.mYolo.getName(r.obj_id) == "Person" && r.prob > 0.95)
+            {
+                ofRectangle cur(r.x, r.y, r.w, r.h);
+                savePersonROIToDir(cur);
+                mTimeToPrintAPerson += 5 * 60 * 1000;
+                return;
+            }
+        }
+    }
+}
+
+void StreamAnalysisAndDisplay::savePersonROIToDir(ofRectangle& inROI)
+{
+    static int index = 0;
+    std::ostringstream destination;
+    destination << "ToPrints/";
+    destination << "APerson";
+    destination << index;
+    destination << ".png";
+    std::string destinationStr = destination.str();
+
+    ofImage ToCrop(mGrayCVProcessingImage.getPixels());
+    ofImage APersonROISubsection;
+    APersonROISubsection.cropFrom(ToCrop, inROI.x, inROI.y, inROI.width, inROI.height);
+    APersonROISubsection.save(destinationStr);
+    ++index;
 }

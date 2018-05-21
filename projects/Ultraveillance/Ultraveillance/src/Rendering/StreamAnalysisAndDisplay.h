@@ -4,8 +4,7 @@
 #include "ofxOpenCv.h"
 
 #include "HaarFaceTracking.h"
-
-class ImgAnalysisInterface;
+#include "Yolo2ObjRecognition.h"
 
 class StreamAnalysisAndDisplay
 {
@@ -34,6 +33,12 @@ private:
 
 private: // analysis
     HaarFaceTracking mFaceTracker;
+    Yolo2ObjRecognition mObjectRecognition;
+
+private:
+    void printAPerson();
+    void savePersonROIToDir(ofRectangle& inROI);
+    static float mTimeToPrintAPerson;
 
 private:
     int mImgCaptureWidth;
