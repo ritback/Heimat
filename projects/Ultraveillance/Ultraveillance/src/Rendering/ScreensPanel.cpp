@@ -89,7 +89,7 @@ void ScreensPanel::drawAnalysisResults()
     for (int i = 0; i < NUM_SCREENS; ++i)
     {
         int displayIndex = mRandomDisplayIndexes[i];
-        mStreams[displayIndex]->drawAnalysisResultsROIs(mDrawingsPositions[i].x, mDrawingsPositions[i].y,
+        mStreams[displayIndex]->drawAnalysisResults(mDrawingsPositions[i].x, mDrawingsPositions[i].y,
                                     mDrawingsWidth, mDrawingsHeight);
     }
 }

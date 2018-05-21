@@ -20,7 +20,7 @@ public:
 
 public:
     void drawImg(float inX, float inY, float inWidth = 0, float inHeight = 0);
-    void drawAnalysisResultsROIs(float inX, float inY, float inWidth = 0, float inHeight = 0);
+    void drawAnalysisResults(float inX, float inY, float inWidth = 0, float inHeight = 0);
     void drawExtractedROIs(float inX, float inY, float inWidth = 0, float inHeight = 0);
 
 public:

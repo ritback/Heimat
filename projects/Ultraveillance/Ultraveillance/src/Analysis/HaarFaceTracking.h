@@ -1,10 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ImgAnalysisInterface.h"
+#include "ofxOpenCv.h"
 
-
-class HaarFaceTracking: public ImgAnalysisInterface
+class HaarFaceTracking
 {
 public:
     HaarFaceTracking();
@@ -13,7 +12,7 @@ public:
 public:
     virtual void process(const ofxCvGrayscaleImage& inImg);
 
-private:
+public:
     ofxCvHaarFinder mCVHaarFinder;
 };
 

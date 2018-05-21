@@ -46,7 +46,7 @@ void StreamAnalysisAndDisplay::drawImg(float inX, float inY, float inWidth, floa
     mGrayCVProcessingImage.draw(inX, inY, inWidth, inHeight);
 }
 
-void StreamAnalysisAndDisplay::drawAnalysisResultsROIs(float inX, float inY, float inWidth, float inHeight)
+void StreamAnalysisAndDisplay::drawAnalysisResults(float inX, float inY, float inWidth, float inHeight)
 {
     if (inWidth == 0) inWidth = mImgCaptureWidth;
     if (inHeight == 0) inHeight = mImgCaptureHeight;
@@ -58,9 +58,9 @@ void StreamAnalysisAndDisplay::drawAnalysisResultsROIs(float inX, float inY, flo
     float widthRatio = inWidth / mImgCaptureWidth;
     float heightRatio = inHeight / mImgCaptureHeight;
 
-    for (unsigned int i = 0; i < mFaceTracker.getROISize(); i++)
+    for (unsigned int i = 0; i < mFaceTracker.mCVHaarFinder.blobs.size(); i++)
     {
-        ofRectangle cur(*(mFaceTracker.getROI(i)));
+        ofRectangle cur(mFaceTracker.mCVHaarFinder.blobs[i].boundingRect);
         cur.x *= widthRatio;
         cur.y *= heightRatio;
         cur.width *= widthRatio;
@@ -78,9 +78,9 @@ void StreamAnalysisAndDisplay::drawExtractedROIs(float inX, float inY, float inW
     if (inWidth == 0) inWidth = mImgCaptureWidth / 4;
     if (inHeight == 0) inHeight = mImgCaptureHeight / 4;
 
-    for (unsigned int i = 0; i < mFaceTracker.getROISize(); i++)
+    for(unsigned int i = 0; i < mFaceTracker.mCVHaarFinder.blobs.size(); i++)
     {
-        ofRectangle cur(*(mFaceTracker.getROI(i)));
+        ofRectangle cur(mFaceTracker.mCVHaarFinder.blobs[i].boundingRect);
         mROITexture.drawSubsection(inX, inY + i * inHeight,
                                    inWidth, inHeight,
                                    cur.x, cur.y,
