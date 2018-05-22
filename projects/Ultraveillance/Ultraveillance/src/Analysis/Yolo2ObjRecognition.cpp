@@ -28,7 +28,14 @@ void Yolo2ObjRecognition::process(ofPixels* inImg)
     // Yolo2 tracking.
     if(inImg)
     {
-        mLastResults = mYolo.detect(*inImg);
+        try
+        {
+            mLastResults = mYolo.detect(*inImg);
+        }
+        catch(std::exception& e)
+        {
+            printf("Exception thrown during detection.\n");
+        }
     }
 #endif
 }
