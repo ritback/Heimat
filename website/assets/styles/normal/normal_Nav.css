@@ -1,0 +1,155 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* Nav */
+
+.nav
+{
+    display: inline-block;
+	vertical-align: top;
+	position: fixed;
+	top: 14%;
+	left: 0px;
+	
+    width: 19%;
+	height: 35%;
+	min-height: 150px;
+}
+
+.nav_menu
+{
+	display: block;
+	top: 0px;
+	left: 0px;
+	list-style: none;
+	list-style-type: none;
+	padding: 0px;
+    margin: 0px;
+	height: 100%;
+}
+
+.nav_elements h2
+{
+	display: inline-block;
+	vertical-align:middle;
+	margin: 0px;
+	padding: 0px;
+	
+	text-decoration: none;
+	
+	font-size: 1em;
+	font-style: normal;
+	
+	font-family: 'Biko', 'Franchise', Arial, Verdana, sans-serif;
+	src: url('../fonts/biko/Biko_Regular.otf') format('otf');
+	src: url('../fonts/Franchise-Bold.ttf') format('ttf');
+}
+
+.nav_elements
+{
+	display: block;
+	margin: 0px;
+	padding-right: 10%;
+	height: 16.65%; /* automatically set with js */
+	
+	text-align: right;
+	color: black;
+	
+	-webkit-transition: background-color 0.75s, color 0.75s;
+    transition: background-color 0.75s, color 0.75s;
+}
+
+#nav_elementSelected_Home
+{
+	font-size: 1.2em;
+	padding-right: -0.4em;
+	color: rgb(58,21,128);
+}
+#nav_elementSelected_Projects
+{
+	font-size: 1.2em;
+	padding-right: -0.4em;
+	color: rgb(35,96,2);
+}
+
+#nav_elementSelected_Graphic
+{
+	font-size: 1.2em;
+	padding-right: -0.4em;
+	color: rgb(140,103,2);
+}
+
+#nav_elementSelected_Blog
+{
+	font-size: 1.2em;
+	padding-right: -0.4em;
+	color: rgb(120,5,9);
+}
+
+#nav_elementSelected_CV
+{
+	font-size: 1.2em;
+	padding-right: -0.4em;
+	color: rgb(87,25,82);
+}
+
+#nav_elementSelected_Contacts
+{
+	font-size: 1.2em;
+	padding-right: -0.4em;
+	color: rgb(96,96,124);
+}
+
+.nav_elements.nav_toHome:hover {
+	background-color: rgb(230,246,255);
+	color: rgb(58,21,128);
+}
+
+.nav_elements.nav_toProjects:hover {
+	background-color: rgb(218,255,222);
+	color: rgb(35,96,2);
+}
+
+.nav_elements.nav_toGraphic:hover {
+	background-color: rgb(255,255,224);
+	color: rgb(140,103,2);
+}
+
+.nav_elements.nav_toBlog:hover {
+	background-color: rgb(255,207,213);
+	color: rgb(120,5,9);
+}
+
+.nav_elements.nav_toCV:hover {
+	background-color: rgb(255,206,251);
+	color: rgb(87,25,82);
+}
+
+.nav_elements.nav_toContacts:hover {
+	background-color: rgb(231,231,231);
+	color: rgb(96,96,134);
+}
+
+#nav_pageIndicator_Home		{color: rgb(58,21,128);}
+#nav_pageIndicator_Projects	{color: rgb(35,96,2);}
+#nav_pageIndicator_Graphic	{color: rgb(140,103,2);}
+#nav_pageIndicator_Blog		{color: rgb(120,5,9);}
+#nav_pageIndicator_CV		{color: rgb(87,25,82);}
+#nav_pageIndicator_Contacts	{color: rgb(96,96,134);}
+
+.nav_elements_VA
+{
+	display: inline-block;
+	vertical-align:middle;
+	margin: 0px;
+	height: 100%;
+	width: 0px;
+	background-color: red;
+	opacity: 0.1;
+}
+
+.nav_mobile, nav_mobile_VA, #nav_icon, .nav_pageIndicator
+{
+    display: none;
+}
+

@@ -1,0 +1,75 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* Nav */
+
+.nav_sub
+{
+    display: inline-block;
+	vertical-align: top;
+	position: fixed;
+	bottom: 7%;
+	right: 0px;
+    width: 12%;
+	background-color: rgba(224,224,224, 0.4);
+}
+
+.nav_sub_menu
+{
+	display: block;
+	top: 0px;
+	left: 0px;
+	list-style: none;
+	list-style-type: none;
+	padding: 0px;
+    margin: 0px;
+}
+
+.nav_sub_elements h2
+{
+	display: inline-block;
+	vertical-align:middle;
+	margin: 0px;
+	margin-top: 0.8em;
+	margin-bottom: 0.6em;
+	padding: 0px;
+	
+	text-decoration: none;
+	
+	font-size: 0.8em;
+	font-style: normal;
+	
+	font-family: 'Biko', 'Franchise', Arial, Verdana, sans-serif;
+	src: url('../fonts/biko/Biko_Regular.otf') format('otf');
+	src: url('../fonts/Franchise-Bold.ttf') format('ttf');
+}
+
+.nav_sub_elements
+{
+	display: block;
+	margin: 0px;
+	padding-right: 10%;
+	min-height: 10%; /* automatically set with js */
+	
+	text-align: right;
+	color: black;
+	
+	-webkit-transition: background-color 0.75s, color 0.75s;
+    transition: background-color 0.75s, color 0.75s;
+}
+
+.nav_sub_elements:hover {
+	background-color: rgb(255,255,224);
+	color: rgb(140,103,2);
+}
+
+.nav_sub_elements_VA
+{
+	display: inline-block;
+	vertical-align:middle;
+	margin: 0px;
+	height: 100%;
+	width: 0px;
+}
+
+

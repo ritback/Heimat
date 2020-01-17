@@ -1,0 +1,156 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* Content */
+
+.content
+{
+    display: block; 
+    vertical-align: top;
+	position: absolute;
+	width: 95%;
+	margin-right: auto;
+	margin-left: auto;
+	top: 22%;
+	padding-bottom: 0.5em;
+}
+
+.content_article
+{
+	display: block;
+	position: relative;
+	vertical-align: top;
+	margin: 0;
+	margin-bottom: 1.2em;
+	padding: 0.5em;
+	background-color: rgba(224,224,224, 0.3);
+}
+
+.content_article h3
+{
+	display: block;
+	margin: 0px;
+	padding: 0.5em;
+	padding-top: 0.7em;
+	padding-left: 0.7em;
+	margin-bottom: 0.3em;
+	
+	font-size: 2em;
+    color: rgb(51,51,163);
+	
+	font-family: 'Biko', 'Franchise', Arial, Verdana, sans-serif;
+	src: url('fonts/biko/Biko_Regular.otf') format('otf');
+	src: url('fonts/Franchise-Bold.ttf') format('ttf');
+}
+
+.content_article p
+{
+	width: 100%;
+	margin-top:2em;
+	margin-left: auto;
+	margin-right:auto;
+
+	font-size: 0.8em;
+	text-align: justify;
+    color: black;
+	font-family: Arial, Verdana, sans-serif;
+}
+
+.content_article p em
+{
+	font-style: normal;
+	font-weight: bold;
+}
+
+.content_article p a
+{
+	font-style: normal;
+	font-weight: bold;
+	text-decoration: underline;
+	color: black;
+}
+
+/* Content media */
+
+.content_article_vid
+{
+	display: block;
+	margin: 0;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px;
+	width: 95%;
+	border: none;
+}
+
+.content_article_img
+{
+	display: block;
+	margin-bottom: 10px;
+	padding: 0px;
+	border: none;
+	width: 80%;
+	font-size: 0;
+	margin-top:1em;
+	margin-left: auto;
+	margin-right:auto;
+}
+
+.content_article_pdf
+{
+	display: block;
+	margin-bottom: 10px;
+	padding: 0px;
+	border: none;
+	max-width: 80%;
+	font-size: 0;
+	background-color: grey;
+	
+	margin-left: auto;
+	margin-right:auto;
+}
+
+.content_article_mosaicContainer
+{
+	display: block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 0px;
+	border: none;
+	max-width: 80%;
+	font-size: 0;
+	margin-left: auto;
+	margin-right:auto;
+}
+
+.content_article_mosaicElement_4
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+	width: 25%;
+	border: none;`
+}
+
+.content_article_mosaicElement_2
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+	width: 50%;
+	border: none;`
+}
+
+.content_article_processingCanvas
+{
+	display: block;
+	margin-top: 0.5em;
+	padding: 0px;
+	border: none;
+	max-width: 80%;
+	border: 5px solid black;
+	margin-left: auto;
+	margin-right:auto;
+}
