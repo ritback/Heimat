@@ -7,6 +7,8 @@ void FlakesParameters::setDefault()
     mForceFieldMag = 5.1;
     mWorldViscosity = 0.3;
     mMass = 15.0;
+    mMaxColor.set(255, 255, 255);
+    mMinColor.set(0, 0, 0);
 }
 
 void FlakesParameters::updateParameters(const FlakesParameters& inParameters)
@@ -26,6 +28,12 @@ void FlakesParameters::updateParameters(const FlakesParameters& inParameters)
     if (inParameters.mMass != -1)
     {
         mMass = inParameters.mMass;
+    }
+    if(inParameters.mUpdateColor)
+    {
+        mMaxColor = inParameters.mMaxColor;
+        mMinColor = inParameters.mMinColor;
+        mUpdateColor = false;
     }
 }
 

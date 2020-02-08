@@ -5,7 +5,8 @@
 #include <vector>
 
 #include "Mvt1Visuals.h"
-#include "OscMsgHandler.h"
+//#include "OscMsgHandler.h"
+#include "Mvt1GuiApp.h"
 
 class ofApp : public ofBaseApp
 {
@@ -43,8 +44,9 @@ public:
     
 private:
     Mvt1Visuals mVisuals;
-    OscMsgHandler mOscHandler;
-    
+    //OscMsgHandler mOscHandler;
+    Mvt1GuiApp* mGui;
+
 private:
     bool mDisplayFramerate;
     

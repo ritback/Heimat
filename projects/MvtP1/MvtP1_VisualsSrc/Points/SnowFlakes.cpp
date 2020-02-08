@@ -91,6 +91,9 @@ void SnowFlakes::update()
         float worldViscosity = mFlakesParameters.mWorldViscosity;
         (*it)->applyForce(- worldViscosity * (*it)->getVel());
         (*it)->incrementPos();
+
+
+        (*it)->update();
     }
 }
 
@@ -132,6 +135,26 @@ void SnowFlakes::draw()
 void SnowFlakes::updateParameters(const FlakesParameters& inParameters)
 {
     mFlakesParameters.updateParameters(inParameters);
+
+
+    if(inParameters.mUpdateColor)
+    {
+        int minRed = min(inParameters.mMinColor.r, inParameters.mMaxColor.r);
+        int minGreen = min(inParameters.mMinColor.g, inParameters.mMaxColor.g);
+        int minBlue = min(inParameters.mMinColor.b, inParameters.mMaxColor.b);
+        int maxRed = max(inParameters.mMinColor.r, inParameters.mMaxColor.r);
+        int maxGreen = max(inParameters.mMinColor.g, inParameters.mMaxColor.g);
+        int maxBlue = max(inParameters.mMinColor.b, inParameters.mMaxColor.b);
+
+
+        for(FlakesIt it = mFlakes.begin(); it < mFlakes.end(); ++it)
+        {
+            (*it)->mAimedColor.r = (int)ofRandom(minRed, maxRed);
+            (*it)->mAimedColor.g = (int)ofRandom(minGreen, maxGreen);
+            (*it)->mAimedColor.b = (int)ofRandom(minBlue, maxBlue);
+        }
+    }
+
 }
 
 // -----------------------------------------------------------------------------

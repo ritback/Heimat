@@ -70,6 +70,8 @@ void SandParameters::updateParameters(const SandParameters& inParameters)
             mSandColor[1] = inParameters.mSandColor[1];
         if (inParameters.mSandColor[2] != -1)
             mSandColor[2] = inParameters.mSandColor[2];
+
+        mUpdateColor = false;
     }
 }
 

@@ -16,5 +16,6 @@ public:
 public:
     int mFlakeImgIndex;
     ofColor mColor;
+    ofColor mAimedColor;
     float mWidth, mHeight;
 };

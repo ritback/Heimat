@@ -22,7 +22,7 @@ public: // updateParameters
     void updateParameters(const BlobsParameters& inParameters);
     void updateParameters(const SandParameters& inParameters);
     void updateParameters(const BlinkingColorParameters& inParameters);
-    void updateParameters(const FlakesParameters& inParameters, bool isBack = true);
+    void updateParameters(const FlakesParameters& inParameters, bool isBack = false);
     void updateParameters(const SpiritsParameters& inParameters);
     
 public:

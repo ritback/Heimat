@@ -9,7 +9,7 @@ Mvt1Visuals::Mvt1Visuals()
 , mSnowFlakesFront(&mFlowField)
 , mGridShapesGroup(&mFlowField)
 {
-    // Let's strat the visuals
+    // Let's start the visuals
 }
 
 Mvt1Visuals::~Mvt1Visuals()
@@ -42,7 +42,7 @@ void Mvt1Visuals::draw()
     mBackgroundShapes.drawShader();
     
     mSnowFlakesBack.draw();
-    //mGridShapesGroup.draw();
+    mGridShapesGroup.draw();
     
     mSpiritsGroup.draw();
     mSnowFlakesFront.draw();

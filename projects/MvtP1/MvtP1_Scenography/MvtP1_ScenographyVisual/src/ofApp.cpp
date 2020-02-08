@@ -4,8 +4,9 @@
 
 ofApp::ofApp()
 : mVisuals()
-, mOscHandler(this)
+//, mOscHandler(this)
 , mDisplayFramerate(false)
+, mGui(0)
 {
     
 }
@@ -28,10 +29,9 @@ void ofApp::exit()
 // -----------------------------------------------------------------------------
 void ofApp::update()
 {
-    mOscHandler.update();
+    //mOscHandler.update();
     mVisuals.update();
 }
-
 
 void ofApp::draw()
 {
