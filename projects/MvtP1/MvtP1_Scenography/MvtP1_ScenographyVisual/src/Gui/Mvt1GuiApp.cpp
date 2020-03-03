@@ -11,6 +11,7 @@ Mvt1GuiApp::Mvt1GuiApp(shared_ptr<ofApp> inApp)
     , mBackFlakesParametersChanged(true)
     , mSpiritsParametersChanged(true)
     , eActivParameters(BLOBS)
+    , mPresets(this)
 {
 
     // ----------------------------------------------------------------------
@@ -51,9 +52,7 @@ Mvt1GuiApp::Mvt1GuiApp(shared_ptr<ofApp> inApp)
     mFrontFlakesParameters.add(mFrontFlakesMinColor.set("Min Color", ofColor(0, 0, 0), ofColor(0, 0, 0), ofColor(255, 255, 255)));
     mFrontFlakesParameters.add(mFrontFlakesMaxColor.set("Max Color", ofColor(255, 255, 255), ofColor(0, 0, 0), ofColor(255, 255, 255)));
     ofAddListener(mFrontFlakesParameters.parameterChangedE(), this, &Mvt1GuiApp::guiEventFrontFlakes);
-    mFrontFlakesPanel.setup(mFrontFlakesParameters);
-
-
+    
     mBackFlakesParameters.setName("BackFlakes parameters");
     mBackFlakesParameters.add(mBackFlakesNumFlakes.set("Num Flake", 0, 0, 150));
     mBackFlakesParameters.add(mBackFlakesForceFieldMag.set("Force field magnitude", 5.1, 0, 10));
@@ -62,7 +61,11 @@ Mvt1GuiApp::Mvt1GuiApp(shared_ptr<ofApp> inApp)
     mBackFlakesParameters.add(mBackFlakesMinColor.set("Min Color", ofColor(0, 0, 0), ofColor(0, 0, 0), ofColor(255, 255, 255)));
     mBackFlakesParameters.add(mBackFlakesMaxColor.set("Max Color", ofColor(255, 255, 255), ofColor(0, 0, 0), ofColor(255, 255, 255)));
     ofAddListener(mBackFlakesParameters.parameterChangedE(), this, &Mvt1GuiApp::guiEventBackFlakes);
-    mBackFlakesPanel.setup(mBackFlakesParameters);
+    
+    mSandParameters.setName("Flakes parameters");
+    mFlakesParameters.add(mFrontFlakesParameters);
+    mFlakesParameters.add(mBackFlakesParameters);
+    mFlakesPanel.setup(mFlakesParameters);
     
     // ----------------------------------------------------------------------
     mSpiritsParameters.setName("spirits parameters");
@@ -72,6 +75,9 @@ Mvt1GuiApp::Mvt1GuiApp(shared_ptr<ofApp> inApp)
     mSpiritsParameters.add(mSpiritsLength.set("Length", 50, 0.5, 100));
     ofAddListener(mSpiritsParameters.parameterChangedE(), this, &Mvt1GuiApp::guiEventSpirits);
     mSpiritsPanel.setup(mSpiritsParameters);
+
+    // ----------------------------------------------------------------------
+    mPresets.init();
 
     // ----------------------------------------------------------------------
     ofxGuiSetFont("GOTHIC.TTF", 16);
@@ -179,9 +185,10 @@ void Mvt1GuiApp::draw()
     mBlobsPanel.draw();
     mSandPanel.draw();
     mBlinkingColorPanel.draw();
-    mFrontFlakesPanel.draw();
-    mBackFlakesPanel.draw();
+    mFlakesPanel.draw();
     mSpiritsPanel.draw();
+
+    mPresets.draw();
     ofPopMatrix();
     ofPopStyle();
 }
@@ -202,10 +209,8 @@ void Mvt1GuiApp::keyPressed(int key)
     case BLINK:
         handleKeyPressedBlinkingColor(key);
     break;
-    case FLAKES_FRONT:
+    case FLAKES:
         handleKeyPressedFrontFlakes(key);
-    break;
-    case FLAKES_BACK:
         handleKeyPressedBackFlakes(key);
     break;
     case SPIRIT:
@@ -247,7 +252,7 @@ void Mvt1GuiApp::keyReleased(int key)
 //------------------------------------------------------------------------------
 void Mvt1GuiApp::windowResized(int w, int h)
 {
-    int numPanel = 5; 
+    int numPanel = 6; 
     float margin = 30;
     float panelWidth = (float)(w - margin*(numPanel+1))/(numPanel);
     
@@ -263,21 +268,18 @@ void Mvt1GuiApp::windowResized(int w, int h)
     mBlinkingColorPanel.setPosition(2*panelWidth + 3*margin, margin);
     mBlinkingColorPanel.setSize(panelWidth, mBlinkingColorPanel.getHeight());
     mBlinkingColorPanel.setWidthElements(panelWidth);
-    
 
-    mFrontFlakesPanel.setPosition(3*panelWidth + 4*margin, margin);
-    mFrontFlakesPanel.setSize(panelWidth, mFrontFlakesPanel.getHeight());
-    mFrontFlakesPanel.setWidthElements(panelWidth);
-
-    mBackFlakesPanel.setPosition(3*panelWidth + 4*margin, mFrontFlakesPanel.getHeight() +2*margin);
-    mBackFlakesPanel.setSize(panelWidth, mBackFlakesPanel.getHeight());
-    mBackFlakesPanel.setWidthElements(panelWidth);
-
+    mFlakesPanel.setPosition(3*panelWidth + 4*margin, margin);
+    mFlakesPanel.setSize(panelWidth, mFlakesPanel.getHeight());
+    mFlakesPanel.setWidthElements(panelWidth);
     
     mSpiritsPanel.setPosition(4*panelWidth + 5*margin, margin);
     mSpiritsPanel.setSize(panelWidth, mSpiritsPanel.getHeight());
     mSpiritsPanel.setWidthElements(panelWidth);
 
+    mPresets.mPresetsPanel.setPosition(5*panelWidth + 6*margin, margin);
+    mPresets.mPresetsPanel.setSize(panelWidth, mSpiritsPanel.getHeight());
+    mPresets.mPresetsPanel.setWidthElements(panelWidth);
 }
 
 //------------------------------------------------------------------------------
@@ -303,13 +305,13 @@ void Mvt1GuiApp::guiEventBlinkingColor(ofAbstractParameter& e)
 void Mvt1GuiApp::guiEventFrontFlakes(ofAbstractParameter& e)
 {
     mFrontFlakesParametersChanged = true;
-    eActivParameters = FLAKES_FRONT;
+    eActivParameters = FLAKES;
     setActivPanelColor();
 }
 void Mvt1GuiApp::guiEventBackFlakes(ofAbstractParameter& e)
 {
     mBackFlakesParametersChanged = true;
-    eActivParameters = FLAKES_BACK;
+    eActivParameters = FLAKES;
     setActivPanelColor();
 }
 void Mvt1GuiApp::guiEventSpirits(ofAbstractParameter& e)
@@ -339,8 +341,7 @@ void Mvt1GuiApp::setActivPanelColor()
     mBlobsPanel.setBorderColor(ofColor(0));
     mSandPanel.setBorderColor(ofColor(0));
     mBlinkingColorPanel.setBorderColor(ofColor(0));
-    mFrontFlakesPanel.setBorderColor(ofColor(0));
-    mBackFlakesPanel.setBorderColor(ofColor(0));
+    mFlakesPanel.setBorderColor(ofColor(0));
     mSpiritsPanel.setBorderColor(ofColor(0));
     
     switch(eActivParameters)
@@ -354,11 +355,8 @@ void Mvt1GuiApp::setActivPanelColor()
     case BLINK:
         mBlinkingColorPanel.setBorderColor(ofColor(200, 150, 50));
         break;
-    case FLAKES_FRONT:
-        mFrontFlakesPanel.setBorderColor(ofColor(200, 150, 50));
-        break;
-    case FLAKES_BACK:
-        mBackFlakesPanel.setBorderColor(ofColor(200, 150, 50));
+    case FLAKES:
+        mFlakesPanel.setBorderColor(ofColor(200, 150, 50));
         break;
     case SPIRIT:
         mSpiritsPanel.setBorderColor(ofColor(200, 150, 50));

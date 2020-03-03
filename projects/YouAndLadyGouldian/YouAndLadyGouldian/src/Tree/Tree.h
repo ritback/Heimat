@@ -37,7 +37,7 @@ private:
     float mAlpha;
     float mActivationTime;
     float mActivationDuration;
-
+    bool mIsVisible;
 
 };
  

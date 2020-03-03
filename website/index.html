@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
 	<meta charset="utf-8" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--
     <link rel="stylesheet" media="screen and (min-width: 700px)" href="assets/styles/normal/normal_Head.css" />
     <link rel="stylesheet" media="screen and (min-width: 700px)" href="assets/styles/normal/normal_Nav.css" />
     <link rel="stylesheet" media="screen and (min-width: 700px)" href="assets/styles/normal/normal_Contact.css" />
@@ -16,7 +17,15 @@
     <link rel="stylesheet" media="screen and (max-device-width: 700px)" href="assets/styles/phone/phone_Nav.css" />
     <link rel="stylesheet" media="screen and (max-device-width: 700px)" href="assets/styles/phone/phone_Contact.css" />
     <link rel="stylesheet" media="screen and (max-device-width: 700px)" href="assets/styles/phone/phone_Content.css" />
+    -->
     
+    
+    <link rel="stylesheet" href="assets/styles/screen/Head.css" />
+    <link rel="stylesheet" href="assets/styles/screen/Nav.css" />
+    <link rel="stylesheet" href="assets/styles/screen/Contact.css" />
+    <link rel="stylesheet" href="assets/styles/screen/Content.css" />
+    
+
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -43,112 +52,197 @@
     <meta name="theme-color" content="#ffffff">
     
     
+    <!-- Add jQuery library -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="assets/js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="assets/js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    
+    
     <title>Henri's</title>
     
 </head>
 
 <body class="global">
+    
 	<header class="head">
-    	<div class="head_VA">
+        
+        <button id="navButton" class="openbtn" onclick="openNav()">
+            <h1>&#9776;</h1>
+        </button>
+        
+        
+        <div class="headTitle">
+            <a href="#" onclick="displayVisibleArticleListCorrectly('.articleElement')">
+                <h1>Henri Aribert-Desjardins</h1>
+            </a>
         </div>
-        <a href="index.html">
-        	<h1 class="head_title">
-        		Henri Aribert-Desjardins
-        	</h1>
-        </a>
+        
+        
+        <div class="headAbout">
+            <a href="#about">
+                <h1>About</h1>
+            </a>
+        </div>
+        
 	</header>
     
     <!------------------------------------------------------->
-
-    <nav class="nav">
+    
+    
+    <nav id="sidebarNav">
         
-        <div class="nav_mobile">
-       		<div class="nav_mobile_VA">
-            </div>
-        	<img src="assets/img/menu_icon.png" id="nav_icon" />
-            <h1 class="nav_pageIndicator" id="nav_pageIndicator_Home">Home</h1>
-        </div>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#about">About</a>
+        <a href="#" onclick="displayVisibleArticleListCorrectly('.articleElement')">All</a>
+        <a href="#" onclick="displayVisibleArticleListCorrectly('.art')">Art installation</a>
+        <a href="#" onclick="displayVisibleArticleListCorrectly('.conception')">3D design</a>
+        <a href="#" onclick="displayVisibleArticleListCorrectly('.woodworking')">Woodworking</a>
+        <a href="#" onclick="displayVisibleArticleListCorrectly('.carpentry')">Carpentry</a>
+        <a href="#" onclick="displayVisibleArticleListCorrectly('.graphic')">Graphic design</a>
+    </nav>
         
-        <ul class="nav_menu">
-			<a href="index.html">
-            	<li class="nav_elements nav_toHome" id="nav_elementSelected_Home">
-            		<div class="nav_elements_VA">
-                	</div><h2>Home</h2>
-            	</li>
-            </a>
-			<a href="nav/projects.html">
-            	<li class="nav_elements nav_toProjects">
-            		<div class="nav_elements_VA">
-                	</div><h2>Projects</h2>
-            	</li>
-            </a>
-			<a href="nav/design.html">
-            	<li class="nav_elements nav_toGraphic">
-            		<div class="nav_elements_VA">
-                	</div><h2>Graphic Design</h2>
-            	</li>
-            </a>
-			<a href="nav/blog.html">
-            <li class="nav_elements nav_toBlog">
-            		<div class="nav_elements_VA">
-                	</div><h2>Blog</h2>
-            	</li>
-            </a>
-			<a href="nav/CV.html">
-            	<li class="nav_elements nav_toCV">
-            		<div class="nav_elements_VA">
-                	</div><h2>CV/Resume</h2>
-            	</li>
-            </a>
-            <a href="nav/contacts.html">
-            	<li class="nav_elements nav_toContacts">
-            		<div class="nav_elements_VA">
-                	</div><h2>Contact Me</h2>
-            	</li>
-            </a>
-		</ul>
-        
-	</nav>
     
     <!------------------------------------------------------->
     
-    <section class="content">
     
-    	<article class="content_article">
-            <h3>Hello there!</h3>
-    		<p>
-            	I, <em>Henri Aribert-Desjardins</em>.<br />
-                <br />
-                <br />
-                I = French, Engineer and Carpenter.<br />
-                <br />
-                Graduated from Grenoble Institute of Technologie - Phelma or Grenoble INP - Phelma in 2015,<br />
-                with Major in <em>Signal processing</em> and <em>Electronics</em>, but self-taught and specialized in <em>C++ development</em>.<br />
-                <br />
-                Also have a Master degree of <em>"Art, Science and Technologie".</em><br/>
-                <br />
-                I'm currently making a <em>House Carpentry</em> diploma in La Rochelle with "Les Compagnons du devoirs".<br />
-                <br />
-            	This website has been hand-coded in a week when I wasn't a lazy boy.<br />
- <br />
-<br />
-                
-				Do not hesitate... never.<br/><br/>
-                <a href="nav/contacts.html">Contact me</a> by email or phone.<br/>
-                <br/>
-                <br/>
-                Have a shitty day. <br/>
-                <br/>
-            </p>
+    
+    <section class="content" id="content" onclick="closeNav()">
+        
+        <ul id="articleList">
+        
+    <!------------------------------------------------------->
+    <!------------------------------------------------------->
+            <li class="articleElement art">
+                <button class="accordionTitleButton">
+                    <div class="articleTitle">
+                        <div class="articleTitleContent">
+                            <h2>Section 1</h2>
+                            <h3>Sub Title tag</h3>
+                        </div>
+                    </div>
+                    <div class="articleTitleMediaContainer">
+                        <div class="articleTitleMediaFrame">
+                            <img src="img_red/Chine/China-8.JPG" alt="China" />
+                        </div>
+                    </div>
+                </button>
+                <div class="panel">
+                    <article class="panelContent">
+                        <div class="panelText">
+                            <div class="panelTextContent">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="panelMediaContainer">
+                            <a class="fancybox" rel="China1" href="img/Chine/China-8.JPG"></a>
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="China1" href="img/Chine/China-7.JPG">
+                                    <img src="img_red/Chine/China-7.JPG" alt="China" />
+                                </a>
+                            </div>
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="China1" href="img/Chine/China-9.JPG">
+                                    <img src="img_red/Chine/China-9.JPG" alt="China" />
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </li>
             
-		</article>
-
-                
+            
     <!------------------------------------------------------->
-    
+    <!------------------------------------------------------->
+            
+            <li class="articleElement woodworking">
+                <button class="accordionTitleButton">
+                    <div class="articleTitle">
+                        <div class="articleTitleContent">
+                            <h2>Section 2</h2>
+                            <h3>Sub Title tag</h3>
+                        </div>
+                    </div>
+                    <div class="articleTitleMediaContainer">
+                        <div class="articleTitleMediaFrame">
+                            <img src="img_red/Chine/China-1.JPG" alt="China" />
+                        </div>
+                    </div>
+                </button>
+                <div class="panel">
+                    <article class="panelContent">
+                        <div class="panelText">
+                            <div class="panelTextContent">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="panelMediaContainer">
+                            <a class="fancybox" rel="China2" href="img/Chine/China-1.JPG"></a>
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="China2" href="img/Chine/China-2.JPG">
+                                    <img src="img_red/Chine/China-2.JPG" alt="China" />
+                                </a>
+                            </div>
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="China2" href="img/Chine/China-3.JPG">
+                                    <img src="img_red/Chine/China-3.JPG" alt="China" />
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </li>
+           
+    <!------------------------------------------------------->
+    <!------------------------------------------------------->
+            
+            <li class="articleElement graphic">
+                <button class="accordionTitleButton">
+                    <div class="articleTitle">
+                        <div class="articleTitleContent">
+                            <h2>Section 3</h2>
+                            <h3>Sub Title tag</h3>
+                        </div>
+                    </div>
+                    <div class="articleTitleMediaContainer">
+                        <div class="articleTitleMediaFrame">
+                            <img src="img_red/Chine/China-14.JPG" alt="China" />
+                        </div>
+                    </div>
+                </button>
+                <div class="panel">
+                    <article class="panelContent">
+                        <div class="panelText">
+                            <div class="panelTextContent">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="panelMediaContainer">
+                            <a class="fancybox" rel="China3" href="img/Chine/China-14.JPG"></a>
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="China3" href="img/Chine/China-17.JPG">
+                                    <img src="img_red/Chine/China-17.JPG" alt="China" />
+                                </a>
+                            </div>
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="China3" href="img/Chine/China-19.JPG">
+                                    <img src="img_red/Chine/China-19.JPG" alt="China" />
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </li>
         
+    <!------------------------------------------------------->
+    <!------------------------------------------------------->
+        </ul>
+              
     </section>
-    
     
     <!------------------------------------------------------->
     
@@ -163,6 +257,10 @@
     
 	<script type="text/javascript" src="assets/js/scripts.js">
   	</script>
+    
+    <script type="text/javascript" src="assets/js/fancybox_loader.js">
+	</script>
+    
 </body>
 
 </html>

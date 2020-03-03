@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<group>
+	<Blobs_parameters>
+		<Bpm>90</Bpm>
+		<Bpm_Amplitude>20.9607</Bpm_Amplitude>
+		<Distortion_Amount>1</Distortion_Amount>
+		<Distortion_Speed>1</Distortion_Speed>
+		<Mvt_Speed>5.66467</Mvt_Speed>
+		<Mvt_Range>1</Mvt_Range>
+	</Blobs_parameters>
+	<Flakes_parameters>
+		<Speed>0.537991</Speed>
+		<Amount>0.5</Amount>
+		<Color>254, 175, 50, 255</Color>
+	</Flakes_parameters>
+	<Background_Color_parameters>
+		<Display>1</Display>
+		<Blinking_Speed>0.1</Blinking_Speed>
+		<Color_brightness>0.8</Color_brightness>
+		<Amount>1</Amount>
+		<Alpha>1</Alpha>
+	</Background_Color_parameters>
+	<group>
+		<FrontFlakes_parameters>
+			<Num_Flake>50</Num_Flake>
+			<Force_field_magnitude>5.1</Force_field_magnitude>
+			<World_viscosity>0.3</World_viscosity>
+			<Mass>15</Mass>
+			<Min_Color>0, 0, 0, 255</Min_Color>
+			<Max_Color>255, 255, 255, 255</Max_Color>
+		</FrontFlakes_parameters>
+		<BackFlakes_parameters>
+			<Num_Flake>0</Num_Flake>
+			<Force_field_magnitude>5.1</Force_field_magnitude>
+			<World_viscosity>0.3</World_viscosity>
+			<Mass>15</Mass>
+			<Min_Color>0, 0, 0, 255</Min_Color>
+			<Max_Color>255, 255, 255, 255</Max_Color>
+		</BackFlakes_parameters>
+	</group>
+	<spirits_parameters>
+		<Num_Spirits>10</Num_Spirits>
+		<Force_field_Magnitude>5.1</Force_field_Magnitude>
+		<Mass>5</Mass>
+		<Length>50</Length>
+	</spirits_parameters>
+</group>

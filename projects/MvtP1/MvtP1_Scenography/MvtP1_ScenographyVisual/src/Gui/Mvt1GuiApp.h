@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include <vector>
+#include "Presets.h"
 
 class ofApp;
 
@@ -30,27 +31,20 @@ public:
     void guiEventFrontFlakes(ofAbstractParameter& e);
     void guiEventBackFlakes(ofAbstractParameter& e);
     void guiEventSpirits(ofAbstractParameter& e);
-    
+
+private:
+    void handleKeyPressedBlobs(int key);
+    void handleKeyPressedSand(int key);
+    void handleKeyPressedBlinkingColor(int key);
+    void handleKeyPressedFrontFlakes(int key);
+    void handleKeyPressedBackFlakes(int key);
+    void handleKeyPressedSpirit(int key);
+
 private:
     void setActivPanelColor();
 
-private:
-    shared_ptr<ofApp> mApp;
 
-private:
-    typedef enum
-    {
-        BLOBS = 0,
-        SAND,
-        BLINK,
-        FLAKES_BACK,
-        FLAKES_FRONT,
-        SPIRIT,
-        NUM_MODE
-    } ParametersCurrentlyEdited;
-    ParametersCurrentlyEdited eActivParameters;
-
-private:
+public:
     // ------------------------------------------
     ofxPanel mBlobsPanel;
     ofParameterGroup mBlobsParameters;
@@ -81,7 +75,9 @@ private:
     ofParameter<float> mBlinkingColorAlpha;
 
     // ------------------------------------------
-    ofxPanel mFrontFlakesPanel;
+    ofxPanel mFlakesPanel;
+    ofParameterGroup mFlakesParameters;
+
     ofParameterGroup mFrontFlakesParameters;
     bool mFrontFlakesParametersChanged;
     ofParameter<float> mFrontFlakesNumFlakes;
@@ -91,7 +87,6 @@ private:
     ofParameter<ofColor> mFrontFlakesMinColor;
     ofParameter<ofColor> mFrontFlakesMaxColor;
 
-    ofxPanel mBackFlakesPanel;
     ofParameterGroup mBackFlakesParameters;
     bool mBackFlakesParametersChanged;
     ofParameter<float> mBackFlakesNumFlakes;
@@ -111,13 +106,23 @@ private:
     ofParameter<float> mSpiritsLength;
 
 private:
-    void handleKeyPressedBlobs(int key);
-    void handleKeyPressedSand(int key);
-    void handleKeyPressedBlinkingColor(int key);
-    void handleKeyPressedFrontFlakes(int key);
-    void handleKeyPressedBackFlakes(int key);
-    void handleKeyPressedSpirit(int key);
+    shared_ptr<ofApp> mApp;
 
+private:
+    typedef enum
+    {
+        BLOBS = 0,
+        SAND,
+        BLINK,
+        FLAKES,
+        SPIRIT,
+        PRESETS,
+        NUM_MODE
+    } ParametersCurrentlyEdited;
+    ParametersCurrentlyEdited eActivParameters;
+
+private:
+    Presets mPresets;
 
 };
 
