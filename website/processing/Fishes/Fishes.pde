@@ -24,7 +24,7 @@ void setup() {
 }
 
 void draw() {
-    background(248, 248, 255);
+    background(255, 255, 255, 0);
     flock.run(obstacles);
   
     for (Obstacle ob : obstacles) {

@@ -20,7 +20,6 @@
 	left: 0%;
 	padding-bottom: 3em;
 	width: 100%;
-    height: inherit;
 }
 
 .content ul
@@ -46,7 +45,6 @@
 	margin: 0;
     width: 100%;
     height: var(--article-button-height);
-    min-height: 100px;
     
     
     transition: 0.5s;
@@ -107,7 +105,7 @@
     justify-content: center;
 	vertical-align:top;
     
-    max-height: var(--article-media-height);
+    height: var(--article-button-height);
     
     overflow: hidden;
     white-space: nowrap;
@@ -265,7 +263,7 @@
     /*justify-content: center;
     align-items: stretch;
     */
-    height: 40vh;
+    height: var(--article-media-height);
     width: 100%;
     padding: 0;
     
@@ -296,21 +294,22 @@
 }
 
 
+.panelMediaFrame iframe
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+	margin-left: 0px;
+    
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: 3s ease-in-out;
+	transition: 3s ease-in-out;
+}
 
 
 /************************************************************************************************/
-
-.content_article_vid
-{
-	display: block;
-	margin: 0;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0px;
-	width: 95%;
-	border: none;
-}
-
 
 .content_article_pdf
 {
@@ -328,35 +327,3 @@
 
 /************************************************************************************************/
 
-.processingCanvas
-{
-    display: flex;
-    position: fixed;
-    align-self: center;
-    top:-5px;
-    left: -5px;
-    margin: auto;
-    
-    height: 12%;
-	width: 105%;
-    
-    background-color: aqua;
-    
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.backgroundProcessingCanvas
-{
-    flex: 1;
-    display: flex;
-    object-fit: cover;
-    
-	padding: 0px;
-	margin: auto;
-    
-	border: none;
-    border-style: none;
-    text-decoration: 0;
-    
-}

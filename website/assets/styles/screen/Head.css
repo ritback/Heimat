@@ -2,8 +2,8 @@
 
 
 :root {
-    --main-txt-color: MIDNIGHTBLUE;
-    --main-bg-color: GHOSTWHITE;
+    --main-txt-color: DARKBLUE;
+    --main-bg-color: WHITESMOKE;
 }
 
 /* CSS Document */
@@ -87,7 +87,7 @@
 {
 	padding: 0px;
 	
-	font-size: 2.7em;
+	font-size: 2.5em;
     line-height: 0.2em;
 	text-decoration: none;
 	
@@ -95,7 +95,7 @@
 	src: url('../fonts/biko/Biko_Bold.otf') format('otf');
 	src: url('../fonts/Franchise-Bold.ttf') format('ttf');
     
-    color: steelblue;
+    color: var(--main-txt-color);
     transition: 2s;
     
 }
@@ -129,11 +129,49 @@
 	src: url('../fonts/biko/Biko_Bold.otf') format('otf');
 	src: url('../fonts/Franchise-Bold.ttf') format('ttf');
     
-    color: steelblue;
+    color: var(--main-txt-color);
     transition: 2s;
 }
 
 
 .headAbout h1:hover {
     color: black;
+}
+
+/******************************************************************************************/
+
+.processingCanvas
+{
+    display: flex;
+    position: fixed;
+    align-self: center;
+    top:-5px;
+    left: -5px;
+    margin: auto;
+    
+	z-index: 1;
+    pointer-events: none;
+    
+    height: 12%;
+	width: 105%;
+    
+    background-color: transparent;
+    
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.backgroundProcessingCanvas
+{
+    flex: 1;
+    display: flex;
+    object-fit: cover;
+    
+	padding: 0px;
+	margin: auto;
+    
+	border: none;
+    border-style: none;
+    text-decoration: 0;
+    
 }
