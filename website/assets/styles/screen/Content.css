@@ -16,7 +16,7 @@
     display: inline-block; 
     vertical-align: top;
 	position: absolute;
-	top: 50%;
+	top: 75%;
 	left: 0%;
 	padding-bottom: 3em;
 	width: 100%;
@@ -326,14 +326,37 @@
 	margin-right:auto;
 }
 
-.content_article_processingCanvas
+/************************************************************************************************/
+
+.processingCanvas
 {
-	display: block;
-	margin-top: 0.5em;
+    display: flex;
+    position: fixed;
+    align-self: center;
+    top:-5px;
+    left: -5px;
+    margin: auto;
+    
+    height: 12%;
+	width: 105%;
+    
+    background-color: aqua;
+    
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.backgroundProcessingCanvas
+{
+    flex: 1;
+    display: flex;
+    object-fit: cover;
+    
 	padding: 0px;
+	margin: auto;
+    
 	border: none;
-	max-width: 80%;
-	border: 5px solid black;
-	margin-left: auto;
-	margin-right:auto;
+    border-style: none;
+    text-decoration: 0;
+    
 }

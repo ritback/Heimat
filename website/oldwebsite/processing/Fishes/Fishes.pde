@@ -1,5 +1,4 @@
 
-boolean running = false;
 
 Flock flock;
 
@@ -26,45 +25,16 @@ void setup() {
 }
 
 void draw() {
-  if(running)
-  {
     background(50);
     flock.run(obstacles);
   
     for (Obstacle ob : obstacles) {
       ob.render();
     }
-  }
-  else
-  {
-    pushStyle();
-    fill(200, 200, 200, 50);
-    noStroke();
-    rect(0, 0, width, height);
-    
-    pushMatrix();
-    translate(width/2, height/2);
-    fill(255, 67, 68);
-    float rectSize = width/25;
-    rect(-1.5*rectSize, -rectSize,
-         3*rectSize, 2*rectSize, width/30);
-    fill(255);
-    rectSize -= 10;
-    translate(-rectSize, 0);
-    triangle(0, rectSize, 0, -rectSize, 2*rectSize, 0);
-    popMatrix();
-    popStyle();
-    noLoop();
-  }
 }
 
 // Add a new boid into the System
 void mousePressed() {
-  if (!running)
-  {
-    loop();
-  }
-  running = !running;
   flock.addBoid(new Boid(mouseX,mouseY));
   
 }

@@ -1,54 +1,139 @@
 @charset "UTF-8";
+
+
+:root {
+    --main-txt-color: steelblue;
+    --main-bg-color: whitesmoke;
+}
+
 /* CSS Document */
 
 .global
 {
 	overflow-y: scroll;
+    background: var(--main-bg-color);
 }
 
+/******************************************************************************************/
 /* Head */
 
 .head
 {
-	display: block;
+	display: flex;
 	position: fixed;
-	margin: 0px;
-	top: 0px;
-	left: 0px;
-	z-index: 1;
-	
+    align-items: flex-end;
+    justify-content: flex-start;
+    
 	width:	100%;
-	height: 8%;
-	
-	background-color: rgba(255,255,255, 0.85);
-}
-
-.head_VA
-{
-	display: inline-block;
-	vertical-align:bottom;
-	top: 0px;
-	left: 0px;
+	height: 11%;
+    top:0;
+    left: 0;
+    
 	margin: 0px;
-	height: 90%;
-	width: 0%;
+    padding: 0em;
+    
+	z-index: 1;
 }
 
-.head_title
+.head a
 {
-	display: inline-block;
-	vertical-align:bottom;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	width: 95%;
-	
+	text-decoration: none;
+}
+
+/******************************************************************************************/
+/* The button used to open the sidebar */
+#navButton
+{
+    flex: 1;
+	display: flex;
+    justify-content: center;
+    
+	margin: 0px;
+    padding: 0;
+    
+    cursor: pointer;
+    
+    background-color: transparent;
+    border: none;
+}
+
+#navButton h1
+{
 	font-size: 3em;
-    color: #09C;
+    font-weight: bold;
+    line-height: 0.1em;
+	text-decoration: none;
+    
+    color: var(--main-txt-color);
+    transition: 2s;
+}
+
+#navButton:hover {
+    color: black;
+}
+
+/******************************************************************************************/
+/*title */
+.headTitle
+{
+    flex: 11;
+	display: flex;
+    justify-content: center;
+	padding: 0;
+    margin: 0;
+}
+
+.headTitle h1
+{
+	padding: 0px;
+	
+	font-size: 1.8em;
+    line-height: 0.5em;
 	text-decoration: none;
 	
-	font-family: 'Biko', 'Franchise', Arial, Verdana, sans-serif;
+	font-family: 'Helvetica', 'Biko', 'Franchise', Arial, Verdana, sans-serif;
 	src: url('../fonts/biko/Biko_Bold.otf') format('otf');
 	src: url('../fonts/Franchise-Bold.ttf') format('ttf');
+    
+    color: steelblue;
+    transition: 2s;
+    
 }
 
+
+.headTitle h1:hover {
+    color: black;
+}
+
+
+/******************************************************************************************/
+/*title */
+.headAbout
+{
+    flex: 1;
+	display: flex;
+    justify-content: center;
+	padding: 0;
+    margin: 0;
+}
+
+.headAbout h1
+{
+	padding: 0px;
+	
+	font-size: 1.5em;
+    line-height: 0.7em;
+	text-decoration: none;
+	
+	font-family: 'Helvetica', 'Biko', 'Franchise', Arial, Verdana, sans-serif;
+	src: url('../fonts/biko/Biko_Bold.otf') format('otf');
+	src: url('../fonts/Franchise-Bold.ttf') format('ttf');
+    
+    color: steelblue;
+    transition: 2s;
+}
+
+
+.headAbout h1:hover {
+    color: black;
+}

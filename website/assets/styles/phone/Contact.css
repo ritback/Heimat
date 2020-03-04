@@ -5,7 +5,7 @@
 
 .contacts
 {
-	display: none;
+	display: inline-block;
 	position: fixed;
 	bottom: 3%;
 	left: 0px;
