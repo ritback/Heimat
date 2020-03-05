@@ -4,6 +4,8 @@
 :root {
     --main-txt-color: DARKBLUE;
     --main-bg-color: WHITESMOKE;
+    --main-font: 'Spartan', sans-serif;
+    
 }
 
 /* CSS Document */
@@ -61,7 +63,7 @@
 {
 	font-size: 2.5em;
     font-weight: bold;
-    line-height: 0.1em;
+    line-height: 0.3em;
 	text-decoration: none;
     
     color: var(--main-txt-color);
@@ -88,21 +90,20 @@
 	padding: 0px;
 	
 	font-size: 2.5em;
-    line-height: 0.2em;
+    line-height: 0em;
 	text-decoration: none;
 	
-	font-family: 'Helvetica', 'Biko', 'Franchise', Arial, Verdana, sans-serif;
-	src: url('../fonts/biko/Biko_Bold.otf') format('otf');
-	src: url('../fonts/Franchise-Bold.ttf') format('ttf');
+	font-family: var(--main-font);
+    font-weight: bold;
     
-    color: var(--main-txt-color);
+    color: black;
     transition: 2s;
     
 }
 
 
 .headTitle h1:hover {
-    color: black;
+    color: var(--main-txt-color);
 }
 
 
@@ -113,6 +114,7 @@
     flex: 2;
 	display: flex;
     justify-content: center;
+    vertical-align: middle;
 	padding: 0;
     margin: 0;
 }
@@ -122,12 +124,10 @@
 	padding: 0px;
 	
 	font-size: 1.5em;
-    line-height: 0.5em;
+    line-height: 0.4em;
 	text-decoration: none;
 	
-	font-family: 'Helvetica', 'Biko', 'Franchise', Arial, Verdana, sans-serif;
-	src: url('../fonts/biko/Biko_Bold.otf') format('otf');
-	src: url('../fonts/Franchise-Bold.ttf') format('ttf');
+	font-family: var(--main-font);
     
     color: var(--main-txt-color);
     transition: 2s;

@@ -18,8 +18,20 @@ var acc = document.getElementsByClassName("accordionTitleButton");
 var i;
 
 for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("activeAccordionButton");
+  acc[i].addEventListener("click", function(){
+      
+    /*
+    var otherElements = document.getElementsByClassName("accordionTitleButton");
+    var j;
+    for (j = 0; j < otherElements.length; j++)
+    {
+        var otherPanel = otherElements[j].nextElementSibling;
+        if (otherPanel.style.maxHeight)
+        {
+            otherPanel.style.maxHeight = null;
+        }
+    }
+     */
     var panel = this.nextElementSibling;
     if (panel.style.maxHeight) {
       panel.style.maxHeight = null;
@@ -75,6 +87,7 @@ function displayVisibleArticleListCorrectly(tag)
             var titleTextContent = titleContent.querySelector(".articleTitleContent");
             titleTextContent.style.marginRight = "auto";
             titleTextContent.style.marginLeft = "0";
+            titleTextContent.style.textAlign = "left";
                 
             panelContent.style.flexDirection  = "row-reverse";
         }
@@ -85,6 +98,7 @@ function displayVisibleArticleListCorrectly(tag)
             var titleTextContent = titleContent.querySelector(".articleTitleContent");
             titleTextContent.style.marginRight = "0";
             titleTextContent.style.marginLeft = "auto";
+            titleTextContent.style.textAlign = "right";
             
             panelContent.style.flexDirection  = "row";
         }

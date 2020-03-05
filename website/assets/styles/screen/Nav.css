@@ -20,16 +20,18 @@
 
 /* The sidebar links */
 #sidebarNav  a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 1.5em;
-    color: #818181;
     display: block;
-    transition: 0.3s;
     
-	font-family: 'Helvetica', 'Biko', 'Franchise', Arial, Verdana, sans-serif;
-	src: url('../fonts/biko/Biko_Bold.otf') format('otf');
-	src: url('../fonts/Franchise-Bold.ttf') format('ttf');
+    padding: 0.3em;
+    padding-left: 2em;
+    
+    color: #818181;
+    
+	font-family: var(--main-font);
+    text-decoration: none;
+    font-size: 1em;
+    
+    transition: 0.3s;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -47,15 +49,3 @@
 }
 
 /***********************************************************************************************/
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-    transition: margin-left .5s; /* If you want a transition effect */
-    padding: 20px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-    #sidebarNav {padding-top: 15px;}
-    #sidebarNav a {font-size: 18px;}
-}
