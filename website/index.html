@@ -3,25 +3,22 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!--
-    <link rel="stylesheet" media="screen and (min-width: 700px)" href="assets/styles/normal/normal_Head.css" />
-    <link rel="stylesheet" media="screen and (min-width: 700px)" href="assets/styles/normal/normal_Nav.css" />
-    <link rel="stylesheet" media="screen and (min-width: 700px)" href="assets/styles/normal/normal_Contact.css" />
-    <link rel="stylesheet" media="screen and (min-width: 700px)" href="assets/styles/normal/normal_Content.css" />
+    useful resource to make this website:
     
-    <link rel="stylesheet" media="screen and (max-width: 700px)" href="assets/styles/small/small_Head.css" />
-    <link rel="stylesheet" media="screen and (max-width: 700px)" href="assets/styles/small/small_Nav.css" />
-    <link rel="stylesheet" media="screen and (max-width: 700px)" href="assets/styles/small/small_Contact.css" />
-    <link rel="stylesheet" media="screen and (max-width: 700px)" href="assets/styles/small/small_Content.css" />
-    
-    <link rel="stylesheet" media="screen and (max-device-width: 700px)" href="assets/styles/phone/phone_Head.css" />
-    <link rel="stylesheet" media="screen and (max-device-width: 700px)" href="assets/styles/phone/phone_Nav.css" />
-    <link rel="stylesheet" media="screen and (max-device-width: 700px)" href="assets/styles/phone/phone_Contact.css" />
-    <link rel="stylesheet" media="screen and (max-device-width: 700px)" href="assets/styles/phone/phone_Content.css" />
+googgle doc to HTML
+image png to jpeg resizer : https://www.iloveimg.com/fr/download/rvc0vsd8jcm1r19hy0kzfbdrd4803vczhA3mmkgnwz5whc0v1b0tknjzAfwAm8f69nklbAnsv89ck4lscfx44lr9944sx8f1yxs8r9mdstzxk0d65qxyf354h24n22Akdt5x6j2tbk5cxwh500775yw8rsb6cqblwlw8lqAvcxkdfpv4ckxq/2
+image jpeg compressor : https://imagecompressor.com/fr/
+
+about flex box: https://www.alsacreations.com/tuto/lire/1493-CSS3-Flexbox-Layout-module.html
+colors : https://htmlcolorcodes.com/fr/noms-de-couleur/?fbclid=IwAR3iDTZEzeyxRQCx9W4txvEXmBE6l7zXECHMN_cWenzR9WE8NTv-jCS6V0I
+
+
     -->
     
     
     <link rel="stylesheet" href="assets/styles/screen/Head.css" />
     <link rel="stylesheet" href="assets/styles/screen/Nav.css" />
+    <link rel="stylesheet" href="assets/styles/screen/About.css" />
     <link rel="stylesheet" href="assets/styles/screen/Contact.css" />
     <link rel="stylesheet" href="assets/styles/screen/Content.css" />
     
@@ -59,6 +56,9 @@
     <link rel="stylesheet" href="assets/js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
     <script type="text/javascript" src="assets/js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
     
+	<script type="text/javascript" src="assets/js/scripts.js">
+  	</script>
+    
     <!-- Add processing -->
     <script type="text/javascript" src="assets/js/processing.js"></script>
     
@@ -79,13 +79,13 @@
         
         
         <div class="headTitle">
-            <a href="index.html" onclick="displayVisibleArticleListCorrectly('.articleElement')">
+            <a href="index.html">
                 <h1>Henri Aribert-Desjardins</h1>
             </a>
         </div>
         
         
-        <div class="headAbout">
+        <div class="headAbout" onclick="openAbout()">
             <a href="#about">
                 <h1>About</h1>
             </a>
@@ -103,7 +103,7 @@
     <nav id="sidebarNav">
         
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a href="#about">About</a>
+        <a href="javascript:void(0)" onclick="closeNav(); openAbout();">About</a>
         <a href="#" onclick="displayVisibleArticleListCorrectly('.articleElement')">All<br/>_</a>
         <a href="#" onclick="displayVisibleArticleListCorrectly('.art')">Art installation</a>
         <a href="#" onclick="displayVisibleArticleListCorrectly('.conception')">3D design</a>
@@ -115,12 +115,12 @@
     
     <!------------------------------------------------------->
     
-    <section class="content" id="content" onclick="closeNav()">
+    <section class="content" id="content" onclick="closeNav(); closeAbout();">
         
         <ul id="articleList">
         
     <!------------------------------------------------------->
-    <!------------------------------------------------------->
+    <!------------------UltraVeillance----------------------->
             <li class="articleElement art">
                 <button class="accordionTitleButton">
                     <div class="articleTitle">
@@ -148,7 +148,7 @@
 <p>Taverne Gutemberg, 2017, Lyon </p>
 <p>Festival Digital Narratives, 2018, Grenoble</p>
 <p>Ville de Grenoble, 2018, Grenoble </p>
-<h3>Propos :</h3>
+<h3>About:</h3>
 <p>Le terme “utlraveillance” désigne, dans le contexte technologique actuel, la surveillance ciblé de tous au travers de la masse, surveillance constante, à la fois global et individuel. C'est un système à l'échelle universelle permettant un accès sur chaque individu.</p>
 <h3>Description :</h3>
 <p>L’oeuvre est composée de différentes caméras placée dans le lieux d’exposition ainsi que de 9 écrans disposés en grille en fin de parcours d’exposition.</p>
@@ -215,11 +215,10 @@
                 </div>
             </li>
             
-            
     <!------------------------------------------------------->
-    <!------------------------------------------------------->
+    <!-------------------Mouvement----------------------->
             
-            <li class="articleElement art">
+            <li class="articleElement art graphic">
                 <button class="accordionTitleButton">
                     <div class="articleTitle">
                         <div class="articleTitleContent">
@@ -243,7 +242,7 @@
 <p>Festival Art Science et Technologie, 2015, Grenoble </p>
 <p>Festival Art Science et Technologie, 2016, Grenoble </p>
 <p>Fêtes des lumières, 2018, Lyon</p>
-<h3>Propos :</h3>
+<h3>About:</h3>
 <p>Mouvement (Procédural) 1, reprend l’oeuvre de Vassily Kandinsky “Mouvement 1” pour l’animer de manière procédurale. Chaque groupe d’éléments du tableau est mu dans l'espace au moyen d'algorithmes émergent ou de vie artificielles.</p>
 
 <p>L’oeuvre est destiné à être joué live, projeté derrière un ou des musiciens. Chaque formes peut être contrôlé individuellement en temps réel pour créer une atmosphère spécifique à la musique.</p>
@@ -284,9 +283,9 @@
             </li>
            
     <!------------------------------------------------------->
-    <!------------------------------------------------------->
+    <!---------------You and Lady----------------------->
             
-            <li class="articleElement graphic">
+            <li class="articleElement art">
                 <button class="accordionTitleButton">
                     <div class="articleTitle">
                         <div class="articleTitleContent">
@@ -310,7 +309,7 @@
 <p>Festival Art Science et Technologie, 2015, Grenoble </p>
 <p>Festival Art Science et Technologie, 2016, Grenoble </p>
 <p>Fêtes des lumières, 2018, Lyon</p>
-<h3>Propos :</h3>
+<h3>About:</h3>
 <p>You and Lady Gouldian est une expérience communautaire. La population d'oiseaux, Lady Gouldians ou Gouldian finchs, n'est pas stable et tient d'un fragile équilibre entre le nombre d'oiseau, la nourriture et l'habitat disponible.</p>
 
 <p>Le spectateur peut s’amuser avec la colonies ou s’apercevoir qu’en restant calme ils les attire à lui. Lorsqu’il en attire un nombre suffisant, il crée alors un arbre, sa silhouette se dissipe et lentement un arbre apparaît sur la projection. Cette arbre représente un habitat et permettra à la colonie de s’agrandir.</p>
@@ -366,10 +365,10 @@
                 </div>
             </li>
         
-            <!------------------------------------------------------->
-            <!------------------------------------------------------->
+    <!------------------------------------------------------->
+    <!---------------Equation d foule------------------------>
             
-            <li class="articleElement graphic">
+            <li class="articleElement art graphic">
                 <button class="accordionTitleButton">
                     <div class="articleTitle">
                         <div class="articleTitleContent">
@@ -393,7 +392,7 @@
 <p>Collectif T'y crois ?, Nabil Tazi</p>
 <h3>Exhibition:</h3>
 <p>Exposition temporaire La Mare, 2017, Lyon</p>
-<h3>Propos :</h3>
+<h3>About:</h3>
 <p>La principale thématique de notre projet est celle des utopies sociales. Il s’agit de créer à la fois une représentation graphique immersive d’un modèle de société, mais aussi de le rendre participatif et évolutif. En effet ce sont les utopies sociales de chaque visiteur / participant / spectateur qui vont enrichir le modèle de société, et donc l’installation.
 </p>
 <p>Nos modèles de sociétés et nos algorithmes sont déterministes, c’est-à-dire que l’issue pourrait être prédite à partir des paramètres d’entrées. Notre vision du déterminisme n’est pas fataliste pour autant. Bien que l’issue soit déterminée par les paramètres, l’aspect participatif de notre utopie sociale évolue en temps réel selon les idéaux sociaux des participants.</p>
@@ -409,21 +408,21 @@
                         </div>
                         
                         <div class="panelMediaContainer">
-                            <a class="fancybox" rel="China3" href="img/Equation/equation1.jpg"></a>
+                            <a class="fancybox" rel="equation" href="img/Equation/equation1.jpg"></a>
                             
                             <div class="panelMediaFrame">
-                                <a class="fancybox" rel="China3" href="img/Equation/equation3.jpg">
+                                <a class="fancybox" rel="equation" href="img/Equation/equation3.jpg">
                                     <img src="img/Equation/equation3-min.jpg" alt="China" />
                                 </a>
                             </div>
                             
                             <div class="panelMediaFrame">
-                                <a class="fancybox" rel="China3" href="img/Equation/equation2.jpg">
+                                <a class="fancybox" rel="equation" href="img/Equation/equation2.jpg">
                                     <img src="img/Equation/equation2-min.jpg" alt="China" />
                                 </a>
                             </div>
                             <div class="panelMediaFrame">
-                                <a class="fancybox" rel="China3" href="img/Equation/equation4.jpg">
+                                <a class="fancybox" rel="equation" href="img/Equation/equation4.jpg">
                                     <img src="img/Equation/equation4-min.jpg" alt="China" />
                                 </a>
                             </div>
@@ -432,12 +431,305 @@
                     </article>
                 </div>
             </li>
+    
+            <!------------------------------------------------------->
+    <!---------------regart------------------------>                   
+            
+            <li class="articleElement graphic">
+                <button class="accordionTitleButton">
+                    <div class="articleTitle">
+                        <div class="articleTitleContent">
+                            <h2>Reg'art</h2>
+                            <h3>Graphic design, visual identity</h3>
+                        </div>
+                    </div>
+                    <div class="articleTitleMediaContainer">
+                        <div class="articleTitleMediaFrame">
+                            <img src="img/regart/regart3.png" alt="China" />
+                        </div>
+                    </div>
+                </button>
+                <div class="panel">
+                    <article class="panelContent">
+                        <div class="panelText">
+                            <div class="panelTextContent">
+<h3>About:</h3>
+<p>Visual identity and Web site developpement for the association reg'art. </p>
+
+<p>The association Reg'art allows amateur artists to display their works throughout the urban space of Grenoble. It aims to develop the cultural identity of the city of Grenoble by posting art works where there would otherwise be advertisements--with the blessing of the city administration.</p>
+
+<p>I designed and coded the web site for the association. Unfortunatly the wesite doesn't exist anymore...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="panelMediaContainer">
+                            <a class="fancybox" rel="regart" href="img/regart/reg3.jpg"></a>
+                            
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="regart" href="img/regart/reg1.jpg">
+                                    <img src="img/regart/reg1.jpg" alt="China" />
+                                </a>
+                            </div>
+                            
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="regart" href="img/regart/reg2.jpg">
+                                    <img src="img/regart/reg2.jpg" alt="China" />
+                                </a>
+                            </div>
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="regart" href="img/regart/regart3.png">
+                                    <img src="img/regart/regart3.png" alt="China" />
+                                </a>
+                            </div>
+                            
+                            
+                        </div>
+                    </article>
+                </div>
+            </li>
+            
+    <!------------------------------------------------------->
+    <!---------------Foster And Goldstein------------------------>                   
+            
+            <li class="articleElement graphic">
+                <button class="accordionTitleButton">
+                    <div class="articleTitle">
+                        <div class="articleTitleContent">
+                            <h2>Foster And Goldstein</h2>
+                            <h3>Graphic design, visual identity, creative coding</h3>
+                        </div>
+                    </div>
+                    <div class="articleTitleMediaContainer">
+                        <div class="articleTitleMediaFrame">
+                            <img src="img/graphic/FosterAndGoldstein-03.png" alt="China" />
+                        </div>
+                    </div>
+                </button>
+                <div class="panel">
+                    <article class="panelContent">
+                        <div class="panelText">
+                            <div class="panelTextContent">
+                                
+                               
+<h3>About:</h3>
+<p>Album art-work I made for the band: Foster & Goldstein.</p>
+
+<p>The band wanted "...a law office business card on acid".</p>
+
+<p>The background was made with a procedural texture. It's a manipulation of Perlin's noise texture. The colors are added using Perlin's different noises.</p>
+<p>I used a GUI add-on of OpenFramework to create a software where it's possible to play with differents parameters. The software has an animation you can use to stop and export textures in HD.</p>
+
+<p>The font is Times New Roman! I love to play with classical fonts and make them my own. Point by point I retouch the font to obtain exactly what I want.</p>
+
+                            </div>
+                        </div>
+                        
+                        <div class="panelMediaContainer">
+                            <a class="fancybox" rel="foster" href="img/graphic/FosterAndGoldstein-03.png"></a>
+                            
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="foster" href="img/graphic/FosterAndGoldstein-07.png">
+                                    <img src="img/graphic/FosterAndGoldstein-07.png" alt="China" />
+                                </a>
+                            </div>
+                            
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="foster" href="img/graphic/FosterAndGoldstein-04.png">
+                                    <img src="img/graphic/FosterAndGoldstein-04.png" alt="China" />
+                                </a>
+                            </div>
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="foster" href="img/graphic/FosterAndGoldstein-08.png">
+                                    <img src="img/graphic/FosterAndGoldstein-08.png" alt="China" />
+                                </a>
+                            </div>
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="foster" href="img/graphic/FosterAndGoldstein_ArtworkGenerator.png">
+                                    <img src="img/graphic/FosterAndGoldstein_ArtworkGenerator.png" alt="China" />
+                                </a>
+                            </div>
+                            
+                            
+                        </div>
+                    </article>
+                </div>
+            </li>
         
+    <!------------------------------------------------------->
+    <!---------------Sound Of Spring------------------------>                   
+            
+            <li class="articleElement graphic">
+                <button class="accordionTitleButton">
+                    <div class="articleTitle">
+                        <div class="articleTitleContent">
+                            <h2>Sound Of Spring</h2>
+                            <h3>Graphic design, visual identity</h3>
+                        </div>
+                    </div>
+                    <div class="articleTitleMediaContainer">
+                        <div class="articleTitleMediaFrame">
+                            <img src="img/graphic/sos_2.png" alt="China" />
+                        </div>
+                    </div>
+                </button>
+                <div class="panel">
+                    <article class="panelContent">
+                        <div class="panelText">
+                            <div class="panelTextContent">
+<h3>About:</h3>
+<p>Visual identity for the "Sound of spring festival" </p>
+                            </div>
+                        </div>
+                        
+                        <div class="panelMediaContainer">
+                            <a class="fancybox" rel="sos" href="img/graphic/sos_2.png"></a>
+                            
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="sos" href="img/graphic/sos_1.png">
+                                    <img src="img/graphic/sos_1.png" alt="China" />
+                                </a>
+                            </div>
+                            
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="sos" href="img/graphic/sos_3.png">
+                                    <img src="img/graphic/sos_3.png" alt="China" />
+                                </a>
+                            </div>
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="sos" href="img/graphic/sos_loader.gif">
+                                    <img src="img/graphic/sos_loader.gif" alt="China" />
+                                </a>
+                            </div>
+                            
+                            
+                        </div>
+                    </article>
+                </div>
+            </li>
+     
+    <!------------------------------------------------------->
+    <!---------------Festival AST------------------------>                   
+            
+            <li class="articleElement graphic">
+                <button class="accordionTitleButton">
+                    <div class="articleTitle">
+                        <div class="articleTitleContent">
+                            <h2>Festival of Art, Science and Technology</h2>
+                            <h3>Graphic design, visual identity, creative coding</h3>
+                        </div>
+                    </div>
+                    <div class="articleTitleMediaContainer">
+                        <div class="articleTitleMediaFrame">
+                            <img src="img/graphic/AST_Printed11.png" alt="China" />
+                        </div>
+                    </div>
+                </button>
+                <div class="panel">
+                    <article class="panelContent">
+                        <div class="panelText">
+                            <div class="panelTextContent">
+<h3>About:</h3>
+<p>Prints for the Festival of Art, Science and Technology in 2015.</p>
+                                <p>The points are disposed in circle that rolls around, creating different patterns that can be exported and create 6 different visuals to be printed as posters</p>
+                            </div>
+                        </div>
+                        
+                        <div class="panelMediaContainer">
+                            <a class="fancybox" rel="ast" href="img/graphic/AST_Printed11.png"></a>
+                            
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="ast" href="img/graphic/AST_Printed12.png">
+                                    <img src="img/graphic/AST_Printed12-min.jpg" alt="China" />
+                                </a>
+                            </div>
+                            
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="ast" href="img/graphic/AST_Printed21.png">
+                                    <img src="img/graphic/AST_Printed21-min.jpg" alt="China" />
+                                </a>
+                            </div>
+                            <div class="panelMediaFrame">
+                                <a class="fancybox" rel="ast" href="img/graphic/AST_Printed22.png">
+                                    <img src="img/graphic/AST_Printed22-min.jpg" alt="China" />
+                                </a>
+                            </div>
+                            
+                            
+                        </div>
+                    </article>
+                </div>
+            </li>
+     
     <!------------------------------------------------------->
     <!------------------------------------------------------->
         </ul>
               
     </section>
+    
+    
+    <div id="aboutPanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeAbout()">×</a>
+        
+        <div class="aboutIntro">
+            <h2>About: </h2>
+            <p>(I can say I have my hands in all kinds of pies.)</p>
+            <p>Graduated from Grenoble Institute of Technology - Phelma with a <strong>major in Signal processing</strong> and a second <strong>major in Art and Science</strong>, I’ve been doing all kind of project that build my confidence in a lot of domain: </p>
+            <p><strong>software and web development</strong>, robotics, <strong>electronics</strong>, graphic design, <strong>carpentry and woodworking,</strong> Ergonomy, Cognitive Science and <strong>Human Machine Interface</strong>.</p>
+        </div>
+        <div class="experiencesTable">
+            <div class="experiencesColumnContent">
+                <div class="XPitem">
+                    <h3>Sales Engineer at <a href="https://www.TechSoft3D.com">TechSoft3D</a></h3>
+                    <p><i>2016 - 2019,</i> World wide support and sale engineer</p>
+                </div>
+                <div class="XPitem">
+                    <h3>Software development at <a href="https://www.eiosis.com/">Eiosis</a></h3>
+                    <p><i>2015,</i> Graphical user interface development</p>
+                </div>
+                <div class="XPitem">
+                    <h3>Software development at <a href="https://www.xils-lab.com/">Xils-Lab</a></h3>
+                    <p><i>2014,</i> Gui development and digital signal processing on filters</p>
+                </div>
+            </div>
+            
+            <div class="experiencesColumnContent">
+                <div class="XPitem">
+                    <h3>Mouvement (Procedural) 1</h3>
+                    <p>2017 - 2019, Production, promotion and exhibition<br/>
+                    Algorithms manipulation and scenography</p>
+                </div>
+                <div class="XPitem">
+                    <h3>Ultraveillance</h3>
+                    <p>2017 - 2019, Production, promotion and exhibition<br/>
+                    Scenography, sculpture, Human machine interface</p>
+                </div>
+                <div class="XPitem">
+                    <h3>You and the lady gouldian</h3>
+                    <p>2015 - 2018, Production, promotion and exhibition<br/>
+                    Algorithm manipulation, scenography and Human machine interface</p>
+                </div>
+                <div class="XPitem">
+                    <h3>Equation de foule</h3>
+                    <p>2017, Production, promotion and exhibition<br/>
+                    Algorithm manipulation, scenography and Human machine interface</p>
+                </div>
+                <div class="XPitem">
+                    <h3>Consome la vie est belle, by David Proux</h3>
+                    <p>2016, Production, promotion and exhibition<br/>
+                    Electronic and conception</p>
+                </div>
+            </div>
+            
+            <div class="experiencesColumnContent">
+                <div class="XPitem">
+                    <h3>Carpenter at Samuel Durozier</h3>
+                    <p>2019-2020, Carpenter, training at “Les Compagnons du Devoir”</p>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    
     
     <!------------------------------------------------------->
     

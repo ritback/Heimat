@@ -12,6 +12,20 @@ function closeNav() {
 }
 
 
+/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+function openAbout() {
+  document.getElementById("aboutPanel").style.width = "90%";
+  //document.getElementById("content").style.marginLeft = "250px";
+}
+
+/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+function closeAbout() {
+  document.getElementById("aboutPanel").style.width = "0";
+  //document.getElementById("content").style.marginLeft = "0";
+}
+
+
+
 
 
 var acc = document.getElementsByClassName("accordionTitleButton");

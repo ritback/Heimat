@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+
+/* CSS Document */
+
+
+/* The sidebar menu */
+#aboutPanel
+{
+    display:block;
+    position: fixed;
+    z-index: 2; /* Stay on top */
+    
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    
+    top: 0;
+    right: 0;
+    
+    background-color: #333; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    
+    padding: 0;
+    
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+/*******************************************************/
+/* Position and style the close button (top right corner) */
+#aboutPanel  .closebtn {
+    display: inline-block;
+    position: absolute;
+    
+    padding: 0.3em;
+    padding-left: 2em;
+    
+    color: #818181;
+    
+	font-family: var(--main-font);
+    text-decoration: none;
+    font-size: 1em;
+    
+    top: 0;
+    right: 25px;
+    font-size: 50px;
+    margin-left: 50px;
+}
+
+/*******************************************************/
+/* Content block */
+/************************************************************************************************/
+.aboutIntro {
+    display: block;
+    border: none;
+    
+    padding: 1em;
+	margin: 0px;
+    width: 100%;
+}
+
+
+/**************************************/
+.experiencesTable
+{
+	display: flex;
+	justify-content:center;
+    align-items: flex-start;
+    
+	margin: 0;
+    padding: 0;
+}
+
+.experiencesColumnContent
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+	margin: 0;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.experiencesRowContent
+{
+	margin: 0;
+    padding: 0;
+}
+
+
+
+/****************************************************/
+
+/************************************************************************************************/
+
+#aboutPanel
+{   
+    color: #f1f1f1;
+    font-family: var(--main-font);
+    text-align: justify;
+}
+
+#aboutPanel .experiencesTable
+{
+	text-align: justify;
+}
+
+#aboutPanel h2 {
+    padding: 0;
+    margin: 0;
+    padding-top: 0.5em;
+    font-size: 1.8em;
+}
+
+#aboutPanel h3
+{
+	margin: 0;
+	margin-top: 0.3em;
+	padding: 0;
+	font-size: 1.3em;
+    line-height: 1.0em;
+}
+
+#aboutPanel p
+{
+	font-size: 1em;
+	text-align: left;
+}
+
+#aboutPanel p em
+{
+	font-style: normal;
+	font-weight: bold;
+}
+
+#aboutPanel a
+{
+	font-style: normal;
+	font-weight: bold;
+	text-decoration: underline;
+    color: inherit;
+}
+
+/************************************************************************************************/
+
