@@ -25,6 +25,20 @@
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
 }
 
+.aboutPanelContent
+{
+	display: flex;
+    flex-direction: column;
+	justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
 /*******************************************************/
 /* Position and style the close button (top right corner) */
 #aboutPanel  .closebtn {
@@ -34,16 +48,25 @@
     padding: 0.3em;
     padding-left: 2em;
     
-    color: #818181;
+    color: #f1f1f1;
     
 	font-family: var(--main-font);
     text-decoration: none;
     font-size: 1em;
     
+    width:100%;
+    text-align: right;
+    
     top: 0;
     right: 25px;
     font-size: 50px;
     margin-left: 50px;
+    
+    transition: 3s;
+}
+
+#aboutPanel .closebtn:hover {
+    color: var(--main-txt-color);
 }
 
 /*******************************************************/
@@ -53,9 +76,12 @@
     display: block;
     border: none;
     
-    padding: 1em;
+    padding-top: 1.5em;
+    
 	margin: 0px;
-    width: 100%;
+    width: 90%;
+    
+    
 }
 
 
@@ -63,11 +89,15 @@
 .experiencesTable
 {
 	display: flex;
-	justify-content:center;
+	justify-content:space-between;
     align-items: flex-start;
     
 	margin: 0;
+	margin-right: 0;
+	margin-left: 0;
     padding: 0;
+    
+    width: 90%;
 }
 
 .experiencesColumnContent
@@ -76,9 +106,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-	margin: 0;
-    padding-left: 1em;
-    padding-right: 1em;
+    
+    width:31%;
 }
 
 .experiencesRowContent
@@ -87,6 +116,10 @@
     padding: 0;
 }
 
+.XPitem
+{
+    width: 100%;
+}
 
 
 /****************************************************/
@@ -97,10 +130,9 @@
 {   
     color: #f1f1f1;
     font-family: var(--main-font);
-    text-align: justify;
 }
 
-#aboutPanel .experiencesTable
+.experiencesTable
 {
 	text-align: justify;
 }
@@ -110,6 +142,12 @@
     margin: 0;
     padding-top: 0.5em;
     font-size: 1.8em;
+    cursor: pointer;
+}
+
+.aboutIntro h2
+{
+    text-align: left;
 }
 
 #aboutPanel h3
@@ -124,7 +162,12 @@
 #aboutPanel p
 {
 	font-size: 1em;
-	text-align: left;
+    font-family: var(--second-font);
+}
+
+.aboutIntro p
+{
+    text-align: left;
 }
 
 #aboutPanel p em

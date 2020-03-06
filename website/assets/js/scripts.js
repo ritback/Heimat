@@ -14,7 +14,7 @@ function closeNav() {
 
 /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
 function openAbout() {
-  document.getElementById("aboutPanel").style.width = "90%";
+  document.getElementById("aboutPanel").style.width = "100%";
   //document.getElementById("content").style.marginLeft = "250px";
 }
 
@@ -119,10 +119,11 @@ function displayVisibleArticleListCorrectly(tag)
         
     }
     
+    closeNav();
+    
 }
 
 
-hideAllArticles();
 displayVisibleArticleListCorrectly(".articleElement");
 
 

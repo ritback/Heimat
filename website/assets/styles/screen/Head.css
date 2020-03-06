@@ -2,9 +2,11 @@
 
 
 :root {
-    --main-txt-color: DARKBLUE;
+    --main-txt-color: #d01d1d;TOMATO;
     --main-bg-color: WHITESMOKE;
-    --main-font: 'Spartan', sans-serif;
+    /*--main-font: 'Spartan', sans-serif;*/
+    --main-font: 'Bebas Neue', cursive;
+    --second-font: 'Lato', sans-serif;
     
 }
 
@@ -23,11 +25,11 @@
 {
 	display: flex;
 	position: fixed;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-start;
     
 	width:	100%;
-	height: 11%;
+	height: 15%;
     top:0;
     left: 0;
     
@@ -35,6 +37,8 @@
     padding: 0em;
     
 	z-index: 1;
+    
+    background-color: var(--main-bg-color);
 }
 
 .head a
@@ -117,6 +121,8 @@
     vertical-align: middle;
 	padding: 0;
     margin: 0;
+    cursor: pointer;
+    
 }
 
 .headAbout h1
@@ -152,8 +158,8 @@
 	z-index: 1;
     pointer-events: none;
     
-    height: 12%;
-	width: 105%;
+    height: 15.5%;
+	width: 100%;
     
     background-color: transparent;
     
@@ -169,6 +175,8 @@
     
 	padding: 0px;
 	margin: auto;
+	width: 101%;
+    height: 101%;
     
 	border: none;
     border-style: none;
