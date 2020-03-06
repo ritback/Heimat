@@ -66,9 +66,9 @@
     display: flex;
 	flex-direction: column;
     align-self: flex-end;
-    padding-top: 0.5em;
-    padding-right: 1.5em;
-    padding-left: 1.5em;
+    padding-top: 0.7em;
+    padding-right: 1.8em;
+    padding-left: 1.8em;
     
     margin-left: auto; /* right align property    margin-right: auto; */
     text-align: right;
@@ -87,15 +87,15 @@
 .articleTitleContent h2 {
     padding: 0;
     margin: 0;
-    padding-top: 0.5em;
-    font-size: 1.8em;
+    padding-top: 0.7em;
+    font-size: 2.3em;
 }
 
 .articleTitleContent h3 {
     padding: 0;
     margin: 0;
     padding-top: 0.5em;
-    font-size: 1.3em;
+    font-size: 1.5em;
     color: black;
 }
 
@@ -150,7 +150,7 @@
 .articleTitleMediaFrame img:hover {
 	-webkit-transform: scale(1.05);
 	transform: scale(1.05);
-	margin-left: -20px;
+	margin-left: -10px;
 }
 
 
@@ -192,8 +192,7 @@
 	vertical-align:top;
     justify-content: center;
     align-items:flex-start;
-	margin: 0;
-    
+	margin: 0;   
 }
 
 .panelTextContent
@@ -292,7 +291,7 @@
 .panelMediaFrame img:hover {
 	-webkit-transform: scale(1.05);
 	transform: scale(1.05);
-	margin-left: -20px;
+	margin-left: -10px;
 }
 
 
@@ -304,10 +303,6 @@
     
 	margin-left: 0px;
     
-    -webkit-transform: scale(1);
-	transform: scale(1);
-	-webkit-transition: 3s ease-in-out;
-	transition: 3s ease-in-out;
 }
 
 
