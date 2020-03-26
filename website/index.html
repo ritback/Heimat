@@ -15,13 +15,6 @@ colors : https://htmlcolorcodes.com/fr/noms-de-couleur/?fbclid=IwAR3iDTZEzeyxRQC
 
     -->
     
-    
-    <link rel="stylesheet" href="assets/styles/screen/Head.css" />
-    <link rel="stylesheet" href="assets/styles/screen/Nav.css" />
-    <link rel="stylesheet" href="assets/styles/screen/About.css" />
-    <link rel="stylesheet" href="assets/styles/screen/Contact.css" />
-    <link rel="stylesheet" href="assets/styles/screen/Content.css" />
-    
 
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -48,22 +41,14 @@ colors : https://htmlcolorcodes.com/fr/noms-de-couleur/?fbclid=IwAR3iDTZEzeyxRQC
     <meta name="msapplication-config" content="assets/img/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     
-    
-    <!-- Add jQuery library -->
-	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-	
-    <!-- Add fancyBox -->
-    <link rel="stylesheet" href="assets/js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
-    <script type="text/javascript" src="assets/js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-    
-	<script type="text/javascript" src="assets/js/scripts.js">
-  	</script>
-    
-    <!-- Add processing -->
-    <script type="text/javascript" src="assets/js/processing.js"></script>
+    <!-- Add styles -->
+    <link rel="stylesheet" href="assets/styles/screen/Head.css" />
+    <link rel="stylesheet" href="assets/styles/screen/Nav.css" />
+    <link rel="stylesheet" href="assets/styles/screen/About.css" />
+    <link rel="stylesheet" href="assets/styles/screen/Contact.css" />
+    <link rel="stylesheet" href="assets/styles/screen/Content.css" />
     
     <!-- Add font -->
-    <link href="https://fonts.googleapis.com/css?family=Spartan&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     
@@ -77,34 +62,30 @@ colors : https://htmlcolorcodes.com/fr/noms-de-couleur/?fbclid=IwAR3iDTZEzeyxRQC
 
 <body class="global">
     
-	<header class="head">
+	<header id="head">
         
-        <button id="navButton" class="openbtn" onclick="openNav();">
+        <button id="headNavBtn" onclick="openNav();">
             <h1>&#9776;</h1>
         </button>
         
-        <div class="headTitle">
+        <div id="headTitle">
             <a href="index.html">
                 <h1>Henri Aribert-Desjardins</h1>
             </a>
         </div>
         
-        <div class="headAbout" onclick="openAbout();">
+        <div id="headAboutBtn" onclick="openAbout(); closeNav();">
                 <h1>About</h1>
         </div>
         
 	</header>
-    
-    <div class="processingCanvas">
-    <canvas class="backgroundProcessingCanvas" data-processing-sources="processing/Fishes/Fishes.pde"></canvas>
-    </div>
     
     <!------------------------------------------------------->
     
     
     <nav id="sidebarNav">
         
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="javascript:void(0)" class="navCloseBtn" onclick="closeNav()">×</a>
         <a href="javascript:void(0)" onclick="closeNav(); openAbout();">About</a>
         <a href="#" onclick="displayVisibleArticleListCorrectly('.articleElement')">All<br/>_</a>
         <a href="#" onclick="displayVisibleArticleListCorrectly('.art')">Art installation</a>
@@ -117,6 +98,11 @@ colors : https://htmlcolorcodes.com/fr/noms-de-couleur/?fbclid=IwAR3iDTZEzeyxRQC
     <!------------------------------------------------------->
     
     <section class="content" id="content" onclick="closeNav(); closeAbout();">
+        
+        <div class="contentTitle">
+            <h1>Art installation</h1>
+        </div>
+        
         
         <ul id="articleList">
         
@@ -179,7 +165,7 @@ colors : https://htmlcolorcodes.com/fr/noms-de-couleur/?fbclid=IwAR3iDTZEzeyxRQC
                             
                             <a class="fancybox" rel="ultraveillance" href="img/Ultraveillance/Capture%20d%E2%80%99%C3%A9cran%20(7).jpg"></a>
                             <div class="panelMediaFrame">
-                                <iframe src="https://player.vimeo.com/video/275833451" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                                <iframe src="https://player.vimeo.com/video/275833451" frameborder="0" allow="autoplay; fullscreen" allowfullscreen SameSite=None></iframe>
                             </div>
                             
                             <div class="panelMediaFrame">
@@ -282,6 +268,15 @@ colors : https://htmlcolorcodes.com/fr/noms-de-couleur/?fbclid=IwAR3iDTZEzeyxRQC
                 </div>
             </li>
             
+            <!--------------------------------------------------->
+            <!-------------------------------------->   
+            
+            </ul>
+            <div class="contentTitle">
+            <h1>Carpentry</h1>
+        </div>
+            
+        <ul id="articleList">
             <!------------------------------------------------------->
             <!-------------------Mouvement----------------------->
             
@@ -535,6 +530,7 @@ Fêtes des lumières, 2018, Lyon</p>
                 </div>
             </li>
             
+        
             <!--------------------------------------------------->
             <!---------------Misc Furnitures------------------------>                   
             
@@ -1255,11 +1251,47 @@ Fêtes des lumières, 2018, Lyon</p>
 	</aside>
     
     
-	<script type="text/javascript" src="assets/js/scripts.js">
-  	</script>
+    <!-- Add jQuery library -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="assets/js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="assets/js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
     
     <script type="text/javascript" src="assets/js/fancybox_loader.js">
 	</script>
+    
+    <!-- Add processing -->
+    
+	<script type="text/javascript" src="assets/p5/p5.js">
+  	</script>
+    
+    <div class="processingCanvas">
+    <!--<canvas class="backgroundProcessingCanvas" data-processing-sources="processing/Fishes/Fishes.pde"></canvas>-->
+        
+        <!--
+        <iframe src="https://editor.p5js.org/Ritback/embed/W7M4ynwht" class="backgroundProcessingCanvas" scrolling="no" frameborder="0"></iframe>
+        -->
+        <iframe src="assets/p5/flocking/flocking.html" class="backgroundProcessingCanvas" scrolling="no" frameborder="0"></iframe>
+        
+    </div>
+    
+    
+    
+    
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            var fileref=document.createElement('script')
+            fileref.setAttribute("type","text/javascript")
+            fileref.setAttribute("src", "assets/js/scripts.js")
+            if (typeof fileref!="undefined")
+                document.getElementsByTagName("body")[0].appendChild(fileref)
+        });
+        
+    </script>
+   
+    <!--
+    -->
     
 </body>
 

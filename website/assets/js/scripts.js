@@ -2,77 +2,112 @@
 /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
 function openNav() {
   document.getElementById("sidebarNav").style.width = "250px";
-  //document.getElementById("content").style.marginLeft = "250px";
 }
 
 /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
 function closeNav() {
   document.getElementById("sidebarNav").style.width = "0";
-  //document.getElementById("content").style.marginLeft = "0";
 }
 
 
 /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
 function openAbout() {
   document.getElementById("aboutPanel").style.width = "100%";
-  //document.getElementById("content").style.marginLeft = "250px";
 }
 
 /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
 function closeAbout() {
   document.getElementById("aboutPanel").style.width = "0";
-  //document.getElementById("content").style.marginLeft = "0";
 }
 
 
-
-
+/******************************************************************************/
 
 var acc = document.getElementsByClassName("accordionTitleButton");
-var i;
+var i, j;
 
 for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function(){
+    acc[i].id = i;
+    acc[i].addEventListener("click", function(){
       
-    /*
-    var otherElements = document.getElementsByClassName("accordionTitleButton");
-    var j;
-    for (j = 0; j < otherElements.length; j++)
-    {
-        var otherPanel = otherElements[j].nextElementSibling;
-        if (otherPanel.style.maxHeight)
-        {
-            otherPanel.style.maxHeight = null;
+      // close other panels
+        var otherPanel;
+      for(j = 0; j < acc.length; j++){
+          // remove transition
+          otherPanel = acc[j].nextElementSibling;
+          otherPanel.classList.add("panelNoTransition");
+          
+          if (acc[j] != this){   
+            if (otherPanel.style.maxHeight) {
+                //close panel
+                otherPanel.style.maxHeight = null;
+                
+            }
         }
-    }
-     */
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
+      }
+        
+        
+      
+      // open / close the correct one.
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+          //close panel
+          panel.style.maxHeight = null;
+      }
+      else {
+          
+            // place the panel on top;
+          this.scrollIntoView({behavior: "instant", block: "start"});
+      
+          //window.location.hash = "#" + i;
+          var headOffset = document.getElementById("head").getBoundingClientRect().bottom;
+          window.scrollBy(0, -headOffset);
+      
+          
+          // remove transition
+          panel.classList.remove("panelNoTransition"); 
+          panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+      
+      
+        
+      /*
+      var headerBottom = document.getElementById("head").getBoundingClientRect().height;
+      console.log(headerBottom);
+      
+      
+      var cardTop = this.getBoundingClientRect().top;
+      console.log(cardTop);
+      window.scrollBy(0, 60);
+      */
+      
+      
   });
 }
 
 
+/******************************************************************************/
 
+
+
+    // hide all articles
 function hideAllArticles()
 {
-	var allArticleElements = document.querySelectorAll(".articleElement");
+    var allArticleElements = document.querySelectorAll(".articleElement");
     var articleElementsNbr = allArticleElements.length;
-    // hide all articles
+
     for (var i = 0; i < articleElementsNbr; i++)
     {
         allArticleElements[i].style.display = "none";
     }
 }
 
+    // display all articles
 function displayAllArticles()
 {
-	var allArticleElements = document.querySelectorAll(".articleElement");
+    var allArticleElements = document.querySelectorAll(".articleElement");
     var articleElementsNbr = allArticleElements.length;
-    // hide all articles
+
     for (var i = 0; i < articleElementsNbr; i++)
     {
         allArticleElements[i].style.display = "block";

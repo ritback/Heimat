@@ -1,14 +1,25 @@
 @charset "UTF-8";
 
 
+/*
+@font-face {
+font-family: 'Bebas Neue';
+src: url('../../fonts/Bebas_Neue/BebasNeue-Regular.ttf') format('ttf');
+font-family: 'Lato';
+src: url('../../fonts/Lato/Lato-Regular.ttf') format('ttf');
+}
+*/
+
+
 :root {
     --main-txt-color: #d01d1d;TOMATO;
     --main-bg-color: WHITESMOKE;
     /*--main-font: 'Spartan', sans-serif;*/
     --main-font: 'Bebas Neue', cursive;
     --second-font: 'Lato', sans-serif;
-    
 }
+
+
 
 /* CSS Document */
 
@@ -21,7 +32,7 @@
 /******************************************************************************************/
 /* Head */
 
-.head
+#head
 {
 	display: flex;
 	position: fixed;
@@ -41,14 +52,14 @@
     background-color: var(--main-bg-color);
 }
 
-.head a
+#head a
 {
 	text-decoration: none;
 }
 
 /******************************************************************************************/
 /* The button used to open the sidebar */
-#navButton
+#headNavBtn
 {
     flex: 1;
 	display: flex;
@@ -63,7 +74,7 @@
     border: none;
 }
 
-#navButton h1
+#headNavBtn h1
 {
 	font-size: 2.5em;
     font-weight: bold;
@@ -74,13 +85,13 @@
     transition: 2s;
 }
 
-#navButton:hover {
+#headNavBtn:hover {
     color: black;
 }
 
 /******************************************************************************************/
 /*title */
-.headTitle
+#headTitle
 {
     flex: 11;
 	display: flex;
@@ -89,7 +100,7 @@
     margin: 0;
 }
 
-.headTitle h1
+#headTitle h1
 {
 	padding: 0px;
 	
@@ -106,14 +117,14 @@
 }
 
 
-.headTitle h1:hover {
+#headTitle h1:hover {
     color: var(--main-txt-color);
 }
 
 
 /******************************************************************************************/
 /*title */
-.headAbout
+#headAboutBtn
 {
     flex: 2;
 	display: flex;
@@ -125,7 +136,7 @@
     
 }
 
-.headAbout h1
+#headAboutBtn h1
 {
 	padding: 0px;
 	
@@ -140,7 +151,7 @@
 }
 
 
-.headAbout h1:hover {
+#headAboutBtn h1:hover {
     color: black;
 }
 
@@ -150,16 +161,17 @@
 {
     display: flex;
     position: fixed;
+    justify-content: center;
     align-self: center;
-    top:-5px;
-    left: -5px;
-    margin: auto;
     
 	z-index: 1;
     pointer-events: none;
     
-    height: 15.5%;
+    height: 15%;
 	width: 100%;
+    top:0px;
+    left: 0px;
+    margin: auto;
     
     background-color: transparent;
     
@@ -171,12 +183,13 @@
 {
     flex: 1;
     display: flex;
-    object-fit: cover;
+    
     
 	padding: 0px;
 	margin: auto;
-	width: 101%;
-    height: 101%;
+    
+	width: 100%;
+    height: 100%;
     
 	border: none;
     border-style: none;

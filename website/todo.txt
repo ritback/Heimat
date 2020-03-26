@@ -1,0 +1,2 @@
+- videos close on panel close.
+- police responsive 

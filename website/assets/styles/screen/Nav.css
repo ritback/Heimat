@@ -40,7 +40,7 @@
 }
 
 /* Position and style the close button (top right corner) */
-#sidebarNav  .closebtn {
+#sidebarNav  .navCloseBtn {
     position: absolute;
     top: 0;
     right: 25px;
