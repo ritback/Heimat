@@ -4,7 +4,7 @@ function setup() {
   // put setup code here
     createCanvas(400,400, WEBGL);
     
-    stars = new StarsGroup(5);
+    stars = new StarsGroup(2);
     
 }
 
@@ -27,7 +27,7 @@ function mousePressed(){
 function StarsGroup(numStars){
     this.starsGroup = [];
     
-    let range = 100;
+    let range = 50;
     let speedRange = 0.1;
     for (let i = 0; i < numStars; ++i){
         this.starsGroup.push(new Star(random(-range, range), random(-range, range), random(-range, range),
@@ -45,7 +45,7 @@ StarsGroup.prototype.render = function(){
 
 StarsGroup.prototype.update = function(){
     
-    let g = 0.01;
+    let g = 0.05;
     
     for (let i = 0; i < this.starsGroup.length; ++i){
         

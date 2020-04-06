@@ -104,7 +104,7 @@ src: url('../../fonts/Lato/Lato-Regular.ttf') format('ttf');
 {
 	padding: 0px;
 	
-	font-size: 2.5em;
+	font-size: 3.5em;
     line-height: 0em;
 	text-decoration: none;
 	
@@ -116,6 +116,15 @@ src: url('../../fonts/Lato/Lato-Regular.ttf') format('ttf');
     
 }
 
+#headTitle h1:hover
+{
+    color: #eee;
+    text-shadow: 0.06rem 0 0.06rem #ea36af, -0.125rem 0 0.06rem #75fa69;
+    animation-duration: 0.01s;
+    animation-name: textflicker;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
 
 #headTitle h1:hover {
     color: var(--main-txt-color);
@@ -149,6 +158,17 @@ src: url('../../fonts/Lato/Lato-Regular.ttf') format('ttf');
     color: var(--main-txt-color);
     transition: 2s;
 }
+
+#headAboutBtn h1:hover
+{
+    color: #eee;
+    text-shadow: 0.06rem 0 0.06rem #ea36af, -0.125rem 0 0.06rem #75fa69;
+    animation-duration: 0.01s;
+    animation-name: textflicker;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 
 
 #headAboutBtn h1:hover {
