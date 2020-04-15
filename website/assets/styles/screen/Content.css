@@ -28,6 +28,12 @@
     padding:0;
 }
 
+.content ul li
+{
+    margin:0;
+    margin-bottom:0em;
+}
+
 
 /************************************************************************************************/
 
@@ -38,7 +44,8 @@
     align-items: flex-end;
 	padding: 0;
     margin: 0;
-    height: 70vh;
+    height: 60vh;
+    width: 100%;
     
     overflow: hidden;
     white-space: nowrap;
@@ -53,8 +60,10 @@
     
     position: absolute;
     margin: auto;
+    
     width:100%;
-    max-height: 70vh;
+    height: 100%;
+    max-height: 60vh;
     max-width: 100%;
     
     z-index: -100;
@@ -79,6 +88,8 @@
     transition: 2s;
     
     text-shadow: 0.06rem 0 0.06rem #ea36af, -0.125rem 0 0.06rem #75fa69;
+    
+    Filter: Wave(Add=0, Freq=1, LightStrength=10, Phase=20, Strength=20);
 }
 
 
@@ -104,6 +115,7 @@
 
 
 
+/************************************************************************************************/
 .articleList
 {
     padding: 0px;
@@ -114,6 +126,83 @@
     overflow: hidden;
     transition: max-height 0.5s ease-out;
 }
+
+
+.articleListsBottomMargin
+{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    
+    /*
+    background-image: url("../../img/favicon.png");
+    background-position: 50% 70%;
+    background-repeat: no-repeat;
+    background-size: 2%;
+    */
+}
+
+.articleListsSeparator
+{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    
+    cursor: pointer;
+    
+    width: 60%;
+    height: 40%;
+    border: none;
+    border-bottom: solid thick;
+}
+
+.articleListsCloseButton
+{
+    flex: 1;
+    text-align: center;
+    align-content: center;
+    font-size: 6em;
+    
+    
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+    transition-property: transform;
+    transition-duration: 1s;
+}
+
+
+.articleListsCloseButton:hover {
+    -webkit-animation-name: rotate; 
+    -webkit-animation-duration: 2s; 
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: rotate; 
+    -moz-animation-duration: 2s; 
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    animation-name: rotate; 
+    animation-duration: 2s; 
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@-webkit-keyframes rotate {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes rotate {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(360deg);}
+}
+
+@keyframes rotate {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
 
 /************************************************************************************************/
 .accordionTitleButton {
@@ -275,6 +364,18 @@
     width: 100%;
     
 }
+
+.panelBottomMargin
+{
+    width: 100%;
+    height: 40vh;
+    
+    background-image: url("../../img/favicon.png");
+    background-position: 50% 30%;
+    background-repeat: no-repeat;
+    background-size: 2%;
+}
+
 
 /************************************************************************************************/
 .panelText

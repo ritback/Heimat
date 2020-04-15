@@ -1,13 +1,33 @@
 
+function closeAllLists(){
+    console.log("Fuck!");
+    let articleTitlesList = document.getElementsByClassName("articleListTitle");
+    let i, j;
 
-var articleTitlesList = document.getElementsByClassName("articleListTitle");
-var i, j;
+      // close other panels
+    let otherPanel;
+    for(j = 0; j < articleTitlesList.length; j++){
+        // remove transition
+        otherPanel = articleTitlesList[j].nextElementSibling;
+        otherPanel.classList.add("panelNoTransition");
+          
+        //close panel
+        otherPanel.style.maxHeight = null;
+    }
+}
+
+
+
+function scriptAfterFullLoad(){
+
+let articleTitlesList = document.getElementsByClassName("articleListTitle");
+let i, j;
 
 for (i = 0; i < articleTitlesList.length; i++) {
     articleTitlesList[i].addEventListener("click", function(){
       
       // close other panels
-        var otherPanel;
+        let otherPanel;
       for(j = 0; j < articleTitlesList.length; j++){
           // remove transition
           otherPanel = articleTitlesList[j].nextElementSibling;
@@ -22,7 +42,7 @@ for (i = 0; i < articleTitlesList.length; i++) {
         }
       }
       // open / close the correct one.
-      var panel = this.nextElementSibling;
+      let panel = this.nextElementSibling;
       if (panel.style.maxHeight) {
           //close panel
           panel.style.maxHeight = null;
@@ -32,8 +52,10 @@ for (i = 0; i < articleTitlesList.length; i++) {
             // place the panel on top;
           this.scrollIntoView({behavior: "instant", block: "start"});
 
-          var headOffset = document.getElementById("head").getBoundingClientRect().bottom;
-          window.scrollBy(0, -headOffset);
+          let headOffset = document.getElementById("head").getBoundingClientRect().bottom;
+          let titleOffset = document.querySelector(".articleListTitle").getBoundingClientRect().height;
+          let totalOffset = headOffset - titleOffset;
+          window.scrollBy(0, -totalOffset);
       
           
           // add back transition
@@ -98,6 +120,6 @@ for (i = 0; i < accordionTitleButtons.length; i++) {
   });
 }
 
-
+}
 
 

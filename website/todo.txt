@@ -1,4 +1,3 @@
 - videos close on panel close.
 - police responsive.
-
-- Burger menu, list open on link click
+- Hover titre nope.

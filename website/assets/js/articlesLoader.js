@@ -70,8 +70,38 @@ request.send();
 function checkToSortArticleList(){
     if(numArticleLoaded === numArticleToLoad) {
         displayVisibleArticleListCorrectly(".articleElement");
+        
+        let articleLists = document.querySelectorAll(".articleList");
+        // add an element as bottom margin for the lists
+        for (let i = 0; i < articleLists.length; ++i){
+            
+            
+            let articleListsCloseButton=document.createElement('a');
+            articleListsCloseButton.classList.add("articleListsCloseButton");
+            articleListsCloseButton.innerHTML = "×";
+            
+            
+            let articleListsSeparator=document.createElement('div');
+            articleListsSeparator.classList.add("articleListsSeparator");
+            articleListsSeparator.appendChild(articleListsCloseButton);
+            articleListsSeparator.addEventListener("click", function(){
+                let ListTitle = this.parentElement.parentElement.previousElementSibling;
+                ListTitle.scrollIntoView({behavior: "instant", block: "start"});
+                let headOffset = document.getElementById("head").getBoundingClientRect().bottom;
+                window.scrollBy(0, -headOffset);
+                
+                closeAllLists()
+            });
+            
+            let articleListsBottomMargin=document.createElement('div');
+            articleListsBottomMargin.classList.add("articleListsBottomMargin");
+            articleListsBottomMargin.appendChild(articleListsSeparator);
+            
+            articleLists[i].appendChild(articleListsBottomMargin);
+        }
+        
+        scriptAfterFullLoad();
     }
-    
 }
 
 
@@ -148,7 +178,6 @@ function parseArticleFile(articleContent){
         panelMediaFrame.classList.add("panelMediaFrame");
         panelMediaFrame.appendChild(videos[i]);
         
-        
         panelMediaContainer.appendChild(panelMediaFrame);
     }
     
@@ -181,17 +210,22 @@ function parseArticleFile(articleContent){
     
     
     // -----------------------------------------------------------------------
-    
-    
     // Panel content
     let panelContent=document.createElement('article');
     panelContent.classList.add("panelContent");
     panelContent.appendChild(panelText);
     panelContent.appendChild(panelMediaContainer);
     
+    
+    
+    // adding the margin under the panel
+    let panelBottomMargin=document.createElement('div');
+    panelBottomMargin.classList.add("panelBottomMargin");
+    
     let panel=document.createElement('div');
     panel.classList.add("panel");
     panel.appendChild(panelContent);
+    panel.appendChild(panelBottomMargin);
     
     
     // List element creation
