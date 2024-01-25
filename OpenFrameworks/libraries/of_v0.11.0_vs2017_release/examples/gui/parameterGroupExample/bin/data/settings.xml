@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<settings>
+	<vSync>1</vSync>
+	<renderer1>
+		<size>54.5918</size>
+		<number>5</number>
+		<position>736.12, 208.233</position>
+		<color>127, 43, 40, 255</color>
+		<frameNum>1697</frameNum>
+	</renderer1>
+	<renderer2>
+		<size>34.6939</size>
+		<number>12</number>
+		<position>512, 384</position>
+		<color>127, 65, 32, 255</color>
+		<frameNum>1697</frameNum>
+	</renderer2>
+</settings>

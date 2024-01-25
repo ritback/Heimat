@@ -1,0 +1,27 @@
+
+@media all and (min-width:512px) and (max-width: 1024px) {
+  .accordionTitleButton {
+        width: 80%;
+    }
+    .articleList {
+        width: 100%;
+    }
+    
+    
+    
+    
+
+    #headTitle h1
+    {
+        font-size: 2.5em;
+    }
+
+    #headAboutBtn h1
+    {
+        font-size: 1.1em;
+    }
+    
+    
+
+}
+

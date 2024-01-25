@@ -1,0 +1,372 @@
+@charset "UTF-8";
+
+:root {
+    --article-button-height: 40vh;
+    --article-media-height: 40vh;
+}
+
+/* CSS Document */
+
+/************************************************************************************************/
+/* Content block */
+
+.content
+{
+    display: flex;
+    justify-content: center;
+	flex-direction: column;
+	position: absolute;
+	top: 15%;
+	left: 0%;
+	padding-bottom: 3em;
+	width: 100%;
+	max-width: 100%;
+}
+
+.content ul
+{
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
+
+.content ul li
+{
+    margin:0;
+    margin-bottom:0em;
+}
+
+/************************************************************************************************/
+.articleList {
+  
+    display: flex;
+    justify-content: center;
+	flex-direction: column;
+    align-self: center;
+    
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    
+    width: 90%;
+	max-width: 100%;
+    
+}
+
+/************************************************************************************************/
+.accordionTitleButton {
+    display: flex;
+    justify-content: center;
+    
+    align-self: center;
+    
+    background-color: var(--second-bg-color);
+    cursor: pointer;
+    border: none;
+    
+    padding: 0px;
+    margin-top: 4%;
+    margin-bottom: 0;
+    margin-right: auto;
+    margin-left: auto;
+    
+    width: 60%;
+    
+    height: var(--article-button-height);
+    
+    transition: 0.5s;
+}
+
+/*******************************************************/
+
+.articleTitle
+{
+    flex: 1;
+	display: flex;
+	vertical-align:top;
+	margin: 0;
+    
+}
+
+.articleTitleContent
+{
+    display: flex;
+	flex-direction: column;
+    align-self: flex-end;
+    padding-top: 0.7em;
+    padding-right: 1.8em;
+    padding-left: 1.8em;
+    
+    margin-left: auto; /* right align property    margin-right: auto; */
+    text-align: right;
+    
+    color: var(--main-txt-color);
+    
+    font-family: var(--main-font);
+    
+    transition: 0.5s;
+}
+
+.articleTitleContent:hover {
+    color: black;
+}
+
+.articleTitleContent h2 {
+    padding: 0;
+    margin: 0;
+    padding-top: 0.7em;
+    font-size: 2.3em;
+}
+
+.articleTitleContent h3 {
+    padding: 0;
+    margin: 0;
+    padding-top: 0.5em;
+    font-size: 1.5em;
+    color: black;
+}
+
+
+/**************************************/
+
+.articleTitleMediaContainer
+{   
+    flex: 2;
+	display: flex;
+    justify-content: center;
+	vertical-align:top;
+    
+    height: var(--article-button-height);
+    
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+.articleTitleMediaFrame
+{
+	display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    
+    height:100%;
+    width: 100%;
+    padding: 0;
+    
+    overflow: hidden;
+    white-space: nowrap;
+    
+    
+    background-color: white;
+    
+}
+
+.articleTitleMediaFrame img
+{
+    flex: 1;
+    object-fit: cover;
+    width:100%;
+    
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: 3s ease-in-out;
+	transition: 3s ease-in-out;
+}
+
+
+.articleTitleMediaFrame img:hover {
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
+	margin-left: -10px;
+}
+
+
+
+
+/************************************************************************************************/
+.panel /* serves for js animation */
+{
+    padding: 0px;
+    
+   
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.panelNoTransition
+{
+    transition:max-height 0.0s ease-out;
+}
+
+/************************************************************************************************/
+
+.panelContent
+{
+    display: flex;
+    justify-content: center;
+    
+	position: relative;
+     
+    background-color: var(--second-bg-color);
+    color: var(--main-txt-color);
+    
+	margin: 0;
+    padding: 0px;
+    width: 100%;
+    
+}
+
+.panelBottomMargin
+{
+    width: 100%;
+    height: 40vh;
+    
+    background-image: url("../../img/favicon.png");
+    background-position: 50% 30%;
+    background-repeat: no-repeat;
+    background-size: 2%;
+}
+
+
+/************************************************************************************************/
+.panelText
+{
+    flex: 1;
+	display: flex;
+	vertical-align:top;
+    justify-content: center;
+    align-items:flex-start;
+	margin: 0;
+    text-align: justify;   
+}
+
+.panelTextContent
+{
+    /*
+    display: flex;
+	flex-direction: column;
+    */
+    display: inline;
+    
+    padding: 3em;
+    padding-left: 3.5em;
+    
+    font-family: var(--second-font);
+}
+
+.panelTextContent h3
+{
+	margin: 0px;
+	padding: 0em;
+	
+	font-size: 1.3em;
+	
+}
+
+.panelTextContent p
+{
+	font-size: 1em;
+	text-align: left;
+    color: black;
+}
+
+.panelTextContent p em
+{
+	font-style: normal;
+	font-weight: bold;
+}
+
+.panelTextContent p a
+{
+	font-style: normal;
+	font-weight: bold;
+	text-decoration: underline;
+	color: black;
+}
+
+/****************************************************/
+
+.panelMediaContainer
+{
+    flex: 2;
+	vertical-align:top;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    
+    overflow: hidden;
+    white-space: nowrap;
+    
+}
+
+.panelMediaFrame
+{
+    display: block;
+    /*justify-content: center;
+    align-items: stretch;
+    */
+    height: var(--article-media-height);
+    width: 100%;
+    padding: 0;
+    
+    overflow: hidden;
+    white-space: nowrap;
+    
+    
+    background-color: black;
+    
+}
+
+.panelMediaFrame img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+	margin-left: 0px;
+    
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: 3s ease-in-out;
+	transition: 3s ease-in-out;
+}
+
+
+.panelMediaFrame img:hover {
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
+	margin-left: -10px;
+}
+
+
+.panelMediaFrame iframe
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+	margin-left: 0px;
+    
+}
+
+
+/************************************************************************************************/
+
+.content_article_pdf
+{
+	display: block;
+	margin-bottom: 10px;
+	padding: 0px;
+	border: none;
+	max-width: 80%;
+	font-size: 0;
+	background-color: grey;
+	
+	margin-left: auto;
+	margin-right:auto;
+}
+
+/************************************************************************************************/
+

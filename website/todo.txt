@@ -1,3 +1,0 @@
-- videos close on panel close.
-- police responsive.
-- Hover titre nope.
